@@ -1,7 +1,7 @@
-# LifeHack 2022 Discord Bot
+# LifeHack 2022 Website
 
 ## Description
-Created to manage the points for participants when they participate in activities.
+Website created to manage the LifeHack 2022 hackathon, where participants can register and earn / view the points they gathered during the event.
 
 Activities include:
 - Early sign-up (website)
@@ -10,12 +10,39 @@ Activities include:
 - (16th July) Visiting sponsor booths
 - (16th July) Kahoot winners
 
+## Landing Page
+- [ ] Register button
+- [ ] About the Hackathon
+- [ ] Timeline
+- [ ] Workshops
+- [ ] Prizes (Main + Special)
+- [ ] (?) About the Points System
+- [ ] FAQ
+- [ ] Sponsors
+- [ ] CTA (Call-to-Action)
+
 ## Features
 
+### Main
+
 For Participants:
-- [ ] Retrieve their current points
-- [ ] See leaderboard and current position
-- [ ] Notify when points earned
+- [ ] Register / Login
+- [ ] Create / Join a team (minimum 2 people, maximum 4 people)
+- [ ] View team points + individual points
+- [ ] View leaderboard and their relative ranking
+- [ ] View timeline of events
 
 For Organising Team:
-- [ ] Manually alter participant's points
+- [ ] Add / Remove participants from team
+- [ ] Accept / Reject team registration
+- [ ] Able to edit a team's points
+- [ ] Assign prizes to winners (Main + Special)
+- [ ] View leaderboard
+
+### TBC 
+
+For Participants:
+- [ ] View incomplete team and request to join
+
+For Organising Team:
+- [ ] 
