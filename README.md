@@ -15,8 +15,7 @@ Activities include:
 For Participants:
 - [ ] Retrieve their current points
 - [ ] See leaderboard and current position
-- [ ] 
+- [ ] Notify when points earned
 
 For Organising Team:
 - [ ] Manually alter participant's points
-- [ ] 
