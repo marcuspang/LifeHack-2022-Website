@@ -1,0 +1,11 @@
+{
+  "name": "lifehack-discord-bot",
+  "version": "1.0.0",
+  "description": "Discord bot created for LifeHack 2022",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "Marcus Pang",
+  "license": "ISC"
+}
