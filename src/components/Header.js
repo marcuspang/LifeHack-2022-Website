@@ -15,8 +15,8 @@ import femaleDevImg from '../images/female-dev.svg';
 function Header() {
   return (
     <Center bg="theme.500" display="flex"  h={500} p={4}>
-      <Box boxSize="sm" pr={5}>
-        <Image src={femaleDevImg} alt="Dan Abramov" />
+      <Box boxSize="xl" pt={20} pr={5}>
+        <Image src={femaleDevImg} alt="Idea" />
       </Box>
       <Box color="white" pl={5}>
         <Heading size={'4xl'}>Lifehack 2022</Heading>
