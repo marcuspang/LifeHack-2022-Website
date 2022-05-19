@@ -1,33 +1,82 @@
-import React from 'react';
-import {
-  Box,
-  Flex,
-  SimpleGrid,
-  Text,
-  Heading,
-  Center,
-  Button,
-  Image,
-} from '@chakra-ui/react';
+import { Box, Button, Flex, Stack } from '@chakra-ui/react';
 
-import femaleDevImg from '../images/female-dev.svg';
-
-function Header() {
+const Nav = () => {
   return (
-    <Center bg="theme.100" display="flex"  h={700} p={4}>
-      <Box boxSize="xl" pt={20} pr={5}>
-        <Image src={femaleDevImg} alt="Idea" />
-      </Box>
-      <Box color="white" pl={5}>
-        <Heading size={'4xl'}>Lifehack 2022</Heading>
-        <Text fontSize={'2xl'}>9th - 10th July & 16th July 2022</Text>
-        <Text fontSize={'xl'}>Stay ahead of change. Innovate the future.</Text>
-        <Button fontSize="2xl" mt="2" colorScheme={"red"} size="lg">
-          Register Now
-        </Button>
-      </Box>
-    </Center>
-  );
-}
+    <>
+      <Box bg={'theme.500'} px={4}>
+        <Flex h={16} alignItems={'center'} justifyContent={'space-between'}>
+          <Box>Logo</Box>
 
-export default Header;
+          <Flex alignItems={'center'}>
+            <Stack flex={{ base: 1, md: 0 }} justify={'flex-end'} direction={'row'} spacing={6}>
+              <Button
+                as={'a'}
+                href={'/login'}
+                fontSize={'sm'}
+                fontWeight={400}
+                bg={'theme.500'}
+                _hover={{ bg: 'theme.400' }}
+                _active={{
+                  bg: 'theme.400',
+                }}
+                color={'white'}
+              >
+                Sign In
+              </Button>
+              <Button
+                as={'a'}
+                href={'/register'}
+                display={{ base: 'none', md: 'inline-flex' }}
+                fontSize={'sm'}
+                fontWeight={600}
+                color={'white'}
+                bg={'theme.300'}
+                _hover={{ bg: 'theme.400' }}
+                _active={{ bg: 'theme.400' }}
+              >
+                Sign Up
+              </Button>
+            </Stack>
+            {/* Mobile */}
+            {/* <Stack direction={"row"} spacing={7}>
+              <Menu>
+                <MenuButton
+                  as={Button}
+                  rounded={"full"}
+                  variant={"link"}
+                  cursor={"pointer"}
+                  minW={0}
+                >
+                  <Avatar
+                    size={"sm"}
+                    src={"https://avatars.dicebear.com/api/male/username.svg"}
+                  />
+                </MenuButton>
+                <MenuList alignItems={"center"}>
+                  <br />
+                  <Center>
+                    <Avatar
+                      size={"2xl"}
+                      src={"https://avatars.dicebear.com/api/male/username.svg"}
+                    />
+                  </Center>
+                  <br />
+                  <Center>
+                    <p>Username</p>
+                  </Center>
+                  <br />
+                  <MenuDivider />
+                  <MenuItem>Your Servers</MenuItem>
+                  <MenuItem>Account Settings</MenuItem>
+                  <MenuItem>Logout</MenuItem>
+                </MenuList>
+              </Menu>
+            </Stack> */}
+          </Flex>
+        </Flex>
+      </Box>
+    </>
+  );
+};
+
+export default Nav;

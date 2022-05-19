@@ -1,0 +1,29 @@
+{
+  "root": true,
+  "parser": "@babel/eslint-parser",
+  "plugins": ["react", "jsx"],
+  "env": {
+    "browser": true,
+    "commonjs": true,
+    "es6": true,
+    "jest": true,
+    "node": true
+  },
+  "parserOptions": {
+    "sourceType": "module",
+    "requireConfigFile": false,
+    "babelOptions": {
+      "presets": ["@babel/preset-react"]
+    }
+  },
+  "settings": {
+    "react": {
+      "version": "detect"
+    }
+  },
+  "extends": ["plugin:react/recommended", "plugin:react/jsx-runtime"],
+  "rules": {
+    "react/jsx-curly-brace-presence": 0,
+    "react/prop-types": 0
+  }
+}
