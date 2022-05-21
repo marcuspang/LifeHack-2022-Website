@@ -3,8 +3,8 @@ import React from 'react';
 
 const Section = ({ children, bg, heading, text }) => {
   return (
-    <Box minH={400} bg={bg} p={10} textAlign="center">
-      <Heading my="10" size={'2xl'}>
+    <Box minH={400} bg={bg} p={4} textAlign="center">
+      <Heading my={5} size={'2xl'}>
         {heading}
       </Heading>
       <Text>{text}</Text>
