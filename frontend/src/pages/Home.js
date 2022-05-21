@@ -75,7 +75,7 @@ const Home = () => {
                 <Text flex="0 0 100px" mr="5">
                   1200 -
                 </Text>
-                <Text>Discord Q&A with Industry Experts</Text>
+                <Text>Discord Q&amp;A with Industry Experts</Text>
               </Flex>
               <Flex w="100%">
                 <Text flex="0 0 100px" mr="5">
@@ -187,7 +187,7 @@ const Home = () => {
         <Center>
           <Box pt="10" mt="10" w="200px">
             <Heading size="lg" color="yellow.300">
-              $600 & $400
+              $600 &amp; $400
             </Heading>
             <Heading size="lg">2nd and 3rd</Heading>
           </Box>
@@ -305,7 +305,7 @@ const Home = () => {
                 Are there any restrictions on platforms and programming languages which can be used?
               </Heading>
               <Text>
-                No. Feel free to use any programming language or technology you&apos; re comfortable
+                No. Feel free to use any programming language or technology you&apos;re comfortable
                 with!
               </Text>
             </Box>

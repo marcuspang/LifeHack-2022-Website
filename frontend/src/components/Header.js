@@ -1,42 +1,28 @@
+import { useAuth0 } from '@auth0/auth0-react';
+import { Box, Flex, Stack } from '@chakra-ui/react';
 import React from 'react';
-import { Box, Button, Flex, Stack } from '@chakra-ui/react';
+import LoginButton from './LoginButton';
+import LogoutButton from './LogoutButton';
+import RegisterButton from './RegisterButton';
 
-const Nav = () => {
+const Header = () => {
+  const { isAuthenticated, user } = useAuth0();
+  console.log(user, isAuthenticated);
   return (
     <>
       <Box bg="theme.500" px={4}>
         <Flex h={16} alignItems="center" justifyContent="space-between">
           <Box>Logo</Box>
-
           <Flex alignItems="center">
             <Stack flex={{ base: 1, md: 0 }} justify="flex-end" direction="row" spacing={6}>
-              <Button
-                as="a"
-                href="/login"
-                fontSize="sm"
-                fontWeight={400}
-                bg="theme.500"
-                _hover={{ bg: 'theme.400' }}
-                _active={{
-                  bg: 'theme.400',
-                }}
-                color="white"
-              >
-                Sign In
-              </Button>
-              <Button
-                as="a"
-                href="/register"
-                display={{ base: 'none', md: 'inline-flex' }}
-                fontSize="sm"
-                fontWeight={600}
-                color="white"
-                bg="theme.300"
-                _hover={{ bg: 'theme.400' }}
-                _active={{ bg: 'theme.400' }}
-              >
-                Sign Up
-              </Button>
+              {!isAuthenticated ? (
+                <>
+                  <RegisterButton />
+                  <LoginButton />
+                </>
+              ) : (
+                <LogoutButton />
+              )}
             </Stack>
             {/* Mobile */}
             {/* <Stack direction={"row"} spacing={7}>
@@ -80,4 +66,4 @@ const Nav = () => {
   );
 };
 
-export default Nav;
+export default Header;
