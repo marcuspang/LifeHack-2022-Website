@@ -19,16 +19,16 @@ const Home = () => {
       <Header />
       <Hero />
       <Section bg="theme.500" heading="About">
-        <Text m="0 auto" w="70%" pt={3} fontSize="2xl">
-          LifeHack 2021 is a 24-Hour virtual hackathon that wants you to develop innovative software
-          solutions to make a positive change in people&apos; s lives in a post-COVID world. Through
-          exciting workshops and events, you will have the chance to learn various technologies from
-          web development to utilizing cloud services.
+        <Text m={'0 auto'} maxW={'800px'} fontSize={['lg', '2xl']}>
+          Lifehack 2022 is a hackathon aimed to channel the creativity, drive, and skills of the
+          participants in the software development field. Participants are expected to develop
+          intelligent solutions in response to the problem statements presented during the
+          competition. The event is mostly held online, with the exception of the closing day.
         </Text>
-        <Heading size="lg" mt="20">
+        <Heading size="lg" mt={[10, 20]}>
           There will be 3 themes for participants to choose from:
         </Heading>
-        <Center my="10">
+        <Center flexDir={['column', 'column', 'row']} my={[5, 10]}>
           <Heading color="theme.100">Giving Back</Heading>
           <Heading px="10" color="green.300">
             Environment
@@ -36,40 +36,51 @@ const Home = () => {
           <Heading color="yellow.300">Safety</Heading>
         </Center>
       </Section>
-      <Section bg="theme.200" heading="Timeline">
-        <Box maxW="75%" m="0 auto">
-          <SimpleGrid mt="20" columns={2} spacing={10}>
+
+      <Section bg="theme.200" heading={'Timeline'}>
+        <Box maxW="900px" m="0 auto" textAlign={'left'}>
+          <SimpleGrid mt={['10', '20']} columns={[1, 1, 2]} spacing={10}>
             <VStack
               divider={<StackDivider borderColor="gray.400" />}
               spacing={4}
               align="flex-start"
             >
               <Heading size="md">Day 1: Opening Day (9th July)</Heading>
-              <Flex>
-                <Text mr="5">0900 - 1000</Text>
+              <Flex w="100%">
+                <Text flex={'0 0 100px'} mr="5">
+                  0900 - 1000
+                </Text>
                 <Text>Opening Ceremony</Text>
               </Flex>
-              <Flex>
-                <Text mr="5">1000 - 1100</Text>
+              <Flex w="100%">
+                <Text flex={'0 0 100px'} mr="5">
+                  1000 - 1100
+                </Text>
                 <Text>Panel Discussion</Text>
               </Flex>
 
-              <Flex>
-                <Text mr="5">1100 - 1200</Text>
+              <Flex w="100%">
+                <Text flex={'0 0 100px'} mr="5">
+                  1100 - 1200
+                </Text>
                 <Text>Sponsorship Talks</Text>
               </Flex>
-              <Flex>
-                <Text mr="5">1200</Text>
-                <Box w="55px"></Box>
+              <Flex w="100%">
+                <Text flex={'0 0 100px'} mr="5">
+                  1200
+                </Text>
                 <Text>Hacking Begins!</Text>
               </Flex>
-              <Flex>
-                <Text mr="5">1200 -</Text>
-                <Box w="43px"></Box>
+              <Flex w="100%">
+                <Text flex={'0 0 100px'} mr="5">
+                  1200 -
+                </Text>
                 <Text>Discord Q&A with Industry Experts</Text>
               </Flex>
-              <Flex>
-                <Text mr="5">2030 - 2145</Text>
+              <Flex w="100%">
+                <Text flex={'0 0 100px'} mr="5">
+                  2030 - 2145
+                </Text>
                 <Text>Games</Text>
               </Flex>
             </VStack>
@@ -79,74 +90,97 @@ const Home = () => {
               align="flex-start"
             >
               <Heading size="md">Day 2: Submission Day (10th July)</Heading>
-              <Flex>
-                <Text mr="5">1200</Text>
-                <Box w="55px"></Box>
+              <Flex w="100%">
+                <Text flex={'0 0 100px'} mr="5">
+                  1200
+                </Text>
                 <Text>Submission Deadline</Text>
               </Flex>
 
-              <Flex>
-                <Text mr="5">1200 - 1800</Text>
+              <Flex w="100%">
+                <Text flex={'0 0 100px'} mr="5">
+                  1200 - 1800
+                </Text>
                 <Text>Judging</Text>
               </Flex>
-              <Flex>
-                <Text mr="5">2000</Text>
-                <Box w="55px"></Box>
+              <Flex w="100%">
+                <Text flex={'0 0 100px'} mr="5">
+                  2000
+                </Text>
                 <Text>Announcements of top projects and special prize winners</Text>
               </Flex>
             </VStack>
           </SimpleGrid>
-          <Box>
+          <Box mb={5}>
             <VStack
               divider={<StackDivider borderColor="gray.400" />}
               spacing={4}
               align="flex-start"
-              mt="20"
+              mt={[10, 20]}
             >
               <Heading size="md">Day 3: Finale Day (16th July)</Heading>
-              <Flex>
-                <Text mr="5">1000 - 1015</Text>
-                <Text>Opening Address</Text>
+              <Flex w="100%">
+                <Text flex={'0 0 100px'} mr="5">
+                  1000 - 1015
+                </Text>
+                <Text flex={'1 0 auto'}>Opening Address</Text>
               </Flex>
 
-              <Flex>
-                <Text mr="5">1030 - 1115</Text>
+              <Flex w="100%">
+                <Text flex={'0 0 100px'} mr="5">
+                  1030 - 1115
+                </Text>
                 <Text>Presentation by Top 3 Teams from Giving Back Theme</Text>
               </Flex>
-              <Flex>
-                <Text mr="5">1115 - 1200</Text>
+              <Flex w="100%">
+                <Text flex={'0 0 100px'} mr="5">
+                  1115 - 1200
+                </Text>
                 <Text>Presentation by Top 3 Teams from Environment Theme</Text>
               </Flex>
-              <Flex>
-                <Text mr="5">1200 - 1245</Text>
-                <Text>Presentation by Top 3 Teams from Safety Back Theme</Text>
+              <Flex w="100%">
+                <Text flex={'0 0 100px'} mr="5">
+                  1200 - 1245
+                </Text>
+                <Text flex={'1 1 auto'}>Presentation by Top 3 Teams from Safety Theme</Text>
               </Flex>
-              <Flex>
-                <Text mr="5">1245 - 1430</Text>
+              <Flex w="100%">
+                <Text flex={'0 0 100px'} mr="5">
+                  1245 - 1430
+                </Text>
                 <Text>Lunch</Text>
               </Flex>
-              <Flex>
-                <Text mr="5">1430 - 1450</Text>
+              <Flex w="100%">
+                <Text flex={'0 0 100px'} mr="5">
+                  1430 - 1450
+                </Text>
                 <Text>Trivia Quiz</Text>
               </Flex>
-              <Flex>
-                <Text mr="5">1450 - 1505</Text>
+              <Flex w="100%">
+                <Text flex={'0 0 100px'} mr="5">
+                  1450 - 1505
+                </Text>
                 <Text>Lucky Draw</Text>
               </Flex>
-              <Flex>
-                <Text mr="5">1510 - 1530</Text>
+              <Flex w="100%">
+                <Text flex={'0 0 100px'} mr="5">
+                  1510 - 1530
+                </Text>
                 <Text>Prize Presentation by Computing Club President</Text>
               </Flex>
-              <Flex>
-                <Text mr="5">1530 - 1630</Text>
+              <Flex w="100%">
+                <Text flex={'0 0 100px'} mr="5">
+                  1530 - 1630
+                </Text>
                 <Text>Closing Ceremony</Text>
               </Flex>
             </VStack>
           </Box>
         </Box>
       </Section>
-      <Section heading="Prizes">
-        <Text fontSize="3xl" mt="10">
+
+      <Section heading={'Prizes'}>
+        <Text fontSize={'3xl'} mt="10">
           Main Prizes
         </Text>
         <Text fontSize="xl">(For each category)</Text>
@@ -190,8 +224,10 @@ const Home = () => {
           <Text color="yellow.300">$300</Text>
         </Box>
       </Section>
-      {/* <Section heading={'Points'} text={'About'} /> */}
-      <Section bg="theme.100" heading="FAQ">
+
+      {/*
+      <Section heading={'Points'} text={'About'} />
+      <Section bg="theme.100" heading={'FAQ'}>
         <Box textAlign="left" maxW="700px" fontSize="xl" m="20px auto">
           <Box mt="10">
             <Heading size="lg">Am I eligible to participate?</Heading>
@@ -283,7 +319,7 @@ const Home = () => {
           </Box>
         </Box>
       </Section>
-      <Section heading="Sponsors" text="About" />
+      <Section heading={'Sponsors'} text={'About'} /> */}
     </Box>
   );
 };

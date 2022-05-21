@@ -4,15 +4,13 @@ import React from 'react';
 
 const Hero = () => {
   return (
-    <Center bg="theme.100" display="flex" h={700} p={4}>
-      <Box boxSize="xl" pt={20} pr={5}>
-        <Image src={femaleDevImg} alt="Idea" />
-      </Box>
-      <Box color="white" pl={5}>
-        <Heading size="4xl">Lifehack 2022</Heading>
-        <Text fontSize="2xl">9th - 10th July & 16th July 2022</Text>
-        <Text fontSize="xl">Stay ahead of change. Innovate the future.</Text>
-        <Button as="a" href="/register" fontSize="2xl" mt="2" colorScheme="red" size="lg">
+    <Center bg="theme.100" p={4} flexDir={['column', 'column', 'row']}>
+      <Image boxSize={['auto', 'auto', 'xl']} src={femaleDevImg} alt="Idea" />
+      <Box pb={5}>
+        <Heading as='h1' size={'4xl'}>Lifehack 2022</Heading>
+        <Text fontSize={['xl', '2xl']}>9th - 10th July & 16th July 2022</Text>
+        <Text fontSize={['lg', 'xl']}>Stay ahead of change. Innovate the future.</Text>
+        <Button as={'a'} href="/register" fontSize="xl" mt="2" colorScheme={'red'} size="lg">
           Register Now
         </Button>
       </Box>
