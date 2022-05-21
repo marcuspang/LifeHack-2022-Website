@@ -4,7 +4,7 @@ import React from 'react';
 const Section = ({ children, bg, heading, text }) => {
   return (
     <Box minH={400} bg={bg} p={10} textAlign="center">
-      <Heading my="10" size={'2xl'}>
+      <Heading my="10" size="2xl">
         {heading}
       </Heading>
       <Text>{text}</Text>

@@ -1,3 +1,7 @@
+import Header from '../components/Header';
+import Hero from '../components/Hero';
+import Section from '../components/Section';
+import React from 'react';
 import {
   Box,
   Center,
@@ -8,9 +12,6 @@ import {
   Text,
   VStack,
 } from '@chakra-ui/react';
-import Header from '../components/Header';
-import Hero from '../components/Hero';
-import Section from '../components/Section';
 
 const Home = () => {
   return (
@@ -18,9 +19,9 @@ const Home = () => {
       <Header />
       <Hero />
       <Section bg="theme.500" heading="About">
-        <Text m={'0 auto'} w={'70%'} pt={3} fontSize={'2xl'}>
+        <Text m="0 auto" w="70%" pt={3} fontSize="2xl">
           LifeHack 2021 is a 24-Hour virtual hackathon that wants you to develop innovative software
-          solutions to make a positive change in people&apos;s lives in a post-COVID world. Through
+          solutions to make a positive change in people&apos; s lives in a post-COVID world. Through
           exciting workshops and events, you will have the chance to learn various technologies from
           web development to utilizing cloud services.
         </Text>
@@ -35,7 +36,7 @@ const Home = () => {
           <Heading color="yellow.300">Safety</Heading>
         </Center>
       </Section>
-      <Section bg="theme.200" heading={'Timeline'}>
+      <Section bg="theme.200" heading="Timeline">
         <Box maxW="75%" m="0 auto">
           <SimpleGrid mt="20" columns={2} spacing={10}>
             <VStack
@@ -144,11 +145,11 @@ const Home = () => {
           </Box>
         </Box>
       </Section>
-      <Section heading={'Prizes'}>
-        <Text fontSize={'3xl'} mt="10">
+      <Section heading="Prizes">
+        <Text fontSize="3xl" mt="10">
           Main Prizes
         </Text>
-        <Text fontSize={'xl'}>(For each category)</Text>
+        <Text fontSize="xl">(For each category)</Text>
         <Center>
           <Box pt="10" mt="10" w="200px">
             <Heading size="lg" color="yellow.300">
@@ -169,7 +170,7 @@ const Home = () => {
             <Heading size="lg">4th and 5th</Heading>
           </Box>
         </Center>
-        <Text fontSize={'3xl'} mt="20">
+        <Text fontSize="3xl" mt="20">
           Special Prizes
         </Text>
         <Box fontSize="xl" mt="8">
@@ -190,7 +191,7 @@ const Home = () => {
         </Box>
       </Section>
       {/* <Section heading={'Points'} text={'About'} /> */}
-      <Section bg="theme.100" heading={'FAQ'}>
+      <Section bg="theme.100" heading="FAQ">
         <Box textAlign="left" maxW="700px" fontSize="xl" m="20px auto">
           <Box mt="10">
             <Heading size="lg">Am I eligible to participate?</Heading>
@@ -215,7 +216,9 @@ const Home = () => {
             </Text>
           </Box>
           <Box mt="10">
-            <Heading size="lg">I don&apos;t have a team member. Can I still participate?</Heading>
+            <Heading size="lg">
+              {'I don&apos;t have a team member. Can I still participate?'}
+            </Heading>
             <Text>
               Each team should have 2 - 4 members. You may email us at lifehack@nuscomputing.com and
               we can try to match you up with someone.
@@ -266,21 +269,21 @@ const Home = () => {
                 Are there any restrictions on platforms and programming languages which can be used?
               </Heading>
               <Text>
-                No. Feel free to use any programming language or technology you&apos;re comfortable
+                No. Feel free to use any programming language or technology you&apos; re comfortable
                 with!
               </Text>
             </Box>
             <Box mt="10">
               <Heading size="lg">Any other questions?</Heading>
               <Text>
-                Let us know at{' '}
+                {'Let us know at'}{' '}
                 <a href="mailto:lifehack@nuscomputing.com">lifehack@nuscomputing.com!</a>
               </Text>
             </Box>
           </Box>
         </Box>
       </Section>
-      <Section heading={'Sponsors'} text={'About'} />
+      <Section heading="Sponsors" text="About" />
     </Box>
   );
 };

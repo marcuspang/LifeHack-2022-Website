@@ -1,5 +1,5 @@
 {
-  "name": "lifehack-2022-website",
+  "name": "lifehack-2022-frontend",
   "version": "0.1.0",
   "private": true,
   "dependencies": {
@@ -13,6 +13,7 @@
     "framer-motion": "^6.3.3",
     "react": "^18.1.0",
     "react-dom": "^18.1.0",
+    "react-router-dom": "^6.3.0",
     "react-scripts": "5.0.1"
   },
   "scripts": {
@@ -45,11 +46,13 @@
     "@babel/eslint-parser": "^7.17.0",
     "@babel/preset-env": "^7.17.12",
     "@babel/preset-react": "^7.17.12",
+    "babel-plugin-transform-class-properties": "^6.24.1",
     "eslint": "^8.15.0",
     "eslint-config-prettier": "^8.5.0",
     "eslint-plugin-jsx": "^0.1.0",
     "eslint-plugin-prettier": "^4.0.0",
     "eslint-plugin-react": "^7.30.0",
+    "eslint-plugin-unused-imports": "^2.0.0",
     "prettier": "^2.6.2"
   }
 }

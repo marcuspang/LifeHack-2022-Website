@@ -1,29 +1,42 @@
 {
-  "root": true,
-  "parser": "@babel/eslint-parser",
-  "plugins": ["react", "jsx"],
   "env": {
     "browser": true,
-    "commonjs": true,
     "es6": true,
-    "jest": true,
     "node": true
   },
-  "parserOptions": {
-    "sourceType": "module",
-    "requireConfigFile": false,
-    "babelOptions": {
-      "presets": ["@babel/preset-react"]
-    }
-  },
   "settings": {
+    "import/resolver": {
+      "node": {
+        "extensions": [".js", ".jsx"],
+        "moduleDirectory": ["node_modules", "src"]
+      }
+    },
+    "import/ignore": ["node_modules"],
     "react": {
       "version": "detect"
     }
   },
-  "extends": ["plugin:react/recommended", "plugin:react/jsx-runtime"],
+  "extends": [
+    "eslint:recommended",
+    "plugin:react/recommended",
+    "plugin:prettier/recommended",
+    "plugin:import/recommended"
+  ],
+  "parser": "@babel/eslint-parser",
+  "parserOptions": {
+    "ecmaFeatures": {
+      "jsx": true
+    },
+    "sourceType": "module"
+  },
+  "plugins": ["react", "import", "unused-imports", "jsx"],
   "rules": {
-    "react/jsx-curly-brace-presence": 0,
+    "no-var": "error",
+    "eqeqeq": ["error", "always", { "null": "ignore" }],
+    "react/jsx-curly-brace-presence": ["error", { "props": "never", "children": "never" }],
+    "curly": ["error", "multi-line"],
+    "import/no-relative-packages": "error",
+    "unused-imports/no-unused-imports": "error",
     "react/prop-types": 0
   }
 }

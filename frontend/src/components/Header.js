@@ -1,36 +1,37 @@
+import React from 'react';
 import { Box, Button, Flex, Stack } from '@chakra-ui/react';
 
 const Nav = () => {
   return (
     <>
-      <Box bg={'theme.500'} px={4}>
-        <Flex h={16} alignItems={'center'} justifyContent={'space-between'}>
+      <Box bg="theme.500" px={4}>
+        <Flex h={16} alignItems="center" justifyContent="space-between">
           <Box>Logo</Box>
 
-          <Flex alignItems={'center'}>
-            <Stack flex={{ base: 1, md: 0 }} justify={'flex-end'} direction={'row'} spacing={6}>
+          <Flex alignItems="center">
+            <Stack flex={{ base: 1, md: 0 }} justify="flex-end" direction="row" spacing={6}>
               <Button
-                as={'a'}
-                href={'/login'}
-                fontSize={'sm'}
+                as="a"
+                href="/login"
+                fontSize="sm"
                 fontWeight={400}
-                bg={'theme.500'}
+                bg="theme.500"
                 _hover={{ bg: 'theme.400' }}
                 _active={{
                   bg: 'theme.400',
                 }}
-                color={'white'}
+                color="white"
               >
                 Sign In
               </Button>
               <Button
-                as={'a'}
-                href={'/register'}
+                as="a"
+                href="/register"
                 display={{ base: 'none', md: 'inline-flex' }}
-                fontSize={'sm'}
+                fontSize="sm"
                 fontWeight={600}
-                color={'white'}
-                bg={'theme.300'}
+                color="white"
+                bg="theme.300"
                 _hover={{ bg: 'theme.400' }}
                 _active={{ bg: 'theme.400' }}
               >

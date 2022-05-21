@@ -4,6 +4,7 @@ import '@fontsource/hammersmith-one';
 import '@fontsource/nunito-sans';
 import React from 'react';
 import ReactDOM from 'react-dom';
+import { BrowserRouter } from 'react-router-dom';
 import App from './App';
 import theme from './theme';
 
@@ -14,9 +15,11 @@ ReactDOM.render(
       clientId={process.env.REACT_APP_AUTH_CLIENT_ID}
       redirectUri={window.location.origin}
     >
-      <ChakraProvider theme={theme}>
-        <App />
-      </ChakraProvider>
+      <BrowserRouter>
+        <ChakraProvider theme={theme}>
+          <App />
+        </ChakraProvider>
+      </BrowserRouter>
     </Auth0Provider>
   </React.StrictMode>,
   document.getElementById('root')
