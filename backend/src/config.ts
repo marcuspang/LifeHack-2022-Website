@@ -6,6 +6,7 @@ export interface IProcessEnv {
 
 declare global {
   namespace NodeJS {
-    type ProcessEnv = IProcessEnv;
+    // eslint-disable-next-line
+    interface ProcessEnv extends IProcessEnv {}
   }
 }
