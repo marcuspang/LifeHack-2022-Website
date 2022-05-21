@@ -7,10 +7,12 @@ const Hero = () => {
     <Center bg="theme.100" p={4} flexDir={['column', 'column', 'row']}>
       <Image boxSize={['auto', 'auto', 'xl']} src={femaleDevImg} alt="Idea" />
       <Box pb={5}>
-        <Heading as='h1' size={'4xl'}>Lifehack 2022</Heading>
+        <Heading as="h1" size="4xl">
+          Lifehack 2022
+        </Heading>
         <Text fontSize={['xl', '2xl']}>9th - 10th July & 16th July 2022</Text>
         <Text fontSize={['lg', 'xl']}>Stay ahead of change. Innovate the future.</Text>
-        <Button as={'a'} href="/register" fontSize="xl" mt="2" colorScheme={'red'} size="lg">
+        <Button as="a" href="/register" fontSize="xl" mt="2" colorScheme="red" size="lg">
           Register Now
         </Button>
       </Box>
