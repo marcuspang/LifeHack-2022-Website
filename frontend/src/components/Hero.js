@@ -1,4 +1,4 @@
-import femaleDevImg from '../images/female-dev.svg';
+import logo from '../images/logo.png';
 import { Box, Button, Center, Heading, Image, Text } from '@chakra-ui/react';
 import React from 'react';
 import { useAuth0 } from '@auth0/auth0-react';
@@ -6,8 +6,8 @@ import { useAuth0 } from '@auth0/auth0-react';
 const Hero = () => {
   const { loginWithRedirect } = useAuth0();
   return (
-    <Center bg="theme.100" p={4} flexDir={['column', 'column', 'row']}>
-      <Image boxSize={['auto', 'auto', 'xl']} src={femaleDevImg} alt="Idea" />
+    <Center bg="black" p={4} flexDir={['column', 'column', 'row']}>
+      <Image boxSize={['auto', 'auto', 'xl']} src={logo} alt="Idea" />
       <Box pb={5}>
         <Heading as="h1" size="4xl">
           Lifehack 2022
@@ -22,7 +22,8 @@ const Hero = () => {
           }}
           fontSize="xl"
           mt="2"
-          colorScheme="red"
+          bg="theme.100"
+          colorScheme="blue"
           size="lg"
         >
           Register Now
