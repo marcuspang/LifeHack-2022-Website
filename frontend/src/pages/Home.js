@@ -12,13 +12,14 @@ import {
   Text,
   VStack,
 } from '@chakra-ui/react';
+import { Link } from '@chakra-ui/react';
 
 const Home = () => {
   return (
     <Box>
       <Header />
       <Hero />
-      <Section bg="theme.500" heading="About">
+      <Section bg="theme.300" heading="About">
         <Text m="0 auto" maxW="800px" fontSize={['lg', '2xl']}>
           Lifehack 2022 is a hackathon aimed to channel the creativity, drive, and skills of the
           participants in the software development field. Participants are expected to develop
@@ -29,7 +30,7 @@ const Home = () => {
           There will be 3 themes for participants to choose from:
         </Heading>
         <Center flexDir={['column', 'column', 'row']} my={[5, 10]}>
-          <Heading color="theme.100">Giving Back</Heading>
+          <Heading color="pink.300">Giving Back</Heading>
           <Heading px="10" color="green.300">
             Environment
           </Heading>
@@ -184,27 +185,27 @@ const Home = () => {
           Main Prizes
         </Text>
         <Text fontSize="xl">(For each category)</Text>
-        <Center>
-          <Box pt="10" mt="10" w="200px">
+        <Center flexDir={['column', 'column', 'row']}>
+          <Box pt={[0, 0, 10]} mt={10} w="200px" order={[2, 2, 1]}>
             <Heading size="lg" color="yellow.300">
               $600 &amp; $400
             </Heading>
             <Heading size="lg">2nd and 3rd</Heading>
           </Box>
-          <Box mx="20" mt="10" w="200px">
+          <Box mx={[0, 0, 20]} mt="10" w="200px" order={[1, 1, 2]}>
             <Heading size="2xl" color="yellow.300">
               $1000
             </Heading>
             <Heading size="xl">1st</Heading>
           </Box>
-          <Box pt="20" mt="10" w="200px">
+          <Box pt={[0, 0, 20]} mt={10} w="200px" order="3">
             <Heading size="lg" color="yellow.300">
               $150
             </Heading>
             <Heading size="lg">4th and 5th</Heading>
           </Box>
         </Center>
-        <Text fontSize="3xl" mt="20">
+        <Text fontSize="3xl" mt={10}>
           Special Prizes
         </Text>
         <Box fontSize="xl" mt="8">
@@ -225,19 +226,19 @@ const Home = () => {
         </Box>
       </Section>
 
-      {/*
-      <Section heading={'Points'} text={'About'} />
-      <Section bg="theme.100" heading={'FAQ'}>
-        <Box textAlign="left" maxW="700px" fontSize="xl" m="20px auto">
+      {/* <Section heading={'Points'} text={'About'} /> */}
+
+      <Section bg="theme.100" heading="FAQ">
+        <Box textAlign="left" maxW="700px" fontSize={['lg', 'lg', 'xl']} m="20px auto">
           <Box mt="10">
-            <Heading size="lg">Am I eligible to participate?</Heading>
+            <Heading size="md">Am I eligible to participate?</Heading>
             <Text>
               This event is open to all current Polytechnic, Junior College and ITE students,
               students awaiting entry to University, and all Undergraduate students.
             </Text>
           </Box>
           <Box mt="10">
-            <Heading size="lg">Do I need any technical experience or knowledge?</Heading>
+            <Heading size="md">Do I need any technical experience or knowledge?</Heading>
             <Text>
               Some knowledge of programming is recommended but not necessary! We have workshops
               planned for you from 4 - 8 July. Attending the workshops will provide you with
@@ -245,30 +246,21 @@ const Home = () => {
             </Text>
           </Box>
           <Box mt="10">
-            <Heading size="lg">Am I eligible to participate?</Heading>
-            <Text>
-              This event is open to all current Polytechnic, Junior College and ITE students,
-              students awaiting entry to University, and all Undergraduate students.
-            </Text>
-          </Box>
-          <Box mt="10">
-            <Heading size="lg">
-              {'I don&apos;t have a team member. Can I still participate?'}
-            </Heading>
+            <Heading size="md">I don&apos;t have a team member. Can I still participate?</Heading>
             <Text>
               Each team should have 2 - 4 members. You may email us at lifehack@nuscomputing.com and
               we can try to match you up with someone.
             </Text>
           </Box>
           <Box mt="10">
-            <Heading size="lg">Will LifeHack 2022 be online or in-person?</Heading>
+            <Heading size="md">Will LifeHack 2022 be online or in-person?</Heading>
             <Text>
               LifeHack 2022 will be a hybrid event. The main hackathon event from 4 - 10 July will
               be conducted online while the finale on 16 July will be a physical event.
             </Text>
           </Box>
           <Box mt="10">
-            <Heading size="lg">
+            <Heading size="md">
               What&apos;s next after our submission of the registration form?
             </Heading>
             <Text>
@@ -277,7 +269,7 @@ const Home = () => {
             </Text>
           </Box>
           <Box mt="10">
-            <Heading size="lg">
+            <Heading size="md">
               Which platform will be used to disseminate event updates/announcements?
             </Heading>
             <Text>
@@ -285,7 +277,7 @@ const Home = () => {
               mini events throughout the hackathon.
             </Text>
             <Box mt="10">
-              <Heading size="lg">Can I use code that I previously wrote?</Heading>
+              <Heading size="md">Can I use code that I previously wrote?</Heading>
               <Text>
                 You are allowed to use snippets of code you have previously written. However,
                 copying your entire hack from previous events or from online is strictly not
@@ -293,7 +285,7 @@ const Home = () => {
               </Text>
             </Box>
             <Box mt="10">
-              <Heading size="lg">How will the submissions be assessed?</Heading>
+              <Heading size="md">How will the submissions be assessed?</Heading>
               <Text>
                 Details on judging criteria and rules will be elaborated upon on the event Opening
                 Day (9 July). Judging panels will consist of NUS professors and industry
@@ -301,7 +293,7 @@ const Home = () => {
               </Text>
             </Box>
             <Box mt="10">
-              <Heading size="lg">
+              <Heading size="md">
                 Are there any restrictions on platforms and programming languages which can be used?
               </Heading>
               <Text>
@@ -310,16 +302,19 @@ const Home = () => {
               </Text>
             </Box>
             <Box mt="10">
-              <Heading size="lg">Any other questions?</Heading>
+              <Heading size="md">Any other questions?</Heading>
               <Text>
-                {'Let us know at'}{' '}
-                <a href="mailto:lifehack@nuscomputing.com">lifehack@nuscomputing.com!</a>
+                Let us know at{' '}
+                <Link color="yellow.200">
+                  <a href="mailto:lifehack@nuscomputing.com">lifehack@nuscomputing.com!</a>
+                </Link>
               </Text>
             </Box>
           </Box>
         </Box>
       </Section>
-      <Section heading={'Sponsors'} text={'About'} /> */}
+
+      <Section heading="Sponsors" text="About" />
     </Box>
   );
 };
