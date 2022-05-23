@@ -14,7 +14,7 @@ const RegisterButton = () => {
       display={{ base: 'none', md: 'inline-flex' }}
       variant="themeBlue"
     >
-      {'Sign Up'}
+      Sign Up
     </Button>
   );
 };

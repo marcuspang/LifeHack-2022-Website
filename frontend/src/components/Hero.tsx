@@ -6,13 +6,13 @@ const Hero = () => {
   const { loginWithRedirect, isAuthenticated } = useAuth0();
   return (
     <Center bg="black" p={4} flexDir={['column', 'column', 'row']}>
-      <Image boxSize={['auto', 'auto', 'xl']} src={'/logo.png'} alt="Idea" />
+      <Image boxSize={['auto', 'auto', 'xl']} src="/logo.png" alt="Idea" />
       <Box pb={5}>
         <Heading as="h1" size="4xl">
-          {'Lifehack 2022'}
+          Lifehack 2022
         </Heading>
-        <Text fontSize={['xl', '2xl']}>{'9th - 10th July & 16th July 2022'}</Text>
-        <Text fontSize={['lg', 'xl']}>{'Stay ahead of change. Innovate the future.'}</Text>
+        <Text fontSize={['xl', '2xl']}>9th - 10th July & 16th July 2022</Text>
+        <Text fontSize={['lg', 'xl']}>Stay ahead of change. Innovate the future.</Text>
         {!isAuthenticated && (
           <Button
             onClick={() => {
@@ -26,7 +26,7 @@ const Hero = () => {
             colorScheme="blue"
             size="lg"
           >
-            {'Register Now'}
+            Register Now
           </Button>
         )}
       </Box>

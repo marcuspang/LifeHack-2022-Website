@@ -11,7 +11,7 @@ const LogoutButton = () => {
       }}
       variant="theme"
     >
-      {'Logout'}
+      Logout
     </Button>
   );
 };

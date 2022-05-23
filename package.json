@@ -1,0 +1,16 @@
+{
+  "name": "lifehack-website",
+  "version": "1.0.0",
+  "repository": "https://github.com/marcuspang/lifehack-2022-website.git",
+  "author": "Marcus Pang <marcuspangyuyang@gmail.com>",
+  "license": "MIT",
+  "private": true,
+  "workspaces": ["frontend", "backend"],
+  "devDependencies": {
+    "husky": "^8.0.0"
+  },
+  "scripts": {
+    "prepare": "husky install",
+    "lint": "yarn workspace frontend lint && yarn workspace backend lint"
+  }
+}

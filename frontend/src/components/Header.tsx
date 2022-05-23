@@ -7,14 +7,12 @@ import Loader from './Loader';
 const Header = () => {
   const { isLoading } = useAuth0();
   return (
-    <>
-      <Box as="header" bg="theme.400" px={4}>
-        <Flex h={16} alignItems="center" justifyContent="space-between">
-          <Heading fontSize={'md'}>LifeHack 2022</Heading>
-          {isLoading ? <Loader /> : <HeaderButtons />}
-        </Flex>
-      </Box>
-    </>
+    <Box as="header" bg="theme.400" px={6}>
+      <Flex h={16} alignItems="center" justifyContent="space-between">
+        <Heading fontSize="md">LifeHack 2022</Heading>
+        {isLoading ? <Loader /> : <HeaderButtons />}
+      </Flex>
+    </Box>
   );
 };
 

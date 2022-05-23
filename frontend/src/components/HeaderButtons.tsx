@@ -6,16 +6,20 @@ import LogoutButton from './LogoutButton';
 import RegisterButton from './RegisterButton';
 
 const HeaderButtons = () => {
-  const { isAuthenticated, user } = useAuth0();
+  const { isAuthenticated } = useAuth0();
 
-  return !isAuthenticated ? (
+  if (!isAuthenticated) {
+    return (
+      <Stack flex={{ base: 1, md: 0 }} justify="flex-end" direction="row" spacing={6}>
+        <RegisterButton />
+        <LoginButton />
+      </Stack>
+    );
+  }
+
+  return (
     <Stack flex={{ base: 1, md: 0 }} justify="flex-end" direction="row" spacing={6}>
-      <RegisterButton />
-      <LoginButton />
-    </Stack>
-  ) : (
-    <Stack flex={{ base: 1, md: 0 }} justify="flex-end" direction="row" spacing={6}>
-      <Button variant={'themeBlue'}>Leaderboard</Button>
+      <Button variant="themeBlue">Leaderboard</Button>
       <Button variant="themeBlue">Settings</Button>
       <LogoutButton />
     </Stack>
