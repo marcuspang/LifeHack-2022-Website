@@ -12,14 +12,9 @@ const RegisterButton = () => {
         });
       }}
       display={{ base: 'none', md: 'inline-flex' }}
-      fontSize="sm"
-      fontWeight={600}
-      color="white"
-      bg="theme.300"
-      _hover={{ bg: 'theme.400' }}
-      _active={{ bg: 'theme.400' }}
+      variant="themeBlue"
     >
-      Sign Up
+      {'Sign Up'}
     </Button>
   );
 };

@@ -18,7 +18,7 @@ const LoginButton = () => {
       }}
       color="white"
     >
-      Sign In
+      {'Sign In'}
     </Button>
   );
 };

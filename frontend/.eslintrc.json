@@ -7,8 +7,8 @@
   "settings": {
     "import/resolver": {
       "node": {
-        "extensions": [".js", ".jsx"],
-        "moduleDirectory": ["node_modules", "src"]
+        "extensions": [".js", ".jsx", ".ts", ".tsx"],
+        "moduleDirectory": ["node_modules", "src/"]
       }
     },
     "import/ignore": ["node_modules"],
@@ -19,24 +19,38 @@
   "extends": [
     "eslint:recommended",
     "plugin:react/recommended",
+    "plugin:@typescript-eslint/eslint-recommended",
     "plugin:prettier/recommended",
     "plugin:import/recommended"
   ],
-  "parser": "@babel/eslint-parser",
+  "globals": {
+    "Atomics": "readonly",
+    "SharedArrayBuffer": "readonly"
+  },
+  "parser": "@typescript-eslint/parser",
   "parserOptions": {
     "ecmaFeatures": {
       "jsx": true
     },
+    "ecmaVersion": 11,
     "sourceType": "module"
   },
-  "plugins": ["react", "import", "unused-imports", "jsx"],
+  "plugins": ["react", "@typescript-eslint", "import", "unused-imports"],
   "rules": {
+    "no-unused-vars": "off", // To be removed eventually
     "no-var": "error",
     "eqeqeq": ["error", "always", { "null": "ignore" }],
-    "react/jsx-curly-brace-presence": ["error", { "props": "never", "children": "never" }],
+    "react/jsx-curly-brace-presence": ["off", { "props": "never", "children": "always" }],
     "curly": ["error", "multi-line"],
     "import/no-relative-packages": "error",
-    "unused-imports/no-unused-imports": "error",
-    "react/prop-types": 0
-  }
+    "unused-imports/no-unused-imports": "error"
+  },
+  "overrides": [
+    {
+      "files": ["**/*.tsx"],
+      "rules": {
+        "react/prop-types": "off"
+      }
+    }
+  ]
 }
