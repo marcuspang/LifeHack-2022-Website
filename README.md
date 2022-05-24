@@ -11,13 +11,13 @@ Activities that earn points include:
 - (16th July) Kahoot winners
 
 ## Landing Page
-- [ ] Register button
-- [ ] About the Hackathon
-- [ ] Timeline
-- [ ] Workshops
+- [x] Register button
+- [x] About the Hackathon
+- [x] Timeline
+- [x] Workshops
 - [ ] Prizes (Main + Special)
 - [ ] (?) About the Points System
-- [ ] FAQ
+- [x] FAQ
 - [ ] Sponsors
 - [ ] CTA (Call-to-Action)
 
@@ -26,7 +26,7 @@ Activities that earn points include:
 ### Main
 
 For Participants:
-- [ ] Register / Login
+- [x] Register / Login
 - [ ] Create / Join a team (minimum 2 people, maximum 4 people)
 - [ ] View team points + individual points
 - [ ] View leaderboard and their relative ranking
@@ -43,6 +43,3 @@ For Organising Team:
 
 For Participants:
 - [ ] View incomplete team and request to join
-
-For Organising Team:
-- [ ] 
