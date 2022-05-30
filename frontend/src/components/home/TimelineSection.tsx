@@ -1,6 +1,6 @@
 import { Box, Flex, Heading, SimpleGrid, StackDivider, Text, VStack } from '@chakra-ui/react';
 import React from 'react';
-import Section from './Section';
+import Section from '../common/Section';
 
 const TimelineSection = () => {
   return (

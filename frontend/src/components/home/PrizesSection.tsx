@@ -1,5 +1,5 @@
 import { Center, Box, Heading, Text } from '@chakra-ui/react';
-import Section from './Section';
+import Section from '../common/Section';
 import React from 'react';
 
 const PrizesSection = () => {

@@ -1,6 +1,6 @@
 import { Heading, Center, Text } from '@chakra-ui/react';
 import React from 'react';
-import Section from './Section';
+import Section from '../common/Section';
 
 const AboutSection = () => {
   return (

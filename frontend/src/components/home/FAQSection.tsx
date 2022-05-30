@@ -1,7 +1,7 @@
 import { Box, Heading, Text } from '@chakra-ui/react';
 import React from 'react';
 import { Link } from 'react-router-dom';
-import Section from './Section';
+import Section from '../common/Section';
 
 const FAQSection = () => {
   return (

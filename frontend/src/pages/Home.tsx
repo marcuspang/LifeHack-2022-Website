@@ -1,11 +1,11 @@
 import { Box } from '@chakra-ui/react';
 import React from 'react';
-import AboutSection from '../components/AboutSection';
-import FAQSection from '../components/FAQSection';
-import Hero from '../components/Hero';
-import PrizesSection from '../components/PrizesSection';
-import SponsorsSection from '../components/SponsorsSection';
-import TimelineSection from '../components/TimelineSection';
+import AboutSection from '../components/home/AboutSection';
+import FAQSection from '../components/home/FAQSection';
+import Hero from '../components/home/Hero';
+import PrizesSection from '../components/home/PrizesSection';
+import SponsorsSection from '../components/home/SponsorsSection';
+import TimelineSection from '../components/home/TimelineSection';
 
 const Home = () => {
   return (

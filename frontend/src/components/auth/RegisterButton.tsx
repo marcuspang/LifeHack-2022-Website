@@ -1,15 +1,13 @@
-import { useAuth0 } from '@auth0/auth0-react';
 import { Button } from '@chakra-ui/react';
 import React from 'react';
+import { useNavigate } from 'react-router-dom';
 
 const RegisterButton = () => {
-  const { loginWithRedirect } = useAuth0();
+  const navigate = useNavigate();
   return (
     <Button
       onClick={() => {
-        loginWithRedirect({
-          screen_hint: 'signup',
-        });
+        navigate('/register');
       }}
       display={{ base: 'none', md: 'inline-flex' }}
       variant="themeBlue"

@@ -16,18 +16,20 @@ enum Role {
 }
 
 model User {
-  id      Int     @id @default(autoincrement())
-  email   String  @unique
-  name    String
-  address String?
-  points  Int
-  role    Role
-  team    Team?   @relation(fields: [teamId], references: [id])
-  teamId  Int?
+  id       Int     @id @default(autoincrement())
+  email    String  @unique
+  name     String
+  password String 
+  address  String?
+  points   Int // points earned by this individual
+  role     Role
+  team     Team?   @relation(fields: [teamId], references: [id])
+  teamId   Int?
 }
 
 model Team {
   id          Int    @id @default(autoincrement())
   totalPoints Int
-  User        User[]
+  name        String @unique
+  users       User[]
 }
