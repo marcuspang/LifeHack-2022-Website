@@ -28,7 +28,7 @@ Activities that earn points include:
 For Participants:
 - [x] Register / Login
 - [ ] Create / Join a team (minimum 2 people, maximum 4 people)
-- [ ] View team points + individual points
+- [x] View team points + individual points
 - [ ] View leaderboard and their relative ranking
 - [ ] View timeline of events
 
@@ -37,7 +37,7 @@ For Organising Team:
 - [ ] Accept / Reject team registration
 - [ ] Able to edit a team's points
 - [ ] Assign prizes to winners (Main + Special)
-- [ ] View leaderboard
+- [x] View leaderboard
 
 ### TBC 
 
