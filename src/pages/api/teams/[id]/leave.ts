@@ -2,7 +2,6 @@ import { NextApiRequest, NextApiResponse } from 'next';
 import { getSession } from 'next-auth/react';
 import prisma from '../../../../../lib/prisma';
 
-// Get the team of a user
 export default async (req: NextApiRequest, res: NextApiResponse) => {
   const session = await getSession({ req });
 
@@ -12,7 +11,7 @@ export default async (req: NextApiRequest, res: NextApiResponse) => {
 
   const id = req.query.id.toString();
   if (id === '') {
-    return res.status(400).send('Invalid parameeters');
+    return res.status(400).send('Invalid parameters');
   }
 
   if (req.method === 'PATCH') {

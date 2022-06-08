@@ -39,7 +39,13 @@ const LeaderboardTable = () => {
           </Thead>
           <Tbody>
             {data.teams.map((team) => (
-              <Tr key={team.id} borderBottom="1px solid" borderColor="gray.600">
+              <Tr
+                key={team.id}
+                borderBottom="1px solid"
+                borderColor="gray.600"
+                transition={'all 0.1s ease-in-out'}
+                _hover={{ bg: 'gray.700' }}
+              >
                 <Td textAlign={'center'}>{team.name}</Td>
                 <Td textAlign={'center'}>{team.points}</Td>
               </Tr>

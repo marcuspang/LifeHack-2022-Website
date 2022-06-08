@@ -1,3 +1,4 @@
+import { Role } from '@prisma/client';
 import { PrismaClientKnownRequestError } from '@prisma/client/runtime';
 import { NextApiRequest, NextApiResponse } from 'next';
 import { getSession } from 'next-auth/react';
@@ -9,21 +10,37 @@ export default async (req: NextApiRequest, res: NextApiResponse) => {
   // Get all teams for leaderboard
   if (req.method === 'GET') {
     const { skip, take } = req.query;
-    const teams = prisma.team.findMany({
-      select: {
-        id: true,
-        name: true,
-        points: true,
-      },
-      where: {
-        verified: true,
-      },
-      orderBy: {
-        points: 'desc',
-      },
-      skip: skip !== '' ? +skip : 0,
-      take: take !== '' ? +take : 10,
-    });
+
+    let teams = null;
+    if (session && session.user.role === Role.ADMIN) {
+      teams = prisma.team.findMany({
+        orderBy: {
+          points: 'desc',
+        },
+        include: {
+          _count: true,
+        },
+        skip: skip !== '' ? +skip : 0,
+        take: take !== '' ? +take : 10,
+      });
+    } else {
+      teams = prisma.team.findMany({
+        select: {
+          id: true,
+          name: true,
+          points: true,
+        },
+        where: {
+          verified: true,
+        },
+        orderBy: {
+          points: 'desc',
+        },
+        skip: skip !== '' ? +skip : 0,
+        take: take !== '' ? +take : 10,
+      });
+    }
+
     const count = prisma.team.count();
     const result = await prisma.$transaction([teams, count]);
 
