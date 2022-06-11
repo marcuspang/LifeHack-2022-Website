@@ -80,7 +80,7 @@ const TeamContent = () => {
           </List>
         )}
       </Stack>
-      <Flex direction={'row-reverse'}>
+      <Flex direction="row-reverse">
         <LeaveTeamButton teamId={data.id} />
         <InviteTeamMemberButton teamId={data.id} mr={4} />
       </Flex>

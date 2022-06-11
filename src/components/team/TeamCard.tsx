@@ -11,7 +11,7 @@ const TeamCard = () => {
       flexDirection="column"
       maxW="80%"
       m="0 auto"
-      width={'100%'}
+      width="100%"
     >
       <TeamContent />
     </Box>

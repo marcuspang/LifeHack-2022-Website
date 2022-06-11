@@ -12,7 +12,7 @@ const NotFoundPage = () => {
         Page Not Found
       </Text>
       <Text color="whiteAlpha.800" mb={6}>
-        The page you're looking for does not seem to exist
+        The page you&apos;re looking for does not seem to exist
       </Text>
 
       <Button colorScheme="teal" color="white" variant="solid" onClick={() => router.back()}>

@@ -33,16 +33,14 @@ const PointsSection = () => {
         </Box>
         <Box mt="10">
           <Heading size="md" mb={3}>
-            Well, what's the
+            Well, what&apos;s the
             <Text as="span" fontStyle="italic">
               {' '}
               point{' '}
             </Text>
             of points?
           </Heading>
-          <Text>
-            The team with the most points will be awarded the Point Hogger prize!
-          </Text>
+          <Text>The team with the most points will be awarded the Point Hogger prize!</Text>
         </Box>
       </Box>
     </Section>

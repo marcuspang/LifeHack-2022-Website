@@ -11,8 +11,8 @@ const MobileHeaderItem = ({ navItem }: MobileNavItemProps) => {
       py={2}
       as={Link}
       href={navItem.route}
-      justify={'space-between'}
-      align={'center'}
+      justify="space-between"
+      align="center"
       _hover={{
         textDecoration: 'none',
       }}

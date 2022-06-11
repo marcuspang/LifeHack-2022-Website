@@ -79,23 +79,23 @@ const EditTeamsTable = () => {
 
   return (
     <>
-      <TableContainer width={'100%'}>
-        <Table variant={'unstyled'} border="1px solid" borderColor="gray.600">
+      <TableContainer width="100%">
+        <Table variant="unstyled" border="1px solid" borderColor="gray.600">
           <Thead>
             <Tr borderBottom="1px solid" borderColor="gray.600">
-              <Th textAlign={'center'} fontSize={['md', 'md', 'lg']}>
+              <Th textAlign="center" fontSize={['md', 'md', 'lg']}>
                 Name
               </Th>
-              <Th textAlign={'center'} isNumeric fontSize={['md', 'md', 'lg']}>
+              <Th textAlign="center" isNumeric fontSize={['md', 'md', 'lg']}>
                 Points
               </Th>
-              <Th textAlign={'center'} isNumeric fontSize={['md', 'md', 'lg']}>
+              <Th textAlign="center" isNumeric fontSize={['md', 'md', 'lg']}>
                 No. of Members
               </Th>
-              <Th textAlign={'center'} fontSize={['md', 'md', 'lg']}>
+              <Th textAlign="center" fontSize={['md', 'md', 'lg']}>
                 Verified?
               </Th>
-              <Th textAlign={'center'} fontSize={['md', 'md', 'lg']}>
+              <Th textAlign="center" fontSize={['md', 'md', 'lg']}>
                 Edit
               </Th>
             </Tr>
@@ -106,10 +106,10 @@ const EditTeamsTable = () => {
                 key={team.id}
                 borderBottom="1px solid"
                 borderColor="gray.600"
-                transition={'all 0.1s ease-in-out'}
+                transition="all 0.1s ease-in-out"
                 _hover={{ bg: 'gray.700' }}
               >
-                <Td textAlign={'center'}>
+                <Td textAlign="center">
                   <Editable
                     defaultValue={team.name}
                     maxW="fit-content"
@@ -120,7 +120,7 @@ const EditTeamsTable = () => {
                     <EditableInput />
                   </Editable>
                 </Td>
-                <Td textAlign={'center'}>
+                <Td textAlign="center">
                   <NumberInput
                     step={1}
                     min={0}
@@ -136,8 +136,8 @@ const EditTeamsTable = () => {
                     </NumberInputStepper>
                   </NumberInput>
                 </Td>
-                <Td textAlign={'center'}>{team._count.users}</Td>
-                <Td textAlign={'center'}>
+                <Td textAlign="center">{team._count.users}</Td>
+                <Td textAlign="center">
                   <Icon
                     as={team.verified ? MdCheckCircle : MdClear}
                     color={team.verified ? 'green.500' : 'red.500'}
@@ -151,7 +151,7 @@ const EditTeamsTable = () => {
                     height="30px"
                   />
                 </Td>
-                <Td textAlign={'center'}>
+                <Td textAlign="center">
                   <IconButton
                     aria-label="Edit team"
                     variant="theme"
@@ -166,15 +166,11 @@ const EditTeamsTable = () => {
         </Table>
       </TableContainer>
       <Flex justifyContent="space-between" pt={6}>
-        <Button
-          variant={'theme'}
-          isDisabled={skip <= 0}
-          onClick={() => setSkip((prev) => prev - 10)}
-        >
+        <Button variant="theme" isDisabled={skip <= 0} onClick={() => setSkip((prev) => prev - 10)}>
           Prev
         </Button>
         <Button
-          variant={'theme'}
+          variant="theme"
           isDisabled={data.count <= skip + 10}
           onClick={() => setSkip((prev) => prev + 10)}
         >

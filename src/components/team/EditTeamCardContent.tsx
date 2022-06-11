@@ -82,7 +82,7 @@ const EditTeamCardContent = ({ teamId }: EditTeamCardContentProps) => {
           </List>
         )}
       </Stack>
-      <Flex direction={'row-reverse'}>
+      <Flex direction="row-reverse">
         <DeleteTeamButton teamId={teamId} />
         <AddTeamMemberButton teamId={teamId} mr={4} />
       </Flex>

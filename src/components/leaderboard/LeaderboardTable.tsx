@@ -15,13 +15,13 @@ const LeaderboardTable = () => {
   return (
     <>
       <TableContainer>
-        <Table variant={'unstyled'} border="1px solid" borderColor="gray.600">
+        <Table variant="unstyled" border="1px solid" borderColor="gray.600">
           <Thead>
             <Tr borderBottom="1px solid" borderColor="gray.600">
-              <Th textAlign={'center'} fontSize={['md', 'md', 'lg']}>
+              <Th textAlign="center" fontSize={['md', 'md', 'lg']}>
                 Name
               </Th>
-              <Th textAlign={'center'} isNumeric fontSize={['md', 'md', 'lg']}>
+              <Th textAlign="center" isNumeric fontSize={['md', 'md', 'lg']}>
                 Points
               </Th>
             </Tr>
@@ -32,26 +32,22 @@ const LeaderboardTable = () => {
                 key={team.id}
                 borderBottom="1px solid"
                 borderColor="gray.600"
-                transition={'all 0.1s ease-in-out'}
+                transition="all 0.1s ease-in-out"
                 _hover={{ bg: 'gray.700' }}
               >
-                <Td textAlign={'center'}>{team.name}</Td>
-                <Td textAlign={'center'}>{team.points}</Td>
+                <Td textAlign="center">{team.name}</Td>
+                <Td textAlign="center">{team.points}</Td>
               </Tr>
             ))}
           </Tbody>
         </Table>
       </TableContainer>
       <Flex justifyContent="space-between" pt={6}>
-        <Button
-          variant={'theme'}
-          isDisabled={skip <= 0}
-          onClick={() => setSkip((prev) => prev - 10)}
-        >
+        <Button variant="theme" isDisabled={skip <= 0} onClick={() => setSkip((prev) => prev - 10)}>
           Prev
         </Button>
         <Button
-          variant={'theme'}
+          variant="theme"
           isDisabled={data.count <= skip + 10}
           onClick={() => setSkip((prev) => prev + 10)}
         >

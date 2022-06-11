@@ -16,7 +16,7 @@ import { FormEventHandler, useRef } from 'react';
 import { useSWRConfig } from 'swr';
 import NoTeamPendingRequests from './NoTeamPendingRequests';
 
-const NoTeamContent = ({}) => {
+const NoTeamContent = () => {
   const { isOpen, onOpen, onClose } = useDisclosure();
   const { mutate } = useSWRConfig();
   const teamNameRef = useRef<HTMLInputElement>(null);
