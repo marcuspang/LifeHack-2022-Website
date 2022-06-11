@@ -13,6 +13,7 @@ deploy:
   skip_cleanup: true
   github_token: $GITHUB_TOKEN
   local_dir: out
+  fqdn: lifehack.nuscomputing.com
   on:
     all_branches: true
     condition: $TRAVIS_BRANCH =~ ^(master|main)$
