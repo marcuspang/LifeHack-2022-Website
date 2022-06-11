@@ -12,7 +12,7 @@ export default async (req: NextApiRequest, res: NextApiResponse) => {
 
   const id = req.query.id.toString();
   if (id === '') {
-    return res.status(400).send('Invalid parameeters');
+    return res.status(400).send('Invalid parameters');
   }
 
   if (req.method === 'DELETE') {
@@ -46,7 +46,33 @@ export default async (req: NextApiRequest, res: NextApiResponse) => {
     // :id?accept=true
     const teamRequestResponse = req.query.accept.toString() as Response;
     if (!Object.values(Response).includes(teamRequestResponse)) {
-      return res.status(400).send('Invalid parameeters');
+      return res.status(400).send('Invalid parameters');
+    }
+
+    const team = await prisma.team.findFirst({
+      where: {
+        teamRequests: {
+          some: {
+            id,
+          },
+        },
+      },
+      select: {
+        id: true,
+        users: {
+          select: {
+            id: true,
+          },
+        },
+      },
+    });
+
+    if (!team) {
+      return res.status(400).send({ error: { message: 'No team found' } });
+    }
+
+    if (teamRequestResponse === Response.ACCEPTED && team.users.length >= 4) {
+      return res.status(400).send({ error: { message: 'Team has reached maximum capacity of 4' } });
     }
 
     try {

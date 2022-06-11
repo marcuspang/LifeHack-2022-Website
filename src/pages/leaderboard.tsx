@@ -1,5 +1,4 @@
 import { Box, Center, Heading } from '@chakra-ui/react';
-import React from 'react';
 import LeaderboardTable from '../components/leaderboard/LeaderboardTable';
 
 const Leaderboard = () => {
@@ -8,7 +7,16 @@ const Leaderboard = () => {
       <Heading as="h1" size="xl" display="inline" pb={10}>
         Leaderboard
       </Heading>
-      <Box p={8} pt={12} bg="gray.800" rounded="md" flexDirection="column" minWidth="5xl">
+      <Box
+        p={8}
+        pt={12}
+        bg="gray.800"
+        rounded="md"
+        flexDirection="column"
+        maxW="80%"
+        m="0 auto"
+        width={'100%'}
+      >
         <LeaderboardTable />
       </Box>
     </Center>

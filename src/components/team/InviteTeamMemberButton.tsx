@@ -15,11 +15,11 @@ import {
 import { FormEventHandler, useRef } from 'react';
 import { useSWRConfig } from 'swr';
 
-interface AddTeamMemberButtonProps extends ButtonProps {
+interface InviteTeamMemberButtonProps extends ButtonProps {
   teamId: string;
 }
 
-const AddTeamMemberButton = ({ teamId, ...props }: AddTeamMemberButtonProps) => {
+const InviteTeamMemberButton = ({ teamId, ...props }: InviteTeamMemberButtonProps) => {
   const { isOpen, onOpen, onClose } = useDisclosure();
   const { mutate } = useSWRConfig();
   const emailRef = useRef<HTMLInputElement>(null);
@@ -31,12 +31,13 @@ const AddTeamMemberButton = ({ teamId, ...props }: AddTeamMemberButtonProps) => 
       toast({
         status: 'error',
         title: 'Please enter a valid email',
+        isClosable: true,
       });
       return;
     }
 
     try {
-      const result = await fetch('api/team-requests', {
+      const result = await fetch('/api/team-requests', {
         method: 'POST',
         body: JSON.stringify({
           teamId,
@@ -47,10 +48,11 @@ const AddTeamMemberButton = ({ teamId, ...props }: AddTeamMemberButtonProps) => 
       if (!result.ok) {
         throw new Error(data.error.message);
       }
-      await mutate('api/users/team');
+      await mutate('/api/users/team');
       toast({
         status: 'success',
         title: 'Successfully sent team request',
+        isClosable: true,
       });
       onClose();
     } catch (error) {
@@ -59,11 +61,13 @@ const AddTeamMemberButton = ({ teamId, ...props }: AddTeamMemberButtonProps) => 
           status: 'error',
           title: 'Error sending request',
           description: error.message,
+          isClosable: true,
         });
       } else {
         toast({
           status: 'error',
           title: 'Error sending request',
+          isClosable: true,
         });
       }
     }
@@ -72,7 +76,7 @@ const AddTeamMemberButton = ({ teamId, ...props }: AddTeamMemberButtonProps) => 
   return (
     <>
       <Button variant="theme" onClick={onOpen} {...props}>
-        Add member
+        Send invite
       </Button>
       <Modal isOpen={isOpen} onClose={onClose}>
         <ModalOverlay />
@@ -98,4 +102,4 @@ const AddTeamMemberButton = ({ teamId, ...props }: AddTeamMemberButtonProps) => 
   );
 };
 
-export default AddTeamMemberButton;
+export default InviteTeamMemberButton;

@@ -75,7 +75,7 @@ model Team {
 
   name     String  @unique
   points   Int
-  users    User[]
+  users    User[] 
   verified Boolean @default(false)
 
   teamRequests TeamRequest[]

@@ -9,7 +9,7 @@ import TimelineSection from '../components/home/TimelineSection';
 
 const Home = () => {
   return (
-    <Box as="main">
+    <Box as="main" >
       <Hero />
       <AboutSection />
       <TimelineSection />

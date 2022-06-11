@@ -1,6 +1,6 @@
 import { useToast } from '@chakra-ui/react';
 import { useRouter } from 'next/router';
-import React, { useEffect } from 'react';
+import { useEffect } from 'react';
 import { ErrorMessages } from '../../constants/errors';
 import { LoginCard } from '../components/auth/LoginCard';
 
@@ -16,12 +16,14 @@ const Login = () => {
           status: 'error',
           title: 'Error signing in',
           description: ErrorMessages.ONE_EMAIL_ONLY,
+          isClosable: true,
         });
       } else {
         toast({
           status: 'error',
           title: 'Error signing in',
           description: error,
+          isClosable: true,
         });
       }
     }

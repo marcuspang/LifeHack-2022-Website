@@ -1,15 +1,4 @@
-import {
-  Heading,
-  TableContainer,
-  Table,
-  Thead,
-  Tr,
-  Th,
-  Tbody,
-  Td,
-  Flex,
-  Button,
-} from '@chakra-ui/react';
+import { Button, Flex, Table, TableContainer, Tbody, Td, Th, Thead, Tr } from '@chakra-ui/react';
 import { Team } from '@prisma/client';
 import { useState } from 'react';
 import useSWR from 'swr';
@@ -17,7 +6,7 @@ import Loader from '../common/Loader';
 
 const LeaderboardTable = () => {
   const [skip, setSkip] = useState(0);
-  const { data } = useSWR<{ teams: Team[]; count: number }>('api/teams?skip=' + skip + '&take=10');
+  const { data } = useSWR<{ teams: Team[]; count: number }>('/api/teams?skip=' + skip + '&take=10');
 
   if (!data) {
     return <Loader />;
@@ -25,14 +14,14 @@ const LeaderboardTable = () => {
 
   return (
     <>
-      <TableContainer width={'100%'}>
+      <TableContainer>
         <Table variant={'unstyled'} border="1px solid" borderColor="gray.600">
           <Thead>
             <Tr borderBottom="1px solid" borderColor="gray.600">
-              <Th textAlign={'center'} fontSize="lg">
+              <Th textAlign={'center'} fontSize={['md', 'md', 'lg']}>
                 Name
               </Th>
-              <Th textAlign={'center'} isNumeric fontSize="lg">
+              <Th textAlign={'center'} isNumeric fontSize={['md', 'md', 'lg']}>
                 Points
               </Th>
             </Tr>

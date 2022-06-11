@@ -1,8 +1,8 @@
 import { Center, Heading } from '@chakra-ui/react';
-import { useSession } from 'next-auth/react';
+import { useSession, getSession } from 'next-auth/react';
 import { useRouter } from 'next/router';
 import { useEffect } from 'react';
-import TeamCard from '../components/dashboard/TeamCard';
+import TeamCard from '../components/team/TeamCard';
 
 const Team = () => {
   const { data, status } = useSession();
@@ -27,5 +27,6 @@ const Team = () => {
     </Center>
   );
 };
+
 
 export default Team;

@@ -1,5 +1,5 @@
 import { CloseIcon } from '@chakra-ui/icons';
-import { ListItem, ListIcon, IconButton, useToast, Tooltip, Box } from '@chakra-ui/react';
+import { IconButton, ListIcon, ListItem, Tooltip, useToast } from '@chakra-ui/react';
 import { Response, TeamRequest, User } from '@prisma/client';
 import { MdCheckCircle, MdClear, MdPending } from 'react-icons/md';
 import { useSWRConfig } from 'swr';
@@ -18,24 +18,27 @@ const MemberDetails = ({ user, request }: MemberDetailsProps) => {
       toast({
         status: 'error',
         title: 'Invalid delete reqeust',
+        isClosable: true,
       });
       return;
     }
 
     try {
-      await fetch('api/team-requests/' + request.id, {
+      await fetch('/api/team-requests/' + request.id, {
         method: 'DELETE',
       });
-      await mutate('api/users/team');
+      await mutate('/api/users/team');
       toast({
         status: 'success',
         title: 'Successfully removed team request',
+        isClosable: true,
       });
     } catch (error) {
       toast({
         status: 'error',
         title: 'Error deleting team request',
         description: ErrorMessages.DEFUALT,
+        isClosable: true,
       });
     }
   };

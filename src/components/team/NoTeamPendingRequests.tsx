@@ -1,6 +1,6 @@
 import { CheckIcon, CloseIcon } from '@chakra-ui/icons';
 import { IconButton, List, ListItem, Text, useToast } from '@chakra-ui/react';
-import { Team, User, Response } from '@prisma/client';
+import { Response, Team, User } from '@prisma/client';
 import useSWR, { useSWRConfig } from 'swr';
 import { ErrorMessages } from '../../../constants/errors';
 import Loader from '../common/Loader';
@@ -16,7 +16,7 @@ const NoTeamPendingRequests = () => {
     isValidating,
     data,
     mutate: mutateRequests,
-  } = useSWR<TeamRequestInterface[]>('api/users/team-requests');
+  } = useSWR<TeamRequestInterface[]>('/api/users/team-requests');
   const { mutate } = useSWRConfig();
   const toast = useToast();
 
@@ -30,30 +30,46 @@ const NoTeamPendingRequests = () => {
 
   const respondToRequest = async (teamRequestId: string, teamName: string, accept: Response) => {
     const url =
-      'api/team-requests/' + teamRequestId + '?' + new URLSearchParams({ accept: String(accept) });
+      '/api/team-requests/' + teamRequestId + '?' + new URLSearchParams({ accept: String(accept) });
     try {
-      await fetch(url, {
+      const res = await fetch(url, {
         method: 'PATCH',
       });
+      const data = await res.json();
+      if (!res.ok) {
+        throw new Error(data.error.message);
+      }
       await mutateRequests();
-      await mutate('api/users/team');
+      await mutate('/api/users/team');
       if (accept === Response.ACCEPTED) {
         toast({
           status: 'success',
           title: 'Successfully joined ' + teamName,
+          isClosable: true,
         });
       } else {
         toast({
           status: 'success',
           title: 'Successfully rejected ' + teamName,
+          isClosable: true,
         });
       }
     } catch (error) {
-      toast({
-        status: 'error',
-        title: 'Error responding to team request',
-        description: ErrorMessages.DEFUALT,
-      });
+      if (error instanceof Error) {
+        toast({
+          status: 'error',
+          title: 'Error responding to team request',
+          description: error.message,
+          isClosable: true,
+        });
+      } else {
+        toast({
+          status: 'error',
+          title: 'Error responding to team request',
+          description: ErrorMessages.DEFUALT,
+          isClosable: true,
+        });
+      }
     }
   };
 

@@ -15,7 +15,7 @@ export default async (req: NextApiRequest, res: NextApiResponse) => {
   if (req.method === 'POST') {
     const body = JSON.parse(req.body);
     if (!body.teamId || !body.email || body.email === '') {
-      return res.status(400).send('Invalid inputs');
+      return res.status(400).send({ error: { message: 'Invalid inputs' } });
     }
 
     try {

@@ -1,12 +1,11 @@
 import { Box, Heading, Text } from '@chakra-ui/react';
 import Link from 'next/link';
-import React from 'react';
 import Section from '../common/Section';
 
 const FAQSection = () => {
   return (
     <Section bg="theme.200" heading="FAQ">
-      <Box textAlign="left" maxW="700px" fontSize={['lg', 'lg', 'xl']} m="20px auto">
+      <Box textAlign="left" maxW="700px" fontSize={['lg', 'lg', 'xl']} m="20px auto" px={6}>
         <Box mt="10">
           <Heading size="md">Am I eligible to participate?</Heading>
           <Text>

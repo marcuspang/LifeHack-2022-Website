@@ -1,20 +1,20 @@
+import { Box, Flex, Heading, Icon, List, Stack, Text, Tooltip } from '@chakra-ui/react';
 import { Team, TeamRequest, User } from '@prisma/client';
+import { MdCheckCircle, MdClear } from 'react-icons/md';
 import useSWR from 'swr';
 import Loader from '../common/Loader';
-import AddTeamMemberButton from './AddTeamMemberButton';
+import InviteTeamMemberButton from './InviteTeamMemberButton';
 import LeaveTeamButton from './LeaveTeamButton';
-import MemberDetails from './TeamMemberDetails';
 import NoTeamContent from './NoTeamContent';
-import { MdCheckCircle, MdClear, MdClose } from 'react-icons/md';
-import { Flex, Box, Heading, Tooltip, Stack, List, Text, Icon } from '@chakra-ui/react';
+import MemberDetails from './TeamMemberDetails';
 
-interface TeamInterface extends Team {
+export interface TeamInterface extends Team {
   users: User[];
   teamRequests: (TeamRequest & { requestee: User })[];
 }
 
 const TeamContent = () => {
-  const { data, isValidating } = useSWR<TeamInterface>('api/users/team');
+  const { data, isValidating } = useSWR<TeamInterface>('/api/users/team');
 
   if (isValidating) {
     return <Loader />;
@@ -23,9 +23,6 @@ const TeamContent = () => {
   if (!data) {
     return <NoTeamContent />;
   }
-
-  let verifiedIcon = data.verified ? MdCheckCircle : MdClear;
-  let verifiedIconColour = data.verified ? 'green.500' : 'red.500';
 
   return (
     <>
@@ -41,7 +38,13 @@ const TeamContent = () => {
           placement="bottom"
         >
           <span style={{ height: '24px' }}>
-            <Icon as={verifiedIcon} color={verifiedIconColour} ml={2} height="24px" width="24px" />
+            <Icon
+              as={data.verified ? MdCheckCircle : MdClear}
+              color={data.verified ? 'green.500' : 'red.500'}
+              ml={2}
+              height="24px"
+              width="24px"
+            />
           </span>
         </Tooltip>
       </Flex>
@@ -66,7 +69,7 @@ const TeamContent = () => {
           </Tooltip>
         </Heading>
         {data.teamRequests.length && (
-          <List spacing={3}>
+          <List>
             {data.teamRequests.map((teamRequest, index) => (
               <MemberDetails
                 key={index + '.' + teamRequest.requestee.email}
@@ -79,7 +82,7 @@ const TeamContent = () => {
       </Stack>
       <Flex direction={'row-reverse'}>
         <LeaveTeamButton teamId={data.id} />
-        <AddTeamMemberButton teamId={data.id} mr={4} />
+        <InviteTeamMemberButton teamId={data.id} mr={4} />
       </Flex>
     </>
   );

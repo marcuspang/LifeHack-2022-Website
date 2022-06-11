@@ -1,12 +1,11 @@
 import { Box, Flex, Heading, SimpleGrid, StackDivider, Text, VStack } from '@chakra-ui/react';
-import React from 'react';
 import Section from '../common/Section';
 
 const TimelineSection = () => {
   return (
     <Section bg="theme.300" heading="Timeline">
-      <Box maxW="900px" m="0 auto" textAlign="left">
-        <SimpleGrid mt={['10', '20']} columns={[1, 1, 2]} spacing={10}>
+      <Box maxW="900px" m="0 auto" textAlign="left" px={6}>
+        <SimpleGrid mt={[0, 10, 20]} columns={[1, 1, 2]} spacing={10}>
           <VStack divider={<StackDivider borderColor="gray.400" />} spacing={4} align="flex-start">
             <Heading size="md">Day 1: Opening Day (9th July)</Heading>
             <Flex w="100%">

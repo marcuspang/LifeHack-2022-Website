@@ -33,7 +33,7 @@ const EditTeamsTable = () => {
   const { data, mutate } = useSWR<{
     teams: (Team & { _count: { users: number; teamRequests: number } })[];
     count: number;
-  }>('api/teams?skip=' + skip + '&take=10');
+  }>('/api/teams?skip=' + skip + '&take=10');
   const toast = useToast();
   const router = useRouter();
 
@@ -43,7 +43,7 @@ const EditTeamsTable = () => {
 
   const updateTeam = async (params: Prisma.TeamUpdateInput) => {
     try {
-      const result = await fetch('api/teams/' + params.id, {
+      const result = await fetch('/api/teams/' + params.id, {
         method: 'PATCH',
         body: JSON.stringify({
           ...params,
@@ -57,6 +57,7 @@ const EditTeamsTable = () => {
       toast({
         status: 'success',
         title: data.message,
+        isClosable: true,
       });
     } catch (error) {
       if (error instanceof Error) {
@@ -64,11 +65,13 @@ const EditTeamsTable = () => {
           status: 'error',
           title: 'Error updating team',
           description: error.message,
+          isClosable: true,
         });
       } else {
         toast({
           status: 'error',
           title: 'Error updating team',
+          isClosable: true,
         });
       }
     }
@@ -80,19 +83,19 @@ const EditTeamsTable = () => {
         <Table variant={'unstyled'} border="1px solid" borderColor="gray.600">
           <Thead>
             <Tr borderBottom="1px solid" borderColor="gray.600">
-              <Th textAlign={'center'} fontSize="lg">
+              <Th textAlign={'center'} fontSize={['md', 'md', 'lg']}>
                 Name
               </Th>
-              <Th textAlign={'center'} isNumeric fontSize="lg">
+              <Th textAlign={'center'} isNumeric fontSize={['md', 'md', 'lg']}>
                 Points
               </Th>
-              <Th textAlign={'center'} isNumeric fontSize="lg">
+              <Th textAlign={'center'} isNumeric fontSize={['md', 'md', 'lg']}>
                 No. of Members
               </Th>
-              <Th textAlign={'center'} isNumeric fontSize="lg">
+              <Th textAlign={'center'} fontSize={['md', 'md', 'lg']}>
                 Verified?
               </Th>
-              <Th textAlign={'center'} isNumeric fontSize="lg">
+              <Th textAlign={'center'} fontSize={['md', 'md', 'lg']}>
                 Edit
               </Th>
             </Tr>
@@ -153,7 +156,7 @@ const EditTeamsTable = () => {
                     aria-label="Edit team"
                     variant="theme"
                     size="sm"
-                    onClick={() => router.push('/teams/' + team.name)}
+                    onClick={() => router.push('/teams/' + team.id)}
                     icon={<EditIcon />}
                   />
                 </Td>

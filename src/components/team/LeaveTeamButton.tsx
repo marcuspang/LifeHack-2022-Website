@@ -11,19 +11,21 @@ const LeaveTeamButton = ({ teamId, ...props }: LeaveTeamButtonProps) => {
   const toast = useToast();
   const leaveTeam = async () => {
     try {
-      await fetch('api/teams/' + teamId + '/leave', {
+      await fetch('/api/teams/' + teamId + '/leave', {
         method: 'PATCH',
       });
-      await mutate('api/users/team');
+      await mutate('/api/users/team');
       toast({
         status: 'success',
         title: 'Team successfully created',
+        isClosable: true,
       });
     } catch (error) {
       toast({
         status: 'error',
         title: 'Error leaving team',
         description: ErrorMessages.DEFUALT,
+        isClosable: true,
       });
     }
   };

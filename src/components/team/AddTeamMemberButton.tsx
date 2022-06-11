@@ -1,6 +1,6 @@
 import {
   Button,
-  Heading,
+  ButtonProps,
   Input,
   Modal,
   ModalBody,
@@ -14,54 +14,58 @@ import {
 } from '@chakra-ui/react';
 import { FormEventHandler, useRef } from 'react';
 import { useSWRConfig } from 'swr';
-import NoTeamPendingRequests from './NoTeamPendingRequests';
 
-const NoTeamContent = ({}) => {
+interface AddTeamMemberButtonProps extends ButtonProps {
+  teamId: string;
+}
+
+const AddTeamMemberButton = ({ teamId, ...props }: AddTeamMemberButtonProps) => {
   const { isOpen, onOpen, onClose } = useDisclosure();
   const { mutate } = useSWRConfig();
-  const teamNameRef = useRef<HTMLInputElement>(null);
+  const emailRef = useRef<HTMLInputElement>(null);
   const toast = useToast();
 
   const handleSubmit: FormEventHandler = async (event) => {
     event.preventDefault();
-    if (!teamNameRef.current || !teamNameRef.current.value) {
+    if (!emailRef.current || !emailRef.current.value) {
       toast({
         status: 'error',
-        title: 'Please enter a valid name',
+        title: 'Please enter a valid email',
       });
       return;
     }
 
     try {
-      const result = await fetch('api/teams', {
+      const result = await fetch('/api/teams/' + teamId + '/add-member', {
         method: 'POST',
         body: JSON.stringify({
-          name: teamNameRef.current.value,
+          email: emailRef.current.value,
         }),
-        headers: {
-          'Content-Type': 'application/json',
-        },
       });
       const data = await result.json();
       if (!result.ok) {
         throw new Error(data.error.message);
       }
-      await mutate('api/users/team');
+      await mutate('/api/teams/' + teamId);
       toast({
         status: 'success',
-        title: 'Team ' + data.name + ' successfully created',
+        title: 'Successfully added',
+        isClosable: true,
       });
+      onClose();
     } catch (error) {
       if (error instanceof Error) {
         toast({
           status: 'error',
-          title: 'Error creating team',
+          title: 'Error adding member',
           description: error.message,
+          isClosable: true,
         });
       } else {
         toast({
           status: 'error',
-          title: 'Error creating team',
+          title: 'Error adding member',
+          isClosable: true,
         });
       }
     }
@@ -69,24 +73,17 @@ const NoTeamContent = ({}) => {
 
   return (
     <>
-      <Heading as="h3" size="md" pb={6}>
-        You&apos;re not in any team currently.
-      </Heading>
-      <Button onClick={onOpen} variant="theme">
-        Click here to create a team
+      <Button variant="theme" onClick={onOpen} {...props}>
+        Add member
       </Button>
-      <Heading as="h3" size="md" pb={6} pt={8}>
-        Pending team requests
-      </Heading>
-      <NoTeamPendingRequests />
       <Modal isOpen={isOpen} onClose={onClose}>
         <ModalOverlay />
         <ModalContent bg="theme.300">
-          <ModalHeader>Create Team</ModalHeader>
+          <ModalHeader>Add member</ModalHeader>
           <ModalCloseButton />
           <form onSubmit={handleSubmit}>
             <ModalBody>
-              <Input ref={teamNameRef} placeholder="Enter your team's name" />
+              <Input ref={emailRef} type="email" placeholder="Enter a valid email" />
             </ModalBody>
             <ModalFooter>
               <Button variant="theme" onClick={onClose} mr={3}>
@@ -103,4 +100,4 @@ const NoTeamContent = ({}) => {
   );
 };
 
-export default NoTeamContent;
+export default AddTeamMemberButton;
