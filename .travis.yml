@@ -3,7 +3,9 @@ node_js:
   - 14
 cache:
   directories:
-  - node_modules
+    - $HOME/.cache/yarn
+    - node_modules
+    - .next/cache
 script:
   - yarn build
   - yarn next export
