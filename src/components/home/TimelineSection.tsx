@@ -10,32 +10,68 @@ const TimelineSection = () => {
             <Heading size="md">Day 1: Opening Day (9th July)</Heading>
             <Flex w="100%">
               <Text flex="0 0 100px" mr="5">
-                0900 - 1000
+                0900 - 0910
               </Text>
-              <Text>Opening Ceremony</Text>
+              <Text>Welcome Address</Text>
             </Flex>
             <Flex w="100%">
               <Text flex="0 0 100px" mr="5">
-                1000 - 1100
+                0910 - 0920
               </Text>
-              <Text>Panel Discussion</Text>
+              <Text>Reiteration of Objectives, Guidelines and Actionables</Text>
             </Flex>
 
             <Flex w="100%">
               <Text flex="0 0 100px" mr="5">
-                1100 - 1200
+                0920 - 0940
+              </Text>
+              <Text>“How it works” Briefing</Text>
+            </Flex>
+            <Flex w="100%">
+              <Text flex="0 0 100px" mr="5">
+                0940 - 0950
+              </Text>
+              <Text>Sharing of available platforms/workshops and helplines available from SoC</Text>
+            </Flex>
+            <Flex w="100%">
+              <Text flex="0 0 100px" mr="5">
+                0950 - 1010
+              </Text>
+              <Text>Live Q&A (Pigeon Hole)</Text>
+            </Flex>
+            <Flex w="100%">
+              <Text flex="0 0 100px" mr="5">
+                1010 - 1020
+              </Text>
+              <Text>Break</Text>
+            </Flex>
+            <Flex w="100%">
+              <Text flex="0 0 100px" mr="5">
+                1020 - 1120
+              </Text>
+              <Text>Panel Discussion</Text>
+            </Flex>
+            <Flex w="100%">
+              <Text flex="0 0 100px" mr="5">
+                1120 - 1150
               </Text>
               <Text>Sponsorship Talks</Text>
             </Flex>
             <Flex w="100%">
               <Text flex="0 0 100px" mr="5">
-                1200
+                1150 - 1155
               </Text>
-              <Text>Hacking Begins!</Text>
+              <Text>Taking a picture with everyone</Text>
             </Flex>
             <Flex w="100%">
               <Text flex="0 0 100px" mr="5">
-                1200 -
+                1155 - 1200
+              </Text>
+              <Text>Release of Problem Statements at 12!</Text>
+            </Flex>
+            <Flex w="100%">
+              <Text flex="0 0 100px" mr="5">
+                1200
               </Text>
               <Text>Discord Q&A with Industry Experts</Text>
             </Flex>
@@ -54,7 +90,6 @@ const TimelineSection = () => {
               </Text>
               <Text>Submission Deadline</Text>
             </Flex>
-
             <Flex w="100%">
               <Text flex="0 0 100px" mr="5">
                 1200 - 1800
@@ -63,9 +98,15 @@ const TimelineSection = () => {
             </Flex>
             <Flex w="100%">
               <Text flex="0 0 100px" mr="5">
+                1800 - 1900
+              </Text>
+              <Text>Moderation of Marks</Text>
+            </Flex>
+            <Flex w="100%">
+              <Text flex="0 0 100px" mr="5">
                 2000
               </Text>
-              <Text>Announcements of top projects and special prize winners</Text>
+              <Text>Announcements of top projects and special prize winners!</Text>
             </Flex>
           </VStack>
         </SimpleGrid>
@@ -112,7 +153,7 @@ const TimelineSection = () => {
               <Text flex="0 0 100px" mr="5">
                 1430 - 1450
               </Text>
-              <Text>Trivia Quiz</Text>
+              <Text>Kahoot Trivia Quiz (Environment, Giving Back, Safety)</Text>
             </Flex>
             <Flex w="100%">
               <Text flex="0 0 100px" mr="5">
@@ -128,9 +169,15 @@ const TimelineSection = () => {
             </Flex>
             <Flex w="100%">
               <Text flex="0 0 100px" mr="5">
-                1530 - 1630
+                1530 - 1545
               </Text>
               <Text>Closing Ceremony</Text>
+            </Flex>
+            <Flex w="100%">
+              <Text flex="0 0 100px" mr="5">
+                1630
+              </Text>
+              <Text>Closing of Sponsor Booths</Text>
             </Flex>
           </VStack>
         </Box>

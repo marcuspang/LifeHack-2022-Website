@@ -1,5 +1,5 @@
 import { Flex, Link, Text } from '@chakra-ui/react';
-import { NavItem } from './navItems';
+import { NavItem } from '../../../constants/navItems';
 
 interface MobileNavItemProps {
   navItem: NavItem;

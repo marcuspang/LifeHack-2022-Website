@@ -23,21 +23,31 @@ const theme = extendTheme({
       variants: {
         theme: {
           fontSize: 'sm',
-          fontWeight: 400,
-          bg: 'theme.500',
-          _hover: { bg: 'theme.400' },
+          fontWeight: 600,
+          bg: 'black',
+          _hover: { bg: 'gray.700' },
           _active: {
-            bg: 'theme.400',
+            bg: 'gray.700',
           },
           color: 'white',
         },
-        themeBlue: {
+        header: {
           fontSize: 'sm',
           fontWeight: 600,
-          bg: 'theme.300',
-          _hover: { bg: 'theme.400' },
+          bg: 'blue.700',
+          _hover: { bg: 'blue.600' },
           _active: {
-            bg: 'theme.400',
+            bg: 'blue.600',
+          },
+          color: 'white',
+        },
+        cta: {
+          fontSize: 'sm',
+          fontWeight: 600,
+          bg: 'cyan.800',
+          _hover: { bg: 'cyan.900' },
+          _active: {
+            bg: 'cyan.900',
           },
           color: 'white',
         },

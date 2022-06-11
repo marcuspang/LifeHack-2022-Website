@@ -3,6 +3,7 @@ import '@fontsource/hammersmith-one';
 import '@fontsource/nunito-sans';
 import { SessionProvider } from 'next-auth/react';
 import { AppProps } from 'next/app';
+import Head from 'next/head';
 import { SWRConfig } from 'swr';
 import fetcher from '../../lib/fetcher';
 import theme from '../../lib/theme';
@@ -22,6 +23,10 @@ const App = ({ Component, pageProps }: AppProps) => {
     >
       <SessionProvider session={pageProps.session}>
         <ChakraProvider theme={theme}>
+          <Head>
+            <title>LifeHack 2022</title>
+            <meta property="og:title" content="LifeHack 2022" key="title" />
+          </Head>
           <Header />
           <Component {...pageProps} />
           <Footer />

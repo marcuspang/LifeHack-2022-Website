@@ -20,7 +20,7 @@ const Header = () => {
           display={{ base: 'flex', md: 'none' }}
           onClick={onToggle}
           icon={isOpen ? <CloseIcon w={3} h={3} /> : <HamburgerIcon w={5} h={5} />}
-          variant={'themeBlue'}
+          variant={'cta'}
           aria-label={'Toggle Navigation'}
         />
       </Flex>

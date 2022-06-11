@@ -2,6 +2,7 @@ export interface NavItem {
   name: string;
   route: string;
   variant?: string;
+  colorScheme?: string;
   requireAdmin: boolean;
   requireUser: boolean;
 }
@@ -10,14 +11,14 @@ export const navItems: NavItem[] = [
   {
     name: 'Leaderboard',
     route: '/leaderboard',
-    variant: 'themeBlue',
+    colorScheme: 'facebook',
     requireAdmin: false,
     requireUser: false,
   },
   {
     name: 'Team',
     route: '/team',
-    variant: 'themeBlue',
+    colorScheme: 'facebook',
     requireAdmin: false,
     requireUser: true,
   },

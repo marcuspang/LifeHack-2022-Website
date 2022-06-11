@@ -2,16 +2,16 @@ import { Heading, Stack } from '@chakra-ui/react';
 import { Role } from '@prisma/client';
 import { useSession } from 'next-auth/react';
 import { useRouter } from 'next/router';
+import { navItems } from '../../../constants/navItems';
 import DesktopAuthItems from './DesktopAuthItems';
 import DesktopHeaderItem from './DesktopHeaderItem';
-import { navItems } from './navItems';
 
 const DesktopHeader = () => {
   const { data, status } = useSession();
   const router = useRouter();
   return (
     <>
-      <Heading fontSize="lg " cursor="pointer" onClick={() => router.push('/')}>
+      <Heading fontSize="lg" cursor="pointer" onClick={() => router.push('/')}>
         LifeHack 2022
       </Heading>
       <Stack

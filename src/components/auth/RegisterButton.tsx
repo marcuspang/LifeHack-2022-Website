@@ -1,6 +1,5 @@
 import { Button } from '@chakra-ui/react';
 import { useRouter } from 'next/router';
-import React from 'react';
 
 const RegisterButton = () => {
   const router = useRouter();
@@ -10,7 +9,7 @@ const RegisterButton = () => {
         router.push('/register');
       }}
       display={{ base: 'none', md: 'inline-flex' }}
-      variant="themeBlue"
+      variant="cta"
     >
       Sign Up
     </Button>
