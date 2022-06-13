@@ -17,24 +17,14 @@ const MobileAuthItems = () => {
     );
   }
   return (
-    <>
-      <MobileHeaderItem
-        navItem={{
-          name: 'Sign Up',
-          requireAdmin: false,
-          requireUser: false,
-          route: '/register',
-        }}
-      />
-      <MobileHeaderItem
-        navItem={{
-          name: 'Sign In',
-          requireAdmin: false,
-          requireUser: false,
-          route: '/login',
-        }}
-      />
-    </>
+    <MobileHeaderItem
+      navItem={{
+        name: 'Sign In',
+        requireAdmin: false,
+        requireUser: false,
+        route: '/login',
+      }}
+    />
   );
 };
 
