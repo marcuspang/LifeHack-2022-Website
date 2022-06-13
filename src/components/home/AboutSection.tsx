@@ -5,7 +5,7 @@ const AboutSection = () => {
   return (
     <Section bg="theme.300" heading="About">
       <Text m="0 auto" maxW="800px" fontSize={['md', 'lg', '2xl']} px={6}>
-        Lifehack 2022 is a hackathon aimed to channel the creativity, drive, and skills of the
+        LifeHack 2022 is a hackathon aimed to channel the creativity, drive, and skills of the
         participants in the software development field. Participants are expected to develop
         intelligent solutions in response to the problem statements presented during the
         competition. The event is mostly held online, with the exception of the closing day.

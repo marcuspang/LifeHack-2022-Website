@@ -1,9 +1,6 @@
 {
-  "name": "lifehack-website",
+  "name": "web",
   "version": "1.0.0",
-  "repository": "https://github.com/marcuspang/lifehack-2022-website.git",
-  "author": "Marcus Pang <marcuspangyuyang@gmail.com>",
-  "license": "MIT",
   "private": true,
   "dependencies": {
     "@chakra-ui/icons": "^2.0.0",
@@ -37,7 +34,7 @@
     "build": "next build",
     "start": "next start",
     "push": "npx prisma db push",
-    "lint": "eslint --fix src && prettier --write src"
+    "lint": "eslint --fix **/*.ts && prettier --write **/*.ts"
   },
   "eslintConfig": {
     "extends": [

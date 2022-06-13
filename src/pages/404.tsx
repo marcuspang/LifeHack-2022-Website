@@ -15,7 +15,7 @@ const NotFoundPage = () => {
         The page you&apos;re looking for does not seem to exist
       </Text>
 
-      <Button colorScheme="teal" color="white" variant="solid" onClick={() => router.back()}>
+      <Button colorScheme="teal" color="gray.50" variant="solid" onClick={() => router.back()}>
         Go Back
       </Button>
     </Box>

@@ -1,7 +1,6 @@
 import { useSession } from 'next-auth/react';
 import LoginButton from '../auth/LoginButton';
 import LogoutButton from '../auth/LogoutButton';
-import RegisterButton from '../auth/RegisterButton';
 
 const DesktopAuthItems = () => {
   const { status } = useSession();
@@ -9,12 +8,7 @@ const DesktopAuthItems = () => {
   if (status === 'authenticated') {
     return <LogoutButton />;
   }
-  return (
-    <>
-      <RegisterButton />
-      <LoginButton />
-    </>
-  );
+  return <LoginButton />;
 };
 
 export default DesktopAuthItems;

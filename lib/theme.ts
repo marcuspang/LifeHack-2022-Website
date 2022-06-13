@@ -14,7 +14,7 @@ const theme = extendTheme({
     global: {
       body: {
         bg: 'theme.500',
-        color: 'white',
+        color: 'gray.100',
       },
     },
   },
@@ -29,7 +29,7 @@ const theme = extendTheme({
           _active: {
             bg: 'gray.700',
           },
-          color: 'white',
+          color: 'gray.100',
         },
         header: {
           fontSize: 'sm',
@@ -39,7 +39,7 @@ const theme = extendTheme({
           _active: {
             bg: 'blue.600',
           },
-          color: 'white',
+          color: 'gray.100',
         },
         cta: {
           fontSize: 'sm',
@@ -49,7 +49,7 @@ const theme = extendTheme({
           _active: {
             bg: 'cyan.900',
           },
-          color: 'white',
+          color: 'gray.100',
         },
       },
     },

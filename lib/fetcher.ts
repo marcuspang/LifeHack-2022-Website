@@ -1,3 +1,3 @@
-const fetcher = (...args: Parameters<typeof fetch>) => fetch(...args).then((res) => res.json());
-
+const fetcher = (url: RequestInfo | URL, init?: RequestInit) =>
+  fetch(url, init).then((res) => res.json());
 export default fetcher;

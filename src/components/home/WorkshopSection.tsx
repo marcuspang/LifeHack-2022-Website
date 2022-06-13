@@ -11,15 +11,15 @@ const WorkshopSection = () => {
           align="flex-start"
           mt={[10, 20]}
         >
-          <Flex w="100%">
+          {/* <Flex w="100%">
             <Heading flex="0 0 100px" mr="5" size="md" fontWeight={600}>
               4th July
             </Heading>
-            <Text>Presentation by Top 3 Teams from Giving Back Theme</Text>
-          </Flex>
+            <Text>NUS FinTech SoC: Incorporating Machine Learning</Text>
+          </Flex> */}
           <Flex w="100%">
             <Heading flex="0 0 100px" mr="5" size="md">
-              -
+              Date: TBC
             </Heading>
             <Text>More workshops will be announced closer to the hackathon!</Text>
           </Flex>

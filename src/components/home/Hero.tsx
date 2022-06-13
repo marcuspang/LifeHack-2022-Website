@@ -6,7 +6,7 @@ const Hero = () => {
       <Image boxSize={['auto', 'auto', 'lg']} src="/logo.png" alt="LifeHack 2022 Logo" />
       <Stack py={5} pl={[0, 8, 8]} spacing={1}>
         <Heading as="h1" size={['2xl', '4xl', '4xl']} textAlign={['center', 'center', 'inherit']}>
-          Lifehack 2022
+          LifeHack 2022
         </Heading>
         <Box>
           <Text fontSize={['lg', 'xl', '2xl']} textAlign={['center', 'center', 'inherit']}>
