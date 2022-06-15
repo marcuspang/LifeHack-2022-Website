@@ -19,7 +19,7 @@ const PrizesSection = () => {
         For Each Theme
       </Text>{' '}
       <Center flexDir={['column', 'column', 'row']}>
-        <Box pt={[0, 0, 10]} w="300px" order={[2, 2, 1]}>
+        <Box pt={[0, 0, 10]} mt={10} w="300px" order={[2, 2, 1]}>
           <Heading size="lg" color="yellow.300">
             $1,000 & $500
           </Heading>
