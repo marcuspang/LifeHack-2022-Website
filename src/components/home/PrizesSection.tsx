@@ -15,27 +15,29 @@ const PrizesSection = () => {
           <Heading size="xl">Overall Best</Heading>
         </Box>
       </Center>
-      <Text fontSize="3xl" mt="10">
-        For each Category
+      <Text fontSize="3xl" mt="16">
+        For Each Theme
       </Text>{' '}
       <Center flexDir={['column', 'column', 'row']}>
-        <Box pt={[0, 0, 10]} mt={10} w="200px" order={[2, 2, 1]}>
+        <Box pt={[0, 0, 10]} w="300px" order={[2, 2, 1]}>
           <Heading size="lg" color="yellow.300">
-            $700 & $400
+            $1,000 & $500
           </Heading>
-          <Heading size="lg">2nd and 3rd</Heading>
+          <Heading size="lg">
+            Theme 1st & <br /> 2nd Runner-Up
+          </Heading>
         </Box>
         <Box mx={[0, 0, 20]} mt="10" w="200px" order={[1, 1, 2]}>
           <Heading size="xl" color="yellow.300">
-            $1,200
+            $2,000
           </Heading>
-          <Heading size="xl">1st</Heading>
+          <Heading size="xl">Theme Best</Heading>
         </Box>
-        <Box pt={[0, 0, 10]} mt={10} w="200px" order={3}>
+        <Box pt={[0, 0, 10]} mt={10} w="300px" order={3}>
           <Heading size="lg" color="yellow.300">
             $100
           </Heading>
-          <Heading size="lg">4th and 5th</Heading>
+          <Heading size="lg">Honorable Mentions</Heading>
         </Box>
       </Center>
       <Text fontSize="3xl" mt={10}>
@@ -66,7 +68,7 @@ const PrizesSection = () => {
         </Box>
         <Box>
           <Text mt="5">Most popular hack</Text>
-          <Text color="yellow.300">$200 worth of vouchers</Text>
+          <Text color="yellow.300">$200</Text>
         </Box>
         <Box>
           <Text mt="5">Point Hogger</Text>
