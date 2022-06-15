@@ -5,6 +5,7 @@ export interface NavItem {
   colorScheme?: string;
   requireAdmin: boolean;
   requireUser: boolean;
+  onClick?: () => void;
 }
 
 export const navItems: NavItem[] = [

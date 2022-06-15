@@ -16,6 +16,7 @@ const MobileHeaderItem = ({ navItem }: MobileNavItemProps) => {
       _hover={{
         textDecoration: 'none',
       }}
+      onClick={navItem.onClick}
     >
       <Text fontWeight={500}>{navItem.name}</Text>
     </Flex>

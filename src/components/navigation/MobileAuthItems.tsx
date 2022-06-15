@@ -1,4 +1,4 @@
-import { useSession } from 'next-auth/react';
+import { signOut, useSession } from 'next-auth/react';
 import MobileHeaderItem from './MobileHeaderItem';
 
 const MobileAuthItems = () => {
@@ -12,6 +12,7 @@ const MobileAuthItems = () => {
           requireAdmin: false,
           requireUser: true,
           route: '/logout',
+          onClick: () => signOut(),
         }}
       />
     );
