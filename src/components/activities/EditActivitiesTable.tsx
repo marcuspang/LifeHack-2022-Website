@@ -20,19 +20,17 @@ import {
   Tr,
   useToast,
 } from '@chakra-ui/react';
-import { Prisma, Team, User } from '@prisma/client';
+import { Activities, Prisma } from '@prisma/client';
 import { useRouter } from 'next/router';
 import { useState } from 'react';
-import useSWR, { useSWRConfig } from 'swr';
+import useSWR from 'swr';
 import Loader from '../common/Loader';
 
-const EditParticipantsTable = () => {
+const EditActivitiesTable = () => {
   const [skip, setSkip] = useState(0);
-  const { data, mutate } = useSWR<{
-    users: (User & { team: Team | null })[];
-    count: number;
-  }>('/api/users?skip=' + skip + '&take=10');
-  const { mutate: globalMutate } = useSWRConfig();
+  const { data, mutate } = useSWR<{ activities: Activities[]; count: number }>(
+    '/api/activities?skip=' + skip + '&take=10'
+  );
   const toast = useToast();
   const router = useRouter();
 
@@ -40,9 +38,9 @@ const EditParticipantsTable = () => {
     return <Loader />;
   }
 
-  const updateUser = async (params: Prisma.UserUpdateInput & { teamId: string | null }) => {
+  const updateActivity = async (params: Prisma.ActivitiesUpdateInput) => {
     try {
-      const result = await fetch('/api/users/' + params.id, {
+      const result = await fetch('/api/activities/' + params.id, {
         method: 'PATCH',
         body: JSON.stringify({
           ...params,
@@ -53,7 +51,6 @@ const EditParticipantsTable = () => {
         throw new Error(data.error.message);
       }
       await mutate();
-      await globalMutate('/api/teams?skip=0&take=10');
       toast({
         status: 'success',
         title: data.message,
@@ -63,14 +60,14 @@ const EditParticipantsTable = () => {
       if (error instanceof Error) {
         toast({
           status: 'error',
-          title: 'Error updating user',
+          title: 'Error updating activity',
           description: error.message,
           isClosable: true,
         });
       } else {
         toast({
           status: 'error',
-          title: 'Error updating user',
+          title: 'Error updating activity',
           isClosable: true,
         });
       }
@@ -86,14 +83,8 @@ const EditParticipantsTable = () => {
               <Th textAlign="center" fontSize={['md', 'md', 'lg']}>
                 Name
               </Th>
-              <Th textAlign="center" fontSize={['md', 'md', 'lg']}>
-                Email
-              </Th>
               <Th textAlign="center" isNumeric fontSize={['md', 'md', 'lg']}>
                 Points
-              </Th>
-              <Th textAlign="center" isNumeric fontSize={['md', 'md', 'lg']}>
-                Team
               </Th>
               <Th textAlign="center" isNumeric fontSize={['md', 'md', 'lg']}>
                 Edit
@@ -101,9 +92,9 @@ const EditParticipantsTable = () => {
             </Tr>
           </Thead>
           <Tbody>
-            {data.users.map((user) => (
+            {data.activities.map((activity) => (
               <Tr
-                key={user.id}
+                key={activity.id}
                 borderBottom="1px solid"
                 borderColor="gray.600"
                 transition="all 0.1s ease-in-out"
@@ -111,26 +102,23 @@ const EditParticipantsTable = () => {
               >
                 <Td textAlign="center">
                   <Editable
-                    defaultValue={user.name!}
+                    defaultValue={activity.name!}
                     maxW="fit-content"
                     mx="auto"
-                    onSubmit={(name) => updateUser({ id: user.id, name, teamId: user.teamId })}
+                    onSubmit={(name) => updateActivity({ id: activity.id, name })}
                   >
                     <EditablePreview />
                     <EditableInput />
                   </Editable>
                 </Td>
-                <Td textAlign="center">{user.email}</Td>
                 <Td textAlign="center">
                   <NumberInput
                     step={1}
                     min={0}
-                    defaultValue={user.points}
+                    defaultValue={activity.points}
                     maxW="100px"
                     mx="auto"
-                    onBlur={(e) =>
-                      updateUser({ id: user.id, points: +e.target.value, teamId: user.teamId })
-                    }
+                    onBlur={(e) => updateActivity({ id: activity.id, points: +e.target.value })}
                   >
                     <NumberInputField />
                     <NumberInputStepper>
@@ -140,18 +128,11 @@ const EditParticipantsTable = () => {
                   </NumberInput>
                 </Td>
                 <Td textAlign="center">
-                  {user.team?.name && (
-                    <Button variant="theme" onClick={() => router.push('/teams/' + user.team?.id)}>
-                      {user.team?.name}
-                    </Button>
-                  )}
-                </Td>
-                <Td textAlign="center">
                   <IconButton
                     aria-label="Edit team"
                     variant="theme"
                     size="sm"
-                    onClick={() => router.push('/users/' + user.id)}
+                    onClick={() => router.push('/activities/' + activity.id)}
                     icon={<EditIcon />}
                   />
                 </Td>
@@ -176,4 +157,4 @@ const EditParticipantsTable = () => {
   );
 };
 
-export default EditParticipantsTable;
+export default EditActivitiesTable;

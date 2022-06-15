@@ -53,6 +53,8 @@ model User {
   teamId        String?
   requestee     TeamRequest[] @relation("requestee")
   requestor     TeamRequest[] @relation("requestor")
+  Activities    Activities?   @relation(fields: [activitiesId], references: [id])
+  activitiesId  String?
 }
 
 enum Role {
@@ -73,12 +75,13 @@ model Team {
   createdAt DateTime @default(now())
   updatedAt DateTime @updatedAt
 
-  name     String  @unique
-  points   Int
-  users    User[]
-  verified Boolean @default(false)
-
+  name         String        @unique
+  points       Int
+  users        User[]
+  verified     Boolean       @default(false)
   teamRequests TeamRequest[]
+  activities   Activities?   @relation(fields: [activitiesId], references: [id])
+  activitiesId String?
   @@map("Teams")
 }
 
@@ -100,4 +103,15 @@ enum Response {
   NOT_RESPONDED
   REJECTED
   ACCEPTED
+}
+
+model Activities {
+  id        String   @id @default(cuid())
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+
+  points       Int
+  name         String
+  teams        Team[]
+  participants User[]
 }

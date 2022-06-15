@@ -37,4 +37,11 @@ export const navItems: NavItem[] = [
     requireAdmin: true,
     requireUser: true,
   },
+  {
+    name: 'Activities',
+    route: '/activities',
+    variant: 'theme',
+    requireAdmin: true,
+    requireUser: true,
+  },
 ];
