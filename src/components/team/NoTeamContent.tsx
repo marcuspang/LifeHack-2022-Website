@@ -47,7 +47,7 @@ const NoTeamContent = () => {
       if (!result.ok) {
         throw new Error(data.error.message);
       }
-      await mutate('/api/users/team');
+      await mutate('/api/user/team');
       toast({
         status: 'success',
         title: 'Team ' + data.name + ' successfully created',

@@ -10,7 +10,6 @@ const DeleteTeamButton = ({ teamId, ...props }: DeleteTeamButtonProps) => {
   const toast = useToast();
   const router = useRouter();
   const deleteTeam = async () => {
-    console.log(teamId);
     if (teamId) {
       try {
         await fetch('/api/teams/' + teamId, {

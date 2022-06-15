@@ -14,7 +14,7 @@ export interface TeamInterface extends Team {
 }
 
 const TeamContent = () => {
-  const { data, isValidating } = useSWR<TeamInterface>('/api/users/team');
+  const { data, isValidating } = useSWR<TeamInterface>('/api/user/team');
 
   if (isValidating) {
     return <Loader />;

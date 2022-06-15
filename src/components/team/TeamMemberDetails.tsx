@@ -27,7 +27,7 @@ const MemberDetails = ({ user, request }: MemberDetailsProps) => {
       await fetch('/api/team-requests/' + request.id, {
         method: 'DELETE',
       });
-      await mutate('/api/users/team');
+      await mutate('/api/user/team');
       toast({
         status: 'success',
         title: 'Successfully removed team request',

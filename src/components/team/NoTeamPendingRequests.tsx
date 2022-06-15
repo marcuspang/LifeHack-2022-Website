@@ -16,7 +16,7 @@ const NoTeamPendingRequests = () => {
     isValidating,
     data,
     mutate: mutateRequests,
-  } = useSWR<TeamRequestInterface[]>('/api/users/team-requests');
+  } = useSWR<TeamRequestInterface[]>('/api/user/team-requests');
   const { mutate } = useSWRConfig();
   const toast = useToast();
 
@@ -40,7 +40,7 @@ const NoTeamPendingRequests = () => {
         throw new Error(data.error.message);
       }
       await mutateRequests();
-      await mutate('/api/users/team');
+      await mutate('/api/user/team');
       if (accept === Response.ACCEPTED) {
         toast({
           status: 'success',

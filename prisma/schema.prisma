@@ -75,7 +75,7 @@ model Team {
 
   name     String  @unique
   points   Int
-  users    User[] 
+  users    User[]
   verified Boolean @default(false)
 
   teamRequests TeamRequest[]
@@ -88,11 +88,11 @@ model TeamRequest {
   updatedAt DateTime @updatedAt
 
   approved    Response @default(NOT_RESPONDED)
-  team        Team     @relation(fields: [teamId], references: [id])
+  team        Team     @relation(fields: [teamId], references: [id], onDelete: Cascade, onUpdate: Cascade)
   teamId      String
-  requestee   User     @relation(fields: [requesteeId], references: [id], name: "requestee")
+  requestee   User     @relation(fields: [requesteeId], references: [id], name: "requestee", onDelete: Cascade, onUpdate: Cascade)
   requesteeId String
-  requestor   User     @relation(fields: [requestorId], references: [id], name: "requestor")
+  requestor   User     @relation(fields: [requestorId], references: [id], name: "requestor", onDelete: Cascade, onUpdate: Cascade)
   requestorId String
 }
 
