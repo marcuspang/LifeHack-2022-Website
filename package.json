@@ -31,8 +31,9 @@
   },
   "scripts": {
     "dev": "next dev",
-    "build": "next build",
+    "build": "yarn gen && next build",
     "start": "next start",
+    "gen": "npx prisma generate",
     "push": "npx prisma db push",
     "lint": "eslint --fix **/*.ts && prettier --write **/*.ts"
   },
