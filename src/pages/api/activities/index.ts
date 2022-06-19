@@ -21,8 +21,8 @@ export default async (req: NextApiRequest, res: NextApiResponse) => {
       include: {
         _count: true,
       },
-      skip: skip !== '' ? +skip : 0,
-      take: take !== '' ? +take : 10,
+      skip: isNaN(skip as any) ? 0 : +skip,
+      take: isNaN(take as any) ? 10 : +take,
     });
 
     const count = prisma.activities.count();

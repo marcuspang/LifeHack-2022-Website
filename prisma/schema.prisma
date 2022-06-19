@@ -80,8 +80,7 @@ model Team {
   users        User[]
   verified     Boolean       @default(false)
   teamRequests TeamRequest[]
-  activities   Activities?   @relation(fields: [activitiesId], references: [id])
-  activitiesId String?
+  activities   Activities[]
   @@map("Teams")
 }
 

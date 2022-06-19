@@ -1,8 +1,11 @@
-import { Box, Button, Flex, Heading, List, ListItem, Stack, Text } from '@chakra-ui/react';
+import { Box, Flex, Heading, List, ListIcon, ListItem, Stack, Text } from '@chakra-ui/react';
 import { Activities, Team, User } from '@prisma/client';
+import { MdCheckCircle } from 'react-icons/md';
 import useSWR from 'swr';
 import Loader from '../common/Loader';
 import MemberDetails from '../team/TeamMemberDetails';
+import AddParticipantToActivityButton from './AddParticipantToActivityButton';
+import AddTeamToActivityButton from './AddTeamToActivityButton';
 
 interface EditActivitiesCardContentProps {
   activityId: string;
@@ -20,12 +23,10 @@ const EditActivitiesCardContent = ({ activityId }: EditActivitiesCardContentProp
   if (!data || !activityId) {
     return (
       <Heading as="h2" size="lg">
-        No such team
+        No such activity
       </Heading>
     );
   }
-
-  console.log(data);
 
   return (
     <>
@@ -47,29 +48,28 @@ const EditActivitiesCardContent = ({ activityId }: EditActivitiesCardContentProp
         <Heading size="md" as="h3" pt={6}>
           Participants involved
         </Heading>
-        {data.participants.length && (
+        {data.participants && data.participants.length && (
           <List spacing={3}>
             {data.participants.map((participants, index) => (
               <MemberDetails key={index + '.' + participants.email} user={participants} />
             ))}
           </List>
         )}
-        <Box>
-          <Button variant="theme">Add participants (not implemented)</Button>
-        </Box>
+        <AddParticipantToActivityButton activityId={activityId} />
         <Heading size="md" as="h3" pt={6}>
           Teams
         </Heading>
-        {data.teams.length && (
+        {data.teams && data.teams.length && (
           <List spacing={3}>
             {data.teams.map((team) => (
-              <ListItem key={team.id}>{team.name}</ListItem>
+              <ListItem key={team.id}>
+                <ListIcon as={MdCheckCircle} color="green.500" height="22px" />
+                {team.name}
+              </ListItem>
             ))}
           </List>
         )}
-        <Box>
-          <Button variant="theme">Add team (not implemented)</Button>
-        </Box>
+        <AddTeamToActivityButton activityId={activityId} />
       </Stack>
     </>
   );

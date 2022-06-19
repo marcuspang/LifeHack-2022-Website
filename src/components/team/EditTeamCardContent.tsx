@@ -1,4 +1,15 @@
-import { Box, Flex, Heading, Icon, List, Stack, Text, Tooltip } from '@chakra-ui/react';
+import {
+  Box,
+  Flex,
+  Heading,
+  Icon,
+  List,
+  ListIcon,
+  ListItem,
+  Stack,
+  Text,
+  Tooltip,
+} from '@chakra-ui/react';
 import { MdCheckCircle, MdClear } from 'react-icons/md';
 import useSWR from 'swr';
 import Loader from '../common/Loader';
@@ -46,7 +57,7 @@ const EditTeamCardContent = ({ teamId }: EditTeamCardContentProps) => {
               ml={2}
               height="24px"
               width="24px"
-            />{' '}
+            />
           </span>
         </Tooltip>
       </Flex>
@@ -56,14 +67,41 @@ const EditTeamCardContent = ({ teamId }: EditTeamCardContentProps) => {
         </Heading>
         <Text fontSize="xl">{data.points}</Text>
       </Stack>
+      <Stack pt={6}>
+        <Heading as="h3" size="md" display="inline">
+          Activities participated
+        </Heading>
+        <List spacing={3}>
+          {data.activities.length &&
+            data.activities.map((activity) => (
+              <Tooltip
+                key={activity.id}
+                label={
+                  activity.points +
+                  ' points by ' +
+                  (activity.participants.length > 0
+                    ? activity.participants.map((participant) => participant.email).join(', ')
+                    : 'the team')
+                }
+                placement="auto-start"
+              >
+                <ListItem>
+                  <ListIcon as={MdCheckCircle} color="green.500" height="22px" />
+                  {activity.name}
+                </ListItem>
+              </Tooltip>
+            ))}
+        </List>
+      </Stack>
       <Stack py={6}>
         <Heading size="md" as="h3">
           Members (min 2, max 4)
         </Heading>
         <List spacing={3}>
-          {data.users.map((user, index) => (
-            <MemberDetails key={index + '.' + user.email} user={user} />
-          ))}
+          {data.users.length &&
+            data.users.map((user, index) => (
+              <MemberDetails key={index + '.' + user.email} user={user} />
+            ))}
         </List>
         <Heading size="md" as="h3" pt={6}>
           <Tooltip label="Any requests sent by your team members will be shown here">

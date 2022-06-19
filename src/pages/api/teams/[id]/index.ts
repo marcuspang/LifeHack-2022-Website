@@ -22,10 +22,7 @@ export default async (req: NextApiRequest, res: NextApiResponse) => {
     try {
       const team = await prisma.team.findFirst({
         where: { id },
-        select: {
-          points: true,
-          name: true,
-          verified: true,
+        include: {
           users: {
             select: {
               email: true,
@@ -43,6 +40,20 @@ export default async (req: NextApiRequest, res: NextApiResponse) => {
                 },
               },
               approved: true,
+            },
+          },
+          activities: {
+            select: {
+              id: true,
+              name: true,
+              points: true,
+              participants: {
+                where: {
+                  team: {
+                    id,
+                  },
+                },
+              },
             },
           },
         },

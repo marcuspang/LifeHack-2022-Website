@@ -1,5 +1,5 @@
 import { Box, Flex, Heading, Icon, List, Stack, Text, Tooltip } from '@chakra-ui/react';
-import { Team, TeamRequest, User } from '@prisma/client';
+import { Activities, Team, TeamRequest, User } from '@prisma/client';
 import { MdCheckCircle, MdClear } from 'react-icons/md';
 import useSWR from 'swr';
 import Loader from '../common/Loader';
@@ -11,6 +11,7 @@ import MemberDetails from './TeamMemberDetails';
 export interface TeamInterface extends Team {
   users: User[];
   teamRequests: (TeamRequest & { requestee: User })[];
+  activities: (Activities & { participants: User[] })[];
 }
 
 const TeamContent = () => {

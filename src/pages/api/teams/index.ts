@@ -17,14 +17,12 @@ export default async (req: NextApiRequest, res: NextApiResponse) => {
         orderBy: {
           points: 'desc',
         },
-        where: {
-          verified: true,
-        },
         include: {
           _count: true,
+          activities: true,
         },
-        skip: skip !== '' ? +skip : 0,
-        take: take !== '' ? +take : 10,
+        skip: isNaN(skip as any) ? 0 : +skip,
+        take: isNaN(take as any) ? 10 : +take,
       });
     } else {
       teams = prisma.team.findMany({
@@ -39,8 +37,8 @@ export default async (req: NextApiRequest, res: NextApiResponse) => {
         orderBy: {
           points: 'desc',
         },
-        skip: skip !== '' ? +skip : 0,
-        take: take !== '' ? +take : 10,
+        skip: isNaN(skip as any) ? 0 : +skip,
+        take: isNaN(take as any) ? 10 : +take,
       });
     }
 
