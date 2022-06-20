@@ -1,6 +1,6 @@
 import { Button } from '@chakra-ui/react';
+import { NavItem } from 'constants/navItems';
 import { useRouter } from 'next/router';
-import { NavItem } from '../../../constants/navItems';
 
 interface DesktopHeaderItemProps {
   navItem: NavItem;

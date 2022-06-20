@@ -10,9 +10,9 @@ import {
   Text,
   Tooltip,
 } from '@chakra-ui/react';
+import Loader from 'components/common/Loader';
 import { MdCheckCircle, MdClear } from 'react-icons/md';
 import useSWR from 'swr';
-import Loader from '../common/Loader';
 import AddTeamMemberButton from './AddTeamMemberButton';
 import DeleteTeamButton from './DeleteTeamButton';
 import { TeamInterface } from './TeamContent';

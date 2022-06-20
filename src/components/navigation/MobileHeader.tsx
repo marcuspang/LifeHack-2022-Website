@@ -1,9 +1,9 @@
 import { Stack } from '@chakra-ui/react';
 import { Role } from '@prisma/client';
+import { navItems } from 'constants/navItems';
 import { useSession } from 'next-auth/react';
 import MobileAuthItems from './MobileAuthItems';
 import MobileHeaderItem from './MobileHeaderItem';
-import { navItems } from '../../../constants/navItems';
 
 const MobileHeader = () => {
   const { data, status } = useSession();

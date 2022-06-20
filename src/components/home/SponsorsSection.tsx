@@ -1,6 +1,6 @@
 import { Box, Stack } from '@chakra-ui/react';
+import Section from 'components/common/Section';
 import Image from 'next/image';
-import Section from '../common/Section';
 
 const SponsorsSection = () => {
   return (

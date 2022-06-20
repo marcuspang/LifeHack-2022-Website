@@ -21,16 +21,18 @@ import {
   useToast,
 } from '@chakra-ui/react';
 import { Activities, Prisma } from '@prisma/client';
+import Loader from 'components/common/Loader';
+import useMatchMutate from 'hooks/useMatchMutate';
 import { useRouter } from 'next/router';
 import { useState } from 'react';
 import useSWR from 'swr';
-import Loader from '../common/Loader';
 
 const EditActivitiesTable = () => {
   const [skip, setSkip] = useState(0);
   const { data, mutate } = useSWR<{ activities: Activities[]; count: number }>(
     '/api/activities?skip=' + skip + '&take=10'
   );
+  const matchMutate = useMatchMutate();
   const toast = useToast();
   const router = useRouter();
 
@@ -51,6 +53,7 @@ const EditActivitiesTable = () => {
         throw new Error(data.error.message);
       }
       await mutate();
+      await matchMutate(/^\/api\/teams/);
       toast({
         status: 'success',
         title: data.message,

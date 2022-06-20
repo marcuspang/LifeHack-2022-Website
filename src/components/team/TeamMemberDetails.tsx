@@ -1,9 +1,9 @@
 import { CloseIcon } from '@chakra-ui/icons';
 import { IconButton, ListIcon, ListItem, Tooltip, useToast } from '@chakra-ui/react';
 import { Response, TeamRequest, User } from '@prisma/client';
+import { ErrorMessages } from 'constants/errors';
 import { MdCheckCircle, MdClear, MdPending } from 'react-icons/md';
 import { useSWRConfig } from 'swr';
-import { ErrorMessages } from '../../../constants/errors';
 
 interface MemberDetailsProps {
   user: User;

@@ -1,5 +1,5 @@
 import { Box, Center, Heading } from '@chakra-ui/react';
-import LeaderboardTable from '../components/leaderboard/LeaderboardTable';
+import LeaderboardTable from 'components/leaderboard/LeaderboardTable';
 
 const Leaderboard = () => {
   return (

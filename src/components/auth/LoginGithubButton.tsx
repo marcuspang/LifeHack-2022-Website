@@ -1,7 +1,7 @@
 import { Button, useToast } from '@chakra-ui/react';
+import { ErrorMessages } from 'constants/errors';
 import { signIn, useSession } from 'next-auth/react';
 import { FaGithub } from 'react-icons/fa';
-import { ErrorMessages } from '../../../constants/errors';
 
 const LoginGithubButton = ({ newAccount }: { newAccount?: boolean }) => {
   const { status } = useSession();

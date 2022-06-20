@@ -1,9 +1,9 @@
 import { Box, Center, Heading } from '@chakra-ui/react';
 import { Role } from '@prisma/client';
+import EditTeamsTable from 'components/teams/EditTeamsTable';
 import { useSession } from 'next-auth/react';
 import { useRouter } from 'next/router';
 import { useEffect } from 'react';
-import EditTeamsTable from '../../components/teams/EditTeamsTable';
 
 // Admin page to edit teams
 const Teams = () => {

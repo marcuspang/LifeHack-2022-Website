@@ -1,8 +1,8 @@
 import { Role } from '@prisma/client';
 import { PrismaClientKnownRequestError } from '@prisma/client/runtime';
+import prisma from 'lib/prisma';
 import { NextApiRequest, NextApiResponse } from 'next';
 import { getSession } from 'next-auth/react';
-import prisma from '../../../../lib/prisma';
 
 // Admin only route
 export default async (req: NextApiRequest, res: NextApiResponse) => {
@@ -75,7 +75,6 @@ export default async (req: NextApiRequest, res: NextApiResponse) => {
           return res.status(400).send({ error: { message: 'Duplicate email' } });
         }
       }
-      console.log(error);
       return res.status(400).send(error);
     }
   }

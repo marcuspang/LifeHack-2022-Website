@@ -1,9 +1,9 @@
 import { Box, Center } from '@chakra-ui/react';
 import { Role } from '@prisma/client';
+import EditTeamCard from 'components/team/EditTeamCard';
 import { useSession } from 'next-auth/react';
 import { useRouter } from 'next/router';
 import { useEffect } from 'react';
-import EditTeamCard from '../../components/team/EditTeamCard';
 
 const EditTeam = () => {
   const { data: userData, status } = useSession();

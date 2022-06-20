@@ -1,8 +1,8 @@
 import { Button, Flex, Table, TableContainer, Tbody, Td, Th, Thead, Tr } from '@chakra-ui/react';
 import { Team } from '@prisma/client';
+import Loader from 'components/common/Loader';
 import { useState } from 'react';
 import useSWR from 'swr';
-import Loader from '../common/Loader';
 
 const LeaderboardTable = () => {
   const [skip, setSkip] = useState(0);

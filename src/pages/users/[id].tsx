@@ -1,9 +1,9 @@
 import { Box, Center } from '@chakra-ui/react';
 import { Role } from '@prisma/client';
+import EditParticipantCard from 'components/participants/EditParticipantCard';
 import { useSession } from 'next-auth/react';
 import { useRouter } from 'next/router';
 import { useEffect } from 'react';
-import EditParticipantCard from '../../components/participants/EditParticipantCard';
 
 const EditUser = () => {
   const { data: userData, status } = useSession();

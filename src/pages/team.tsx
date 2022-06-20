@@ -1,8 +1,8 @@
 import { Center, Heading } from '@chakra-ui/react';
+import TeamCard from 'components/team/TeamCard';
 import { useSession } from 'next-auth/react';
 import { useRouter } from 'next/router';
 import { useEffect } from 'react';
-import TeamCard from '../components/team/TeamCard';
 
 const Team = () => {
   const { data, status } = useSession();

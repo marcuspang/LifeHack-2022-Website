@@ -16,6 +16,13 @@
     "noEmit": true,
     "jsx": "preserve",
     "incremental": true,
+    "downlevelIteration": true,
+    "baseUrl": ".",
+    "paths": {
+      "lib/*": ["lib/*"],
+      "components/*": ["src/components/*"],
+      "hooks/*": ["src/hooks/*"]
+    }
   },
   "include": ["**/*.ts", "**/*.tsx", "*.d.ts"],
   "exclude": ["node_modules"]

@@ -1,7 +1,7 @@
 import { Box, Flex, Heading, Link, List, Stack, Text } from '@chakra-ui/react';
 import { Team, User } from '@prisma/client';
+import Loader from 'components/common/Loader';
 import useSWR from 'swr';
-import Loader from '../common/Loader';
 import MemberDetails from '../team/TeamMemberDetails';
 
 interface EditParticipantCardContentProps {
@@ -24,7 +24,6 @@ const EditParticipantCardContent = ({ userId }: EditParticipantCardContentProps)
       </Heading>
     );
   }
-  console.log(data);
 
   return (
     <>

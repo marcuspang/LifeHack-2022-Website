@@ -1,8 +1,8 @@
 import { Box, Flex, Heading, List, ListIcon, ListItem, Stack, Text } from '@chakra-ui/react';
 import { Activities, Team, User } from '@prisma/client';
+import Loader from 'components/common/Loader';
 import { MdCheckCircle } from 'react-icons/md';
 import useSWR from 'swr';
-import Loader from '../common/Loader';
 import MemberDetails from '../team/TeamMemberDetails';
 import AddParticipantToActivityButton from './AddParticipantToActivityButton';
 import AddTeamToActivityButton from './AddTeamToActivityButton';

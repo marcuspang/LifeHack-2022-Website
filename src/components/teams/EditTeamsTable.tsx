@@ -22,11 +22,11 @@ import {
   useToast,
 } from '@chakra-ui/react';
 import { Prisma, Team } from '@prisma/client';
+import Loader from 'components/common/Loader';
 import { useRouter } from 'next/router';
 import { useState } from 'react';
 import { MdCheckCircle, MdClear } from 'react-icons/md';
 import useSWR from 'swr';
-import Loader from '../common/Loader';
 
 const EditTeamsTable = () => {
   const [skip, setSkip] = useState(0);

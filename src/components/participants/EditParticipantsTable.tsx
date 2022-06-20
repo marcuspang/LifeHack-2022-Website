@@ -21,10 +21,10 @@ import {
   useToast,
 } from '@chakra-ui/react';
 import { Prisma, Team, User } from '@prisma/client';
+import Loader from 'components/common/Loader';
 import { useRouter } from 'next/router';
 import { useState } from 'react';
 import useSWR, { useSWRConfig } from 'swr';
-import Loader from '../common/Loader';
 
 const EditParticipantsTable = () => {
   const [skip, setSkip] = useState(0);

@@ -1,5 +1,5 @@
 import { Box, Heading, Link, Text } from '@chakra-ui/react';
-import Section from '../common/Section';
+import Section from 'components/common/Section';
 
 const FAQSection = () => {
   return (

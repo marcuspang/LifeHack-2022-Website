@@ -1,7 +1,7 @@
 import { Button, useToast } from '@chakra-ui/react';
+import { ErrorMessages } from 'constants/errors';
 import { signIn, useSession } from 'next-auth/react';
 import { FcGoogle } from 'react-icons/fc';
-import { ErrorMessages } from '../../../constants/errors';
 
 const LoginGoogleButton = ({ newAccount }: { newAccount?: boolean }) => {
   const { status } = useSession();
@@ -10,9 +10,7 @@ const LoginGoogleButton = ({ newAccount }: { newAccount?: boolean }) => {
   const handleClick = async () => {
     try {
       await signIn('google');
-      console.log('here');
     } catch (error) {
-      console.log(error);
       toast({
         title: 'Error when creating account',
         description: ErrorMessages.ONE_EMAIL_ONLY,

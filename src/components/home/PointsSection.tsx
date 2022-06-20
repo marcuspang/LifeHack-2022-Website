@@ -1,6 +1,6 @@
 import { Box, Heading, List, ListIcon, ListItem, Text } from '@chakra-ui/react';
+import Section from 'components/common/Section';
 import { MdCheckCircle } from 'react-icons/md';
-import Section from '../common/Section';
 
 const PointsSection = () => {
   return (

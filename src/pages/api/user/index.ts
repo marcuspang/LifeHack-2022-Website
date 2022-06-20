@@ -1,6 +1,6 @@
+import prisma from 'lib/prisma';
 import { NextApiRequest, NextApiResponse } from 'next';
 import { getSession } from 'next-auth/react';
-import prisma from '../../../../lib/prisma';
 
 // Get the role of a user
 export default async (req: NextApiRequest, res: NextApiResponse) => {

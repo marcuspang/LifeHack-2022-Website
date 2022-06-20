@@ -1,6 +1,6 @@
 import { Button, ButtonProps, useToast } from '@chakra-ui/react';
+import { ErrorMessages } from 'constants/errors';
 import { useSWRConfig } from 'swr';
-import { ErrorMessages } from '../../../constants/errors';
 
 interface LeaveTeamButtonProps extends ButtonProps {
   teamId: string;

@@ -1,9 +1,9 @@
 import { CheckIcon, CloseIcon } from '@chakra-ui/icons';
 import { IconButton, List, ListItem, Text, useToast } from '@chakra-ui/react';
 import { Response, Team, User } from '@prisma/client';
+import Loader from 'components/common/Loader';
+import { ErrorMessages } from 'constants/errors';
 import useSWR, { useSWRConfig } from 'swr';
-import { ErrorMessages } from '../../../constants/errors';
-import Loader from '../common/Loader';
 
 interface TeamRequestInterface {
   id: string;

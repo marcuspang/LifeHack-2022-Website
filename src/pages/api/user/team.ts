@@ -1,6 +1,6 @@
+import prisma from 'lib/prisma';
 import { NextApiRequest, NextApiResponse } from 'next';
 import { getSession } from 'next-auth/react';
-import prisma from '../../../../lib/prisma';
 
 // Get the team of a user
 export default async (req: NextApiRequest, res: NextApiResponse) => {
@@ -20,11 +20,7 @@ export default async (req: NextApiRequest, res: NextApiResponse) => {
             },
           },
         },
-        select: {
-          id: true,
-          points: true,
-          name: true,
-          verified: true,
+        include: {
           users: {
             select: {
               email: true,
@@ -42,6 +38,24 @@ export default async (req: NextApiRequest, res: NextApiResponse) => {
                 },
               },
               approved: true,
+            },
+          },
+          activities: {
+            select: {
+              id: true,
+              name: true,
+              points: true,
+              participants: {
+                where: {
+                  team: {
+                    users: {
+                      some: {
+                        email: session.user.email,
+                      },
+                    },
+                  },
+                },
+              },
             },
           },
         },

@@ -1,6 +1,6 @@
 import { Button, ButtonProps, useToast } from '@chakra-ui/react';
+import { ErrorMessages } from 'constants/errors';
 import { useRouter } from 'next/router';
-import { ErrorMessages } from '../../../constants/errors';
 
 interface DeleteTeamButtonProps extends ButtonProps {
   teamId: string;

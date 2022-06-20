@@ -1,10 +1,10 @@
 import { Box, Center, Heading } from '@chakra-ui/react';
 import { Role } from '@prisma/client';
+import AddActivityButton from 'components/activities/AddActivityButton';
+import EditActivitiesTable from 'components/activities/EditActivitiesTable';
 import { useSession } from 'next-auth/react';
 import { useRouter } from 'next/router';
 import { useEffect } from 'react';
-import AddActivityButton from '../../components/activities/AddActivityButton';
-import EditActivitiesTable from '../../components/activities/EditActivitiesTable';
 
 // Admin page to edit teams
 const Activities = () => {

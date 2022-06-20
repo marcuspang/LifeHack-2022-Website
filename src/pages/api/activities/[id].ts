@@ -1,8 +1,8 @@
 import { Role } from '@prisma/client';
 import { PrismaClientKnownRequestError } from '@prisma/client/runtime';
+import prisma from 'lib/prisma';
 import { NextApiRequest, NextApiResponse } from 'next';
 import { getSession } from 'next-auth/react';
-import prisma from '../../../../lib/prisma';
 
 // Admin only route
 export default async (req: NextApiRequest, res: NextApiResponse) => {
@@ -38,6 +38,7 @@ export default async (req: NextApiRequest, res: NextApiResponse) => {
     const { id: _, ...updateData } = body;
     try {
       const activity = await prisma.activities.findFirst({ where: { id } });
+
       const updateActivity = prisma.activities.update({
         data: updateData,
         where: {
@@ -46,39 +47,60 @@ export default async (req: NextApiRequest, res: NextApiResponse) => {
       });
       const queries: any[] = [updateActivity];
       if (updateData.points && activity) {
-        let updateTeams = null;
         const difference = updateData.points - activity.points;
-        if (difference > 0) {
-          updateTeams = prisma.team.updateMany({
-            data: {
-              points: {
-                increment: difference,
-              },
+        const updateTeams = prisma.team.updateMany({
+          data: {
+            points: {
+              increment: difference,
             },
-            where: {
-              activities: {
+          },
+          where: {
+            activities: {
+              every: {
                 id,
               },
             },
-          });
-        } else {
-          updateTeams = prisma.team.updateMany({
-            data: {
-              points: {
-                decrement: difference,
-              },
-            },
-            where: {
-              activities: {
-                id,
-              },
-            },
-          });
-        }
+          },
+        });
         queries.push(updateTeams);
       }
+      if (updateData.teams && activity) {
+        const addPoints = await prisma.team.updateMany({
+          where: {
+            id: {
+              in: updateData.teams.set.map((item: { id: string }) => item.id),
+            },
+            activities: {
+              none: {
+                id,
+              },
+            },
+          },
+          data: {
+            points: {
+              increment: activity.points,
+            },
+          },
+        });
+        const removePoints = await prisma.team.updateMany({
+          where: {
+            id: {
+              notIn: updateData.teams.set.map((item: { id: string }) => item.id),
+            },
+            activities: {
+              some: {
+                id,
+              },
+            },
+          },
+          data: {
+            points: {
+              decrement: activity.points,
+            },
+          },
+        });
+      }
       await prisma.$transaction(queries);
-
       return res.status(200).json({ message: 'Updated successfully' });
     } catch (error) {
       if (error instanceof PrismaClientKnownRequestError) {
@@ -86,7 +108,6 @@ export default async (req: NextApiRequest, res: NextApiResponse) => {
           return res.status(400).send({ error: { message: 'Duplicate email' } });
         }
       }
-      console.log(error);
       return res.status(400).send(error);
     }
   }

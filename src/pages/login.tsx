@@ -1,8 +1,8 @@
 import { useToast } from '@chakra-ui/react';
+import { LoginCard } from 'components/auth/LoginCard';
+import { ErrorMessages } from 'constants/errors';
 import { useRouter } from 'next/router';
 import { useEffect } from 'react';
-import { ErrorMessages } from '../../constants/errors';
-import { LoginCard } from '../components/auth/LoginCard';
 
 const Login = () => {
   const router = useRouter();
