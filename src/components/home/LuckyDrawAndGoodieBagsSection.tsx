@@ -13,10 +13,11 @@ const LuckyDrawAndGoodieBagsSection = () => {
         and other goodies will be up for grabs!
       </Text>
       <Text fontSize="xl" maxW="700px" mx="auto" mt={6}>
-        First 50 teams to register and submit a hack on DevPost gets a{' '}
+        First 50 teams to register will also get a{' '}
         <Text as="span" color="yellow.300">
-          LifeHack 2022 goodie bag!
+          LifeHack 2022 goodie bag,{' '}
         </Text>
+        provided you submit your hack on DevPost.
       </Text>
     </Section>
   );

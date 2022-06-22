@@ -1,5 +1,6 @@
 import { Button, Link, Stack, Text } from '@chakra-ui/react';
 import Section from 'components/common/Section';
+import NextLink from 'next/link';
 
 const CallToActionSection = () => {
   return (
@@ -8,22 +9,23 @@ const CallToActionSection = () => {
         Make sure to fill up this form below too!
       </Text>
       <Stack>
-        <Button
-          as={Link}
-          p={6}
-          onClick={() => {
-            window.location.href = 'https://nus.campuslabs.com/engage/submitter/form/start/545156';
-          }}
-          variant="cta"
-          fontSize={['lg', 'xl', 'xl']}
-          mt={3}
-          colorScheme="blue"
-          size="lg"
-          width={['auto', '300px', '300px', '300px']}
-          mx="auto"
-        >
-          Registration Form
-        </Button>
+        <NextLink href="https://nus.campuslabs.com/engage/submitter/form/start/545156" passHref>
+          <Button
+            as={Link}
+            target="_blank"
+            rel="noopener noreferrer"
+            p={6}
+            variant="cta"
+            fontSize={['lg', 'xl', 'xl']}
+            mt={3}
+            colorScheme="blue"
+            size="lg"
+            width={['auto', '300px', '300px', '300px']}
+            mx="auto"
+          >
+            Register Now
+          </Button>
+        </NextLink>
         <Text as="span" color="gray.400" mt={2}>
           Deadline: 27th June
         </Text>

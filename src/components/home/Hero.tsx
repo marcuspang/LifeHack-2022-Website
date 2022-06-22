@@ -1,4 +1,5 @@
 import { Box, Button, Center, Flex, Heading, Image, Link, Stack, Text } from '@chakra-ui/react';
+import NextLink from 'next/link';
 
 const Hero = () => {
   return (
@@ -27,22 +28,22 @@ const Hero = () => {
           </Text>
         </Box>
         <Flex alignItems={['center', 'center', 'inherit', 'inherit']} direction="column">
-          <Button
-            as={Link}
-            p={6}
-            onClick={() => {
-              window.location.href =
-                'https://nus.campuslabs.com/engage/submitter/form/start/545156';
-            }}
-            variant="cta"
-            fontSize={['lg', 'xl', 'xl']}
-            mt={3}
-            colorScheme="blue"
-            size="lg"
-            width="200px"
-          >
-            Register Now
-          </Button>
+          <NextLink href="https://nus.campuslabs.com/engage/submitter/form/start/545156" passHref>
+            <Button
+              as={Link}
+              target="_blank"
+              rel="noopener noreferrer"
+              p={6}
+              variant="cta"
+              fontSize={['lg', 'xl', 'xl']}
+              mt={3}
+              colorScheme="blue"
+              size="lg"
+              width="200px"
+            >
+              Register Now
+            </Button>
+          </NextLink>
           <Text as="span" color="gray.400" mt={2}>
             Deadline: 27th June!
           </Text>
