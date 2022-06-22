@@ -17,13 +17,7 @@ const SponsorsSection = () => {
         <Heading order={[3, 2, 2, 2]} color="blue.200" mt={10} mb={6}>
           Club Sponsor
         </Heading>
-        <Box
-          order={[2, 3, 3, 3]}
-          bg="white"
-          p={8}
-          rounded="xl"
-          width={['50%', '60%', '50%']}
-        >
+        <Box order={[2, 3, 3, 3]} bg="white" p={8} rounded="xl" width={['50%', '60%', '50%']}>
           <Image src="/tiktok-logo.png" alt="Tiktok Logo" />
         </Box>
         <Flex
