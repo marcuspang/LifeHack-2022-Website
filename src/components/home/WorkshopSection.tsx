@@ -17,7 +17,7 @@ const WorkshopSection = () => {
               2000 - 2100
             </Text>
             <Text>
-              <Text color="blue.200" as="span" fontWeight={'bold'}>
+              <Text color="blue.200" fontWeight={'bold'}>
                 NUS FinTech Society:{' '}
               </Text>
               Textual Analysis using Natural Language Processing
@@ -37,7 +37,7 @@ const WorkshopSection = () => {
             </Text>
 
             <Text>
-              <Text color="blue.200" as="span" fontWeight={'bold'}>
+              <Text color="blue.200" fontWeight={'bold'}>
                 NUS Computing Club:{' '}
               </Text>
               Building a Telegram Bot using Python
@@ -56,7 +56,7 @@ const WorkshopSection = () => {
               2000 - 2100
             </Text>
             <Text>
-              <Text color="blue.200" as="span" fontWeight={'bold'}>
+              <Text color="blue.200" fontWeight={'bold'}>
                 NUS Computing Club:{' '}
               </Text>{' '}
               Flutter for Mobile Development
@@ -75,7 +75,7 @@ const WorkshopSection = () => {
               2000 - 2100
             </Text>
             <Text>
-              <Text color="blue.200" as="span" fontWeight={'bold'}>
+              <Text color="blue.200" fontWeight={'bold'}>
                 NUS StartIT Society:{' '}
               </Text>
               React for Web Development
@@ -86,7 +86,7 @@ const WorkshopSection = () => {
               2100 - 2200
             </Text>
             <Text>
-              <Text color="blue.200" as="span" fontWeight={'bold'}>
+              <Text color="blue.200" fontWeight={'bold'}>
                 NUS Stats &amp; Data Science Society:{' '}
               </Text>
               Exploratory Data Analysis &amp; Visualisation
