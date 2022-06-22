@@ -39,7 +39,8 @@
     "start": "next start",
     "gen": "npx prisma generate",
     "push": "npx prisma db push",
-    "lint": "eslint --fix **/*.ts && prettier --write **/*.ts"
+    "lint": "eslint --fix **/*.ts && prettier --write **/*.ts",
+    "postinstall": "husky install"
   },
   "eslintConfig": {
     "extends": [
@@ -70,6 +71,7 @@
     "eslint-plugin-prettier": "^4.0.0",
     "eslint-plugin-react": "^7.30.0",
     "eslint-plugin-unused-imports": "^2.0.0",
+    "husky": "^8.0.0",
     "prettier": "^2.6.2",
     "prisma": "^3.15.0"
   }
