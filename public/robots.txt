@@ -1,3 +1,9 @@
-# https://www.robotstxt.org/robotstxt.html
+# *
 User-agent: *
-Disallow:
+Allow: /
+
+# Host
+Host: https://lifehack.nuscomputing.com
+
+# Sitemaps
+Sitemap: https://lifehack.nuscomputing.com/sitemap.xml
