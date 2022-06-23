@@ -1,10 +1,13 @@
-import { Box, Button, Center, Flex, Heading, Image, Link, Stack, Text } from '@chakra-ui/react';
+import { Box, Button, Center, Flex, Heading, Link, Stack, Text } from '@chakra-ui/react';
+import Image from 'next/image';
 import NextLink from 'next/link';
 
 const Hero = () => {
   return (
     <Center bg="black" p={12} flexDir={['column', 'column', 'row']}>
-      <Image boxSize={['auto', 'sm', 'md', 'lg']} src="/logo.png" alt="LifeHack 2022 Logo" />
+      <Box boxSize={['auto', 'sm', 'md', 'lg']} position="relative">
+        <Image layout="fill" objectFit="contain" src="/logo.png" alt="LifeHack 2022 Logo" />
+      </Box>
       <Stack py={5} pl={[0, 8, 8]} spacing={1}>
         <Heading
           as="h1"
