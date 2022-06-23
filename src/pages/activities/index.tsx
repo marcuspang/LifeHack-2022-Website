@@ -1,26 +1,8 @@
 import { Box, Center, Heading } from '@chakra-ui/react';
-import { Role } from '@prisma/client';
-import AddActivityButton from 'components/activities/AddActivityButton';
-import EditActivitiesTable from 'components/activities/EditActivitiesTable';
-import { useSession } from 'next-auth/react';
-import { useRouter } from 'next/router';
-import { useEffect } from 'react';
+import EditActivitiesContent from 'components/activities/EditActivitiesContent';
 
 // Admin page to edit teams
 const Activities = () => {
-  const { data, status } = useSession();
-  const router = useRouter();
-
-  useEffect(() => {
-    if (status === 'authenticated' && data.user.role !== Role.ADMIN) {
-      router.push('/');
-    }
-
-    if (status === 'unauthenticated') {
-      router.push('/');
-    }
-  }, [status]);
-
   return (
     <Center as="main" bg="black" py={12} flexDirection="column">
       <Heading as="h1" size="xl" display="inline" pb={10}>
@@ -36,8 +18,7 @@ const Activities = () => {
         m="0 auto"
         width="100%"
       >
-        <AddActivityButton />
-        <EditActivitiesTable />
+        <EditActivitiesContent />
       </Box>
     </Center>
   );

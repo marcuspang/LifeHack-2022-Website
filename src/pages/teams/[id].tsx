@@ -1,24 +1,10 @@
 import { Box, Center } from '@chakra-ui/react';
-import { Role } from '@prisma/client';
 import EditTeamCard from 'components/team/EditTeamCard';
-import { useSession } from 'next-auth/react';
 import { useRouter } from 'next/router';
-import { useEffect } from 'react';
 
 const EditTeam = () => {
-  const { data: userData, status } = useSession();
   const router = useRouter();
   const { id } = router.query;
-
-  useEffect(() => {
-    if (status === 'authenticated' && userData.user.role !== Role.ADMIN) {
-      router.push('/');
-    }
-
-    if (status === 'unauthenticated') {
-      router.push('/');
-    }
-  }, [status]);
 
   return (
     <Center as="main" bg="black" py={12} flexDir="column">

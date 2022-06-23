@@ -16,13 +16,15 @@ import {
   TableContainer,
   Tbody,
   Td,
+  Text,
   Th,
   Thead,
   Tr,
   useToast,
 } from '@chakra-ui/react';
-import { Prisma, Team } from '@prisma/client';
+import { Prisma, Role, Team } from '@prisma/client';
 import Loader from 'components/common/Loader';
+import { useSession } from 'next-auth/react';
 import { useRouter } from 'next/router';
 import { useState } from 'react';
 import { MdCheckCircle, MdClear } from 'react-icons/md';
@@ -30,15 +32,28 @@ import useSWR from 'swr';
 
 const EditTeamsTable = () => {
   const [skip, setSkip] = useState(0);
-  const { data, mutate } = useSWR<{
+  const { data: userData, status } = useSession();
+  const { data, isValidating, mutate } = useSWR<{
     teams: (Team & { _count: { users: number; teamRequests: number } })[];
     count: number;
   }>('/api/teams?skip=' + skip + '&take=10');
   const toast = useToast();
   const router = useRouter();
 
-  if (!data) {
+  if (
+    (status === 'authenticated' && userData.user.role !== Role.ADMIN) ||
+    status === 'unauthenticated'
+  ) {
+    router.push('/');
     return <Loader />;
+  }
+
+  if (status === 'loading' || isValidating) {
+    return <Loader />;
+  }
+
+  if (!data) {
+    return <Text>No teams found</Text>;
   }
 
   const updateTeam = async (params: Prisma.TeamUpdateInput) => {

@@ -69,7 +69,7 @@ const EditTeamCardContent = ({ teamId }: EditTeamCardContentProps) => {
       </Stack>
       <Stack pt={6}>
         <Heading as="h3" size="md" display="inline">
-          Activities participated
+          Activities Participated
         </Heading>
         <List spacing={3}>
           {data.activities.length &&

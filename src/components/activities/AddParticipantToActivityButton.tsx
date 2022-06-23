@@ -33,7 +33,7 @@ const AddParticipantToActivityButton = ({ activityId }: AddTeamToActivityButtonI
     if (data && data.teams.length) {
       setPickerItems(data.teams.map((team) => ({ label: team.name, value: team.id })));
     }
-  }, [isValidating]);
+  }, [isValidating, data]);
 
   const handleSelectedItemsChange = async (selectedItems?: Item[]) => {
     if (selectedItems) {

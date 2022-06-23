@@ -10,8 +10,10 @@ import {
   Text,
   Tooltip,
 } from '@chakra-ui/react';
-import { Activities, Team, TeamRequest, User } from '@prisma/client';
+import { Activities, Role, Team, TeamRequest, User } from '@prisma/client';
 import Loader from 'components/common/Loader';
+import { useSession } from 'next-auth/react';
+import { useRouter } from 'next/router';
 import { MdCheckCircle, MdClear } from 'react-icons/md';
 import useSWR from 'swr';
 import InviteTeamMemberButton from './InviteTeamMemberButton';
@@ -26,9 +28,19 @@ export interface TeamInterface extends Team {
 }
 
 const TeamContent = () => {
+  const { data: userData, status } = useSession();
+  const router = useRouter();
   const { data, isValidating } = useSWR<TeamInterface>('/api/user/team');
 
-  if (isValidating) {
+  if (
+    (status === 'authenticated' && userData.user.role !== Role.ADMIN) ||
+    status === 'unauthenticated'
+  ) {
+    router.push('/');
+    return <Loader />;
+  }
+
+  if (status === 'loading' || isValidating) {
     return <Loader />;
   }
 
@@ -68,7 +80,7 @@ const TeamContent = () => {
       </Stack>
       <Stack pt={6}>
         <Heading as="h3" size="md" display="inline">
-          Activities participated
+          Activities Participated
         </Heading>
         <List spacing={3}>
           {data.activities.length &&

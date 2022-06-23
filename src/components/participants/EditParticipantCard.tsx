@@ -1,4 +1,8 @@
-import { Heading } from '@chakra-ui/react';
+import { Box, Center, Heading } from '@chakra-ui/react';
+import { Role } from '@prisma/client';
+import Loader from 'components/common/Loader';
+import { useSession } from 'next-auth/react';
+import router from 'next/router';
 import EditParticipantCardContent from './EditParticipantCardContent';
 
 interface EditParticipantCardProps {
@@ -6,10 +10,24 @@ interface EditParticipantCardProps {
 }
 
 const EditParticipantCard = ({ userId }: EditParticipantCardProps) => {
+  const { data, status } = useSession();
+
+  if (status === 'loading') {
+    return <Loader />;
+  }
+
+  if (
+    (status === 'authenticated' && data.user.role !== Role.ADMIN) ||
+    status === 'unauthenticated'
+  ) {
+    router.push('/');
+    return <Loader />;
+  }
+
   if (!userId) {
     return (
       <Heading as="h2" size="lg">
-        Enter a valid teamId
+        Enter a valid user ID
       </Heading>
     );
   }

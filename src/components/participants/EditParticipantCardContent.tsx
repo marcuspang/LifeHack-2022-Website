@@ -20,7 +20,7 @@ const EditParticipantCardContent = ({ userId }: EditParticipantCardContentProps)
   if (!data || !userId) {
     return (
       <Heading as="h2" size="lg">
-        No such team
+        No such user
       </Heading>
     );
   }

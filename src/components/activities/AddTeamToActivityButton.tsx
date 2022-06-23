@@ -14,8 +14,9 @@ import {
 } from '@chakra-ui/react';
 import { Activities, Prisma, Team } from '@prisma/client';
 import { CUIAutoComplete, Item } from 'chakra-ui-autocomplete';
+import useMatchMutate from 'hooks/useMatchMutate';
 import { useEffect, useState } from 'react';
-import useSWR, { useSWRConfig } from 'swr';
+import useSWR from 'swr';
 
 interface AddTeamToActivityButtonInterface {
   activityId: string;
@@ -23,9 +24,9 @@ interface AddTeamToActivityButtonInterface {
 
 const AddTeamToActivityButton = ({ activityId }: AddTeamToActivityButtonInterface) => {
   const toast = useToast();
-  const { mutate } = useSWRConfig();
+  const matchMutate = useMatchMutate();
   const { isOpen, onOpen, onClose } = useDisclosure();
-  const { data, isValidating } = useSWR<{
+  const { data, mutate } = useSWR<{
     teams: (Team & { activities: Activities[] })[];
     count: number;
   }>(isOpen && '/api/teams');
@@ -47,7 +48,7 @@ const AddTeamToActivityButton = ({ activityId }: AddTeamToActivityButtonInterfac
       });
       setSelectedItems(selectedTeams);
     }
-  }, [isValidating]);
+  }, [activityId, data]);
 
   const handleSelectedItemsChange = async (selectedItems?: Item[]) => {
     if (selectedItems) {
@@ -67,7 +68,7 @@ const AddTeamToActivityButton = ({ activityId }: AddTeamToActivityButtonInterfac
         if (!result.ok) {
           throw new Error(data.error.message);
         }
-        await mutate('/api/activities?skip=0&take=10');
+        await matchMutate(/^\/api\/(activities|team)/);
         toast({
           status: 'success',
           title: data.message,

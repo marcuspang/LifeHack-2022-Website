@@ -105,7 +105,7 @@ const EditActivitiesTable = () => {
               >
                 <Td textAlign="center">
                   <Editable
-                    defaultValue={activity.name!}
+                    defaultValue={activity.name}
                     maxW="fit-content"
                     mx="auto"
                     onSubmit={(name) => updateActivity({ id: activity.id, name })}

@@ -4,7 +4,7 @@ const Footer = () => {
   return (
     <Box as="footer" px={6} pt={3} pb={3} bg="theme.400">
       <Box width={['100%', '400px', '500px']} pb={8} pt={4}>
-        <Image src="/nus-computing-logo.png" />
+        <Image src="/nus-computing-logo.png" alt="NUS Computing Logo" />
       </Box>
       <Text fontSize="sm">© 2022 LifeHack. All rights reserved.</Text>
     </Box>

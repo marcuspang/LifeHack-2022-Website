@@ -20,7 +20,7 @@ export const LoginCard = () => {
       });
       return;
     }
-  }, [status]);
+  }, [status, router, toast]);
 
   return (
     <Flex minH="100vh" align="center" justify="center">

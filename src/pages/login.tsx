@@ -27,7 +27,7 @@ const Login = () => {
         });
       }
     }
-  }, [error]);
+  }, [error, toast]);
 
   return <LoginCard></LoginCard>;
 };
