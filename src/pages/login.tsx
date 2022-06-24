@@ -29,7 +29,7 @@ const Login = () => {
     }
   }, [error, toast]);
 
-  return <LoginCard></LoginCard>;
+  return <LoginCard />;
 };
 
 export default Login;
