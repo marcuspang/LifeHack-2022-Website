@@ -80,7 +80,7 @@ const NoTeamPendingRequests = () => {
           <Tooltip label="Accept team request">
             <IconButton
               aria-label="Accept team request"
-              icon={<CheckIcon />}
+              icon={<CheckIcon color="green.500" />}
               bg="transparent"
               _hover={{ bg: 'gray.600' }}
               onClick={() =>
@@ -92,7 +92,7 @@ const NoTeamPendingRequests = () => {
             <IconButton
               ml={3}
               aria-label="Cancel team request"
-              icon={<CloseIcon />}
+              icon={<CloseIcon color="red.500" />}
               bg="transparent"
               _hover={{ bg: 'gray.600' }}
               mr={3}

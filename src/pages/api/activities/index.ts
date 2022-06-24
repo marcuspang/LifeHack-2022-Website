@@ -1,12 +1,12 @@
-import { Role } from '@prisma/client';
 import prisma from 'lib/prisma';
 import { NextApiRequest, NextApiResponse } from 'next';
 import { getSession } from 'next-auth/react';
+import isAdmin from 'utils/isAdmin';
 
 export default async (req: NextApiRequest, res: NextApiResponse) => {
   const session = await getSession({ req });
 
-  if (!session || !session.user || !session.user.email || session.user.role !== Role.ADMIN) {
+  if (!isAdmin(session)) {
     return res.status(403).send('Unauthorized');
   }
 

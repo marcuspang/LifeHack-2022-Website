@@ -21,7 +21,8 @@
     "paths": {
       "lib/*": ["lib/*"],
       "components/*": ["src/components/*"],
-      "hooks/*": ["src/hooks/*"]
+      "hooks/*": ["src/hooks/*"],
+      "utils/*": ["utils/*"]
     }
   },
   "include": ["**/*.ts", "**/*.tsx", "*.d.ts"],

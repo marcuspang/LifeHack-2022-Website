@@ -32,7 +32,6 @@ import { useSession } from 'next-auth/react';
 import { useRouter } from 'next/router';
 import { useState } from 'react';
 import { MdCheckCircle, MdClear } from 'react-icons/md';
-import NotFoundPage from 'src/pages/404';
 import useSWR from 'swr';
 
 const EditTeamsTable = () => {
@@ -51,7 +50,8 @@ const EditTeamsTable = () => {
     (status === 'authenticated' && userData.user.role !== Role.ADMIN) ||
     status === 'unauthenticated'
   ) {
-    return <NotFoundPage />;
+    router.push('/');
+    return <Loader />;
   }
 
   if (status === 'loading' || isValidating) {

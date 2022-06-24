@@ -77,7 +77,7 @@ const TeamRequestDetails = ({ request, hideApprovedRequests }: TeamRequestDetail
           size="sm"
           verticalAlign={'middle'}
           aria-label="Cancel team request"
-          icon={<CloseIcon />}
+          icon={<CloseIcon color="red.500" />}
           bg="transparent"
           _hover={{ bg: 'gray.600' }}
           onClick={deleteRequest}
