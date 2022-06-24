@@ -3,7 +3,7 @@ import { Activities, Team, User } from '@prisma/client';
 import Loader from 'components/common/Loader';
 import { MdCheckCircle } from 'react-icons/md';
 import useSWR from 'swr';
-import MemberDetails from '../team/TeamMemberDetails';
+import TeamMemberDetails from '../team/TeamMemberDetails';
 import AddParticipantToActivityButton from './AddParticipantToActivityButton';
 import AddTeamToActivityButton from './AddTeamToActivityButton';
 
@@ -51,7 +51,7 @@ const EditActivitiesCardContent = ({ activityId }: EditActivitiesCardContentProp
         {data.participants && data.participants.length && (
           <List spacing={3}>
             {data.participants.map((participants, index) => (
-              <MemberDetails key={index + '.' + participants.email} user={participants} />
+              <TeamMemberDetails key={index + '.' + participants.email} user={participants} />
             ))}
           </List>
         )}

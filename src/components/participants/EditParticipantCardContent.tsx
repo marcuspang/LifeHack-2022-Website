@@ -2,7 +2,7 @@ import { Box, Flex, Heading, Link, List, Stack, Text } from '@chakra-ui/react';
 import { Team, User } from '@prisma/client';
 import Loader from 'components/common/Loader';
 import useSWR from 'swr';
-import MemberDetails from '../team/TeamMemberDetails';
+import TeamMemberDetails from '../team/TeamMemberDetails';
 
 interface EditParticipantCardContentProps {
   userId: string;
@@ -62,7 +62,7 @@ const EditParticipantCardContent = ({ userId }: EditParticipantCardContentProps)
         {data.requestee.length && (
           <List spacing={3}>
             {data.requestee.map((requestee, index) => (
-              <MemberDetails key={index + '.' + requestee.email} user={requestee} />
+              <TeamMemberDetails key={index + '.' + requestee.email} user={requestee} />
             ))}
           </List>
         )}
@@ -72,7 +72,7 @@ const EditParticipantCardContent = ({ userId }: EditParticipantCardContentProps)
         {data.requestee.length && (
           <List spacing={3}>
             {data.requestor.map((requestor, index) => (
-              <MemberDetails key={index + '.' + requestor.email} user={requestor} />
+              <TeamMemberDetails key={index + '.' + requestor.email} user={requestor} />
             ))}
           </List>
         )}

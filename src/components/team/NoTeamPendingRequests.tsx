@@ -1,10 +1,10 @@
 import { CheckIcon, CloseIcon } from '@chakra-ui/icons';
-import { IconButton, List, ListItem, Text, useToast } from '@chakra-ui/react';
+import { IconButton, Link, List, ListItem, Text, Tooltip, useToast } from '@chakra-ui/react';
 import { Response, Team, User } from '@prisma/client';
 import Loader from 'components/common/Loader';
 import { ErrorMessages } from 'constants/errors';
 import useSWR, { useSWRConfig } from 'swr';
-
+import NextLink from 'next/link';
 interface TeamRequestInterface {
   id: string;
   requestor: User;
@@ -77,36 +77,45 @@ const NoTeamPendingRequests = () => {
     <List spacing={3}>
       {data.map((teamRequest) => (
         <ListItem key={teamRequest.id}>
-          <IconButton
-            aria-label="Accept team request"
-            icon={<CheckIcon />}
-            bg="transparent"
-            _hover={{ bg: 'gray.600' }}
-            onClick={() =>
-              respondToRequest(teamRequest.id, teamRequest.team.name, Response.ACCEPTED)
-            }
-          />
-          <IconButton
-            ml={3}
-            aria-label="Cancel team request"
-            icon={<CloseIcon />}
-            bg="transparent"
-            _hover={{ bg: 'gray.600' }}
-            mr={3}
-            onClick={() =>
-              respondToRequest(teamRequest.id, teamRequest.team.name, Response.REJECTED)
-            }
-          />
+          <Tooltip label="Accept team request">
+            <IconButton
+              aria-label="Accept team request"
+              icon={<CheckIcon />}
+              bg="transparent"
+              _hover={{ bg: 'gray.600' }}
+              onClick={() =>
+                respondToRequest(teamRequest.id, teamRequest.team.name, Response.ACCEPTED)
+              }
+            />
+          </Tooltip>
+          <Tooltip label="Cancel team request">
+            <IconButton
+              ml={3}
+              aria-label="Cancel team request"
+              icon={<CloseIcon />}
+              bg="transparent"
+              _hover={{ bg: 'gray.600' }}
+              mr={3}
+              onClick={() =>
+                respondToRequest(teamRequest.id, teamRequest.team.name, Response.REJECTED)
+              }
+            />
+          </Tooltip>
           Team
           <Text as="span" fontWeight="bold" color="blue.100">
             {' '}
             {teamRequest.team.name}{' '}
           </Text>
-          by
+          from
           <Text as="span" fontWeight="bold" color="blue.100">
             {' '}
-            {teamRequest.requestor.name} ({teamRequest.requestor.email})
+            {teamRequest.requestor.name}{' '}
           </Text>
+          <NextLink href={'mailto:' + teamRequest.requestor.email} passHref>
+            <Link fontWeight="bold" color="blue.100">
+              ({teamRequest.requestor.email})
+            </Link>
+          </NextLink>
         </ListItem>
       ))}
     </List>

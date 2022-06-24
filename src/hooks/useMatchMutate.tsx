@@ -14,7 +14,6 @@ const useMatchMutate = () => {
         keys.push(key);
       }
     }
-    console.log('keys', keys);
 
     const mutations = keys.map((key) => mutate(key, data, opts));
     return Promise.all(mutations);

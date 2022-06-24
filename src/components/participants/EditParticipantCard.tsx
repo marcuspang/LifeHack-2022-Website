@@ -1,4 +1,4 @@
-import { Box, Center, Heading } from '@chakra-ui/react';
+import { Heading } from '@chakra-ui/react';
 import { Role } from '@prisma/client';
 import Loader from 'components/common/Loader';
 import { useSession } from 'next-auth/react';

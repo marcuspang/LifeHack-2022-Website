@@ -2,25 +2,28 @@ import { Heading } from '@chakra-ui/react';
 import { Role } from '@prisma/client';
 import Loader from 'components/common/Loader';
 import { useSession } from 'next-auth/react';
-import router from 'next/router';
-import EditTeamCardContent from './EditTeamCardContent';
+import { useRouter } from 'next/router';
+import useSWR from 'swr';
+import TeamContent, { TeamInterface } from './TeamContent';
 
 interface EditTeamCardProps {
   teamId?: string;
 }
 
 const EditTeamCard = ({ teamId }: EditTeamCardProps) => {
-  const { data, status } = useSession();
-
-  if (status === 'loading') {
-    return <Loader />;
-  }
+  const { data: userData, status } = useSession();
+  const { data, isValidating } = useSWR<TeamInterface>(teamId && '/api/teams/' + teamId);
+  const router = useRouter();
 
   if (
-    (status === 'authenticated' && data.user.role !== Role.ADMIN) ||
+    (status === 'authenticated' && userData.user.role !== Role.ADMIN) ||
     status === 'unauthenticated'
   ) {
     router.push('/');
+    return <Loader />;
+  }
+
+  if (status === 'loading' || isValidating) {
     return <Loader />;
   }
 
@@ -32,7 +35,7 @@ const EditTeamCard = ({ teamId }: EditTeamCardProps) => {
     );
   }
 
-  return <EditTeamCardContent teamId={teamId} />;
+  return <TeamContent data={data} isEditing />;
 };
 
 export default EditTeamCard;

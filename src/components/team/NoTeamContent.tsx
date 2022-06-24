@@ -16,11 +16,19 @@ import { FormEventHandler, useRef } from 'react';
 import { useSWRConfig } from 'swr';
 import NoTeamPendingRequests from './NoTeamPendingRequests';
 
-const NoTeamContent = () => {
+interface NoTeamContentProps {
+  isEditing?: boolean;
+}
+
+const NoTeamContent = ({ isEditing }: NoTeamContentProps) => {
   const { isOpen, onOpen, onClose } = useDisclosure();
   const { mutate } = useSWRConfig();
   const teamNameRef = useRef<HTMLInputElement>(null);
   const toast = useToast();
+
+  if (isEditing) {
+    return <Heading>No such team</Heading>;
+  }
 
   const handleSubmit: FormEventHandler = async (event) => {
     event.preventDefault();
@@ -80,7 +88,7 @@ const NoTeamContent = () => {
         Click here to create a team
       </Button>
       <Heading as="h3" size="md" pb={6} pt={8}>
-        Pending team requests
+        Pending Team Requests
       </Heading>
       <NoTeamPendingRequests />
       <Modal isOpen={isOpen} onClose={onClose}>

@@ -6,12 +6,12 @@ import NextLink from 'next/link';
 import { MdCheckCircle, MdClear, MdPending } from 'react-icons/md';
 import { useSWRConfig } from 'swr';
 
-interface MemberDetailsProps {
+interface TeamMemberDetailsProps {
   user: User;
   request?: TeamRequest;
 }
 
-const MemberDetails = ({ user, request }: MemberDetailsProps) => {
+const TeamMemberDetails = ({ user, request }: TeamMemberDetailsProps) => {
   const toast = useToast();
   const { mutate } = useSWRConfig();
   const deleteRequest = async () => {
@@ -65,15 +65,22 @@ const MemberDetails = ({ user, request }: MemberDetailsProps) => {
     return (
       <ListItem key={user.email}>
         <ListIcon as={icon} color={color} height="22px" />
-        {user.name} ({user.email})
-        <IconButton
-          ml={3}
-          aria-label="Cancel team request"
-          icon={<CloseIcon />}
-          bg="transparent"
-          _hover={{ bg: 'gray.600' }}
-          onClick={deleteRequest}
-        />
+        <Text as="span">{user.name}</Text>{' '}
+        <NextLink href={'mailto:' + user.email} passHref>
+          <Link color="blue.200">({user.email})</Link>
+        </NextLink>
+        <Tooltip label="Cancel team request sent">
+          <IconButton
+            ml={3}
+            size="sm"
+            verticalAlign={'middle'}
+            aria-label="Cancel team request"
+            icon={<CloseIcon />}
+            bg="transparent"
+            _hover={{ bg: 'gray.600' }}
+            onClick={deleteRequest}
+          />
+        </Tooltip>
       </ListItem>
     );
   }
@@ -91,4 +98,4 @@ const MemberDetails = ({ user, request }: MemberDetailsProps) => {
   );
 };
 
-export default MemberDetails;
+export default TeamMemberDetails;
