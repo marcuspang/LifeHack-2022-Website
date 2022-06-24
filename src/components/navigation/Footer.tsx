@@ -8,6 +8,7 @@ const Footer = () => {
         position="relative"
         maxW={['287.5px', '345px', '431.25px', '575px']}
         height={['50px', '60px', '75px', '100px']}
+        mb={4}
       >
         <Image
           objectFit="contain"
