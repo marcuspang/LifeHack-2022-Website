@@ -50,14 +50,15 @@ const FAQSection = () => {
             Which platform will be used to disseminate event updates/announcements?
           </Heading>
           <Text>
-            We will have a Discord server for you to join and be notified of workshops or
-            mini events throughout the hackathon.
+            We will have a Discord server for you to join and be notified of workshops or mini
+            events throughout the hackathon.
           </Text>
           <Box mt="10">
             <Heading size="md">Can I use code that I previously wrote?</Heading>
             <Text>
               You are allowed to use snippets of code you have previously written. However, copying
-              your entire hack from previous events or from other online sources is strictly not allowed.
+              your entire hack from previous events or from other online sources is strictly not
+              allowed.
             </Text>
           </Box>
           <Box mt="10">
