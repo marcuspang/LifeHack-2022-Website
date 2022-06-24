@@ -4,15 +4,21 @@ import NextLink from 'next/link';
 
 const Hero = () => {
   return (
-    <Center bg="black" p={12} flexDir={['column', 'column', 'row']}>
-      <Box boxSize={['auto', 'sm', 'md', 'lg']} position="relative">
-        <Image layout="fill" objectFit="contain" src="/logo.png" alt="LifeHack 2022 Logo" />
+    <Center bg="black" p={12} flexDir={['column', 'column', 'row']} minH="500px">
+      <Box boxSize={['xs', 'sm', 'md', 'lg']} position="relative">
+        <Image
+          layout="fill"
+          objectFit="contain"
+          src="/logo.png"
+          alt="LifeHack 2022 Logo"
+          priority
+        />
       </Box>
       <Stack py={5} pl={[0, 8, 8]} spacing={1}>
         <Heading
           as="h1"
           size={['2xl', '4xl', '4xl']}
-          textAlign={['center', 'inherit', 'inherit', 'inherit']}
+          textAlign={['center', 'center', 'inherit', 'inherit']}
         >
           LifeHack 2022
         </Heading>

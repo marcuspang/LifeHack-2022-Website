@@ -9,88 +9,106 @@ const WorkshopSection = () => {
           divider={<StackDivider borderColor="gray.400" />}
           spacing={4}
           align="flex-start"
-          mt={[10, 20]}
+          mt={12}
         >
           <Heading size="md">4th July</Heading>
           <Flex w="100%">
             <Text flex="0 0 120px" mr="5">
               2000 - 2100
             </Text>
-            <Text>
-              <Text color="blue.200" as="span" display={'block'} fontWeight={'bold'}>
-                NUS FinTech Society:{' '}
+            <Box>
+              <Text color="blue.200" fontWeight={'bold'}>
+                NUS FinTech Society
               </Text>
-              Textual Analysis using Natural Language Processing
-            </Text>
+              <Text>Textual Analysis using Natural Language Processing</Text>
+              <Text pt={1}>Location: Zoom</Text>
+            </Box>
           </Flex>
         </VStack>
         <VStack
           divider={<StackDivider borderColor="gray.400" />}
           spacing={4}
           align="flex-start"
-          mt={[10, 20]}
+          mt={12}
         >
           <Heading size="md">5th July</Heading>
           <Flex w="100%">
             <Text flex="0 0 120px" mr="5">
-              2000 - 2100
+              1400 - 1530
             </Text>
 
-            <Text>
-              <Text color="blue.200" as="span" display={'block'} fontWeight={'bold'}>
-                NUS Computing Club:{' '}
+            <Box>
+              <Text color="blue.200" fontWeight={'bold'}>
+                MuleSoft
               </Text>
-              Building a Telegram Bot using Python
+              <Text>API Management &amp; MuleSoft Methodoly</Text>
+              <Text pt={1}>Location: Salesforce Office, Training Room</Text>
+            </Box>
+          </Flex>
+          <Flex w="100%">
+            <Text flex="0 0 120px" mr="5">
+              2000 - 2100
             </Text>
+            <Box>
+              <Text color="blue.200" as="span" display={'block'} fontWeight={'bold'}>
+                NUS Computing Club
+              </Text>
+              <Text>Building a Telegram Bot using Python</Text>
+              <Text pt={1}>Location: Zoom</Text>
+            </Box>
           </Flex>
         </VStack>
         <VStack
           divider={<StackDivider borderColor="gray.400" />}
           spacing={4}
           align="flex-start"
-          mt={[10, 20]}
+          mt={12}
         >
           <Heading size="md">6th July</Heading>
           <Flex w="100%">
             <Text flex="0 0 120px" mr="5">
               2000 - 2100
             </Text>
-            <Text>
+            <Box>
               <Text color="blue.200" as="span" display={'block'} fontWeight={'bold'}>
-                NUS Computing Club:{' '}
+                NUS Computing Club
               </Text>{' '}
-              Flutter for Mobile Development
-            </Text>
+              <Text>Flutter for Mobile Development</Text>
+              <Text pt={1}>Location: Zoom</Text>
+            </Box>
           </Flex>
         </VStack>
         <VStack
           divider={<StackDivider borderColor="gray.400" />}
           spacing={4}
           align="flex-start"
-          mt={[10, 20]}
+          mt={12}
         >
           <Heading size="md">7th July</Heading>
           <Flex w="100%">
             <Text flex="0 0 120px" mr="5">
               2000 - 2100
             </Text>
-            <Text>
+
+            <Box>
               <Text color="blue.200" as="span" display={'block'} fontWeight={'bold'}>
-                NUS StartIT Society:{' '}
+                NUS StartIT Society
               </Text>
-              React for Web Development
-            </Text>
+              <Text>React for Web Development</Text>
+              <Text pt={1}>Location: Zoom</Text>
+            </Box>
           </Flex>
           <Flex w="100%">
             <Text flex="0 0 120px" mr="5">
               2100 - 2200
             </Text>
-            <Text>
+            <Box>
               <Text color="blue.200" as="span" display={'block'} fontWeight={'bold'}>
-                NUS Stats &amp; Data Science Society:{' '}
+                NUS Stats &amp; Data Science Society
               </Text>
-              Exploratory Data Analysis &amp; Visualisation
-            </Text>
+              <Text>Exploratory Data Analysis &amp; Visualisation</Text>
+              <Text pt={1}>Location: Zoom</Text>
+            </Box>
           </Flex>
         </VStack>
       </Box>
