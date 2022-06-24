@@ -22,10 +22,41 @@ export default async (req: NextApiRequest, res: NextApiResponse) => {
     try {
       const user = await prisma.user.findFirst({
         where: { id },
-        include: {
-          requestee: true,
-          requestor: true,
-          team: true,
+        select: {
+          id: true,
+          name: true,
+          email: true,
+          points: true,
+          requestee: {
+            select: {
+              id: true,
+              approved: true,
+              requestor: {
+                select: {
+                  name: true,
+                  email: true,
+                },
+              },
+            },
+          },
+          requestor: {
+            select: {
+              id: true,
+              approved: true,
+              requestee: {
+                select: {
+                  name: true,
+                  email: true,
+                },
+              },
+            },
+          },
+          team: {
+            select: {
+              id: true,
+              name: true,
+            },
+          },
         },
       });
       return res.status(200).send(user);

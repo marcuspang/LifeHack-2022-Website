@@ -1,13 +1,19 @@
 import { Box } from '@chakra-ui/react';
+import { Role } from '@prisma/client';
 import Loader from 'components/common/Loader';
 import { useSession } from 'next-auth/react';
 import { useRouter } from 'next/router';
 import useSWR from 'swr';
 import TeamContent, { TeamInterface } from './TeamContent';
 
+interface UserTeamInterface {
+  role: Role;
+  team: TeamInterface;
+}
+
 const TeamCard = () => {
   const { status } = useSession();
-  const { data, isValidating } = useSWR<TeamInterface>('/api/user/team');
+  const { data, isValidating } = useSWR<UserTeamInterface>('/api/user');
   const router = useRouter();
 
   if (status === 'unauthenticated') {
@@ -30,7 +36,7 @@ const TeamCard = () => {
       m="0 auto"
       width="100%"
     >
-      <TeamContent data={data} />
+      <TeamContent data={data?.team} />
     </Box>
   );
 };

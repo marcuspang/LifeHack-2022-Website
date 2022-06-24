@@ -1,6 +1,6 @@
 import { Stack, Heading, Tooltip, List } from '@chakra-ui/react';
 import { TeamInterface } from './TeamContent';
-import TeamMemberDetails from './TeamMemberDetails';
+import TeamRequestDetails from './TeamRequestDetails';
 
 interface TeamRequestsProps {
   teamRequests: TeamInterface['teamRequests'];
@@ -17,10 +17,9 @@ const TeamRequests = ({ teamRequests }: TeamRequestsProps) => {
       {teamRequests.length && (
         <List>
           {teamRequests.map((teamRequest, index) => (
-            <TeamMemberDetails
+            <TeamRequestDetails
               key={index + '.' + teamRequest.requestee.email}
-              user={teamRequest.requestee}
-              request={teamRequest}
+              request={{ ...teamRequest, user: { ...teamRequest.requestee } }}
             />
           ))}
         </List>

@@ -5,13 +5,17 @@ import {
   EditableInput,
   EditablePreview,
   Flex,
+  FormControl,
+  FormLabel,
   Icon,
   IconButton,
+  Input,
   NumberDecrementStepper,
   NumberIncrementStepper,
   NumberInput,
   NumberInputField,
   NumberInputStepper,
+  Stack,
   Table,
   TableContainer,
   Tbody,
@@ -28,15 +32,18 @@ import { useSession } from 'next-auth/react';
 import { useRouter } from 'next/router';
 import { useState } from 'react';
 import { MdCheckCircle, MdClear } from 'react-icons/md';
+import NotFoundPage from 'src/pages/404';
 import useSWR from 'swr';
 
 const EditTeamsTable = () => {
   const [skip, setSkip] = useState(0);
+  const [query, setQuery] = useState('');
+
   const { data: userData, status } = useSession();
   const { data, isValidating, mutate } = useSWR<{
     teams: (Team & { _count: { users: number; teamRequests: number } })[];
     count: number;
-  }>('/api/teams?skip=' + skip + '&take=10');
+  }>('/api/teams?skip=' + skip + '&take=10&query=' + query);
   const toast = useToast();
   const router = useRouter();
 
@@ -44,8 +51,7 @@ const EditTeamsTable = () => {
     (status === 'authenticated' && userData.user.role !== Role.ADMIN) ||
     status === 'unauthenticated'
   ) {
-    router.push('/');
-    return <Loader />;
+    return <NotFoundPage />;
   }
 
   if (status === 'loading' || isValidating) {
@@ -94,6 +100,22 @@ const EditTeamsTable = () => {
 
   return (
     <>
+      <Stack justifyContent={'flex-start'} direction={'row'} spacing={6}>
+        {/* <FormControl mb={8} width="auto">
+          <FormLabel htmlFor="email">Email address</FormLabel>
+          <Input id="email" type="email" maxW="200px" />
+        </FormControl> */}
+        <FormControl mb={8} width="auto">
+          <FormLabel htmlFor="name">Name (NOT WORKING YET)</FormLabel>
+          <Input
+            id="name"
+            type="text"
+            maxW="200px"
+            value={query}
+            onChange={(e) => setQuery(e.target.value)}
+          />
+        </FormControl>
+      </Stack>
       <TableContainer width="100%">
         <Table variant="unstyled" border="1px solid" borderColor="gray.600">
           <Thead>

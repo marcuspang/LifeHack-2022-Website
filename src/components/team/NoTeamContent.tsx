@@ -55,7 +55,7 @@ const NoTeamContent = ({ isEditing }: NoTeamContentProps) => {
       if (!result.ok) {
         throw new Error(data.error.message);
       }
-      await mutate('/api/user/team');
+      await mutate('/api/user');
       toast({
         status: 'success',
         title: 'Team ' + data.name + ' successfully created',

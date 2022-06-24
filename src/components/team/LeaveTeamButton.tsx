@@ -14,7 +14,7 @@ const LeaveTeamButton = ({ teamId, ...props }: LeaveTeamButtonProps) => {
       await fetch('/api/teams/' + teamId + '/leave', {
         method: 'PATCH',
       });
-      await mutate('/api/user/team');
+      await mutate('/api/user');
       toast({
         status: 'success',
         title: 'Team successfully created',

@@ -48,7 +48,7 @@ const InviteTeamMemberButton = ({ teamId, ...props }: InviteTeamMemberButtonProp
       if (!result.ok) {
         throw new Error(data.error.message);
       }
-      await mutate('/api/user/team');
+      await mutate('/api/user');
       toast({
         status: 'success',
         title: 'Successfully sent team request',

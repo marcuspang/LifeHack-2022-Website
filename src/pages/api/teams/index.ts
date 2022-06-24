@@ -9,7 +9,7 @@ export default async (req: NextApiRequest, res: NextApiResponse) => {
 
   // Get all teams for leaderboard
   if (req.method === 'GET') {
-    const { skip, take } = req.query;
+    const { skip, take, query } = req.query;
 
     let teams = null;
     if (session && session.user.role === Role.ADMIN) {

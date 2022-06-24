@@ -40,7 +40,7 @@ const NoTeamPendingRequests = () => {
         throw new Error(data.error.message);
       }
       await mutateRequests();
-      await mutate('/api/user/team');
+      await mutate('/api/user');
       if (accept === Response.ACCEPTED) {
         toast({
           status: 'success',

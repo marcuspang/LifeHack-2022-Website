@@ -1,17 +1,21 @@
 import { Box, Flex, Heading, Link, List, Stack, Text } from '@chakra-ui/react';
-import { Team, User } from '@prisma/client';
+import { Team, TeamRequest, User } from '@prisma/client';
 import Loader from 'components/common/Loader';
+import TeamRequestDetails from 'components/team/TeamRequestDetails';
 import useSWR from 'swr';
-import TeamMemberDetails from '../team/TeamMemberDetails';
 
 interface EditParticipantCardContentProps {
   userId: string;
 }
 
+interface UserRequestsInterface extends User {
+  requestee: (Pick<TeamRequest, 'id' | 'approved'> & { requestor: Pick<User, 'name' | 'email'> })[];
+  requestor: (Pick<TeamRequest, 'id' | 'approved'> & { requestee: Pick<User, 'name' | 'email'> })[];
+  team?: Pick<Team, 'id' | 'name' | 'points'>;
+}
+
 const EditParticipantCardContent = ({ userId }: EditParticipantCardContentProps) => {
-  const { data, isValidating } = useSWR<
-    User & { requestee: User[]; requestor: User[]; team: Team }
-  >('/api/users/' + userId);
+  const { data, isValidating } = useSWR<UserRequestsInterface>('/api/users/' + userId);
 
   if (isValidating) {
     return <Loader />;
@@ -24,7 +28,7 @@ const EditParticipantCardContent = ({ userId }: EditParticipantCardContentProps)
       </Heading>
     );
   }
-
+  console.log('here', data);
   return (
     <>
       <Flex>
@@ -54,7 +58,11 @@ const EditParticipantCardContent = ({ userId }: EditParticipantCardContentProps)
           Team Name
         </Heading>
         <Text>
-          <Link href={'/teams/' + data.teamId}>{data.team.name}</Link>
+          {data.team ? (
+            <Link href={'/teams/' + data.team.id}>{data.team.name}</Link>
+          ) : (
+            'No team found!'
+          )}
         </Text>
         <Heading size="md" as="h3" pt={6}>
           Team requests received
@@ -62,17 +70,23 @@ const EditParticipantCardContent = ({ userId }: EditParticipantCardContentProps)
         {data.requestee.length && (
           <List spacing={3}>
             {data.requestee.map((requestee, index) => (
-              <TeamMemberDetails key={index + '.' + requestee.email} user={requestee} />
+              <TeamRequestDetails
+                key={index + '.' + requestee.id}
+                request={{ ...requestee, user: { ...requestee.requestor } }}
+              />
             ))}
           </List>
         )}
         <Heading size="md" as="h3" pt={6}>
           Team requests sent
         </Heading>
-        {data.requestee.length && (
+        {data.requestor.length && (
           <List spacing={3}>
             {data.requestor.map((requestor, index) => (
-              <TeamMemberDetails key={index + '.' + requestor.email} user={requestor} />
+              <TeamRequestDetails
+                key={index + '.' + requestor.id}
+                request={{ ...requestor, user: { ...requestor.requestee } }}
+              />
             ))}
           </List>
         )}

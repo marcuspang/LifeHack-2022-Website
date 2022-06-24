@@ -18,9 +18,47 @@ export default async (req: NextApiRequest, res: NextApiResponse) => {
         },
         select: {
           role: true,
+          team: {
+            select: {
+              id: true,
+              name: true,
+              points: true,
+              users: {
+                select: {
+                  email: true,
+                  name: true,
+                  points: true,
+                },
+              },
+              teamRequests: {
+                select: {
+                  id: true,
+                  requestee: {
+                    select: {
+                      email: true,
+                      name: true,
+                    },
+                  },
+                  approved: true,
+                },
+              },
+              activities: {
+                select: {
+                  id: true,
+                  name: true,
+                  points: true,
+                  participants: {
+                    select: {
+                      email: true,
+                    },
+                  },
+                },
+              },
+            },
+          },
         },
       });
-      return res.status(200).json(user ? { role: user.role } : null);
+      return res.status(200).json(user);
     } catch (error) {
       return res.status(400).send(error);
     }
