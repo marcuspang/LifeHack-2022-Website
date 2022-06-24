@@ -4,7 +4,7 @@ import NextLink from 'next/link';
 
 const CallToActionSection = () => {
   return (
-    <Section bg="theme.500" heading="See you then!👋">
+    <Section bg="theme.500" heading="See you then!👋" px={5}>
       <Text fontWeight={600} fontSize="2xl" color="gray.300" mb={2}>
         Make sure to fill up this form below too!
       </Text>

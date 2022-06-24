@@ -3,8 +3,8 @@ import Section from 'components/common/Section';
 
 const WorkshopSection = () => {
   return (
-    <Section bg="theme.500" heading="Upcoming Workshops">
-      <Box maxW="900px" m="0 auto" textAlign="left" px={6} fontSize="lg">
+    <Section bg="theme.500" heading="Upcoming Workshops" pt={3}>
+      <Box maxW="900px" m="0 auto" textAlign="left" px={6} fontSize="lg" pt={1}>
         <VStack
           divider={<StackDivider borderColor="gray.400" />}
           spacing={4}

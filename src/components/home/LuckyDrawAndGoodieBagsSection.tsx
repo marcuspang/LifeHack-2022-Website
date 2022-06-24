@@ -4,7 +4,7 @@ import Section from 'components/common/Section';
 const LuckyDrawAndGoodieBagsSection = () => {
   return (
     <Section bg="theme.500" heading="Lucky Draws and Goodie Bags" minHeight={200}>
-      <Text fontSize="xl" maxW="700px" mx="auto" mt={4}>
+      <Text fontSize="xl" maxW="700px" mx="auto" pt={8}>
         Stay tuned for our lucky draws, where
         <Text as="span" color="yellow.300">
           {' '}

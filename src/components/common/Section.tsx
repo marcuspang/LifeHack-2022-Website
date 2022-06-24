@@ -7,8 +7,8 @@ interface SectionProps extends BoxProps {
 
 const Section = ({ children, heading, text, ...props }: SectionProps) => {
   return (
-    <Box minH={400} p={4} textAlign="center" py={12} px={6} {...props}>
-      <Heading my={[2, 5, 5]} size="2xl">
+    <Box minH={400} textAlign="center" py={12} px={[2, 6, 6, 6]} {...props}>
+      <Heading my={[4, 5, 5]} size="2xl">
         {heading}
       </Heading>
       <Text>{text}</Text>

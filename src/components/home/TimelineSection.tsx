@@ -3,9 +3,9 @@ import Section from 'components/common/Section';
 
 const TimelineSection = () => {
   return (
-    <Section bg="theme.300" heading="Timeline">
+    <Section bg="theme.400" heading="Timeline" mt={-1} pt={3}>
       <Box maxW="900px" m="0 auto" textAlign="left" px={6}>
-        <SimpleGrid mt={[0, 10, 20]} columns={[1, 1, 2]} spacing={10}>
+        <SimpleGrid mt={[10, 10, 20]} columns={[1, 1, 2]} spacing={10}>
           <VStack divider={<StackDivider borderColor="gray.400" />} spacing={4} align="flex-start">
             <Heading size="md">Day 1: Opening Day (9th July)</Heading>
             <Flex w="100%">

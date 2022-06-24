@@ -1,7 +1,8 @@
 import { CloseIcon } from '@chakra-ui/icons';
-import { IconButton, ListIcon, ListItem, Tooltip, useToast } from '@chakra-ui/react';
+import { IconButton, Link, ListIcon, ListItem, Text, Tooltip, useToast } from '@chakra-ui/react';
 import { Response, TeamRequest, User } from '@prisma/client';
 import { ErrorMessages } from 'constants/errors';
+import NextLink from 'next/link';
 import { MdCheckCircle, MdClear, MdPending } from 'react-icons/md';
 import { useSWRConfig } from 'swr';
 
@@ -81,7 +82,10 @@ const MemberDetails = ({ user, request }: MemberDetailsProps) => {
     <Tooltip label={user.name + ' has earned ' + user.points + ' points'} placement="auto-start">
       <ListItem key={user.email} width="auto">
         <ListIcon as={MdCheckCircle} color="green.500" height="22px" />
-        {user.name} ({user.email})
+        <Text as="span">{user.name}</Text>{' '}
+        <NextLink href={'mailto:' + user.email} passHref>
+          <Link color="blue.200">({user.email})</Link>
+        </NextLink>
       </ListItem>
     </Tooltip>
   );

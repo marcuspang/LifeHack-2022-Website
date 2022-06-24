@@ -1,7 +1,6 @@
-import { Box, Flex, Heading, Image, Link, SimpleGrid, Stack } from '@chakra-ui/react';
+import { Box, Heading, Image } from '@chakra-ui/react';
 import Section from 'components/common/Section';
 import NextLink from 'next/link';
-import { useRouter } from 'next/router';
 
 const SponsorsSection = () => {
   return (
@@ -27,8 +26,8 @@ const SponsorsSection = () => {
             alt="NCS Logo"
             bg="white"
             rounded="3xl"
-            width={['150px', '150px', '200px']}
-            height={['150px', '150px', '200px']}
+            width={['120px', '150px', '200px']}
+            height={['120px', '150px', '200px']}
             mx="auto"
             objectFit={'contain'}
           />
@@ -55,8 +54,8 @@ const SponsorsSection = () => {
             padding={8}
             bg="white"
             rounded="3xl"
-            width={['150px', '150px', '200px']}
-            height={['150px', '150px', '200px']}
+            width={['120px', '150px', '200px']}
+            height={['120px', '150px', '200px']}
             alt="Tiktok Logo"
             objectFit={'contain'}
           />
@@ -82,8 +81,8 @@ const SponsorsSection = () => {
             src="/ccsgp-logo.png"
             bg="white"
             rounded="3xl"
-            width={['150px', '150px', '200px']}
-            height={['150px', '150px', '200px']}
+            width={['120px', '150px', '200px']}
+            height={['120px', '150px', '200px']}
             alt="CCSGP Logo"
             objectFit={'contain'}
           />

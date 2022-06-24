@@ -14,10 +14,10 @@ const Hero = () => {
           priority
         />
       </Box>
-      <Stack py={5} pl={[0, 8, 8]} spacing={1}>
+      <Stack py={5} pl={[0, 8, 8]} spacing={1} textAlign="left">
         <Heading
           as="h1"
-          size={['2xl', '4xl', '4xl']}
+          size={['2xl', '3xl', '4xl']}
           textAlign={['center', 'center', 'inherit', 'inherit']}
         >
           LifeHack 2022

@@ -3,7 +3,7 @@ import Section from 'components/common/Section';
 
 const PrizesSection = () => {
   return (
-    <Section heading="Prizes">
+    <Section heading="Prizes" color="gray.200">
       <Text fontSize="3xl" mt="10">
         Main Prizes
       </Text>
@@ -17,14 +17,15 @@ const PrizesSection = () => {
       </Center>
       <Text fontSize="3xl" mt="16">
         For Each Theme
-      </Text>{' '}
+      </Text>
       <Center flexDir={['column', 'column', 'row']}>
         <Box pt={[0, 0, 10]} mt={10} w="300px" order={[2, 2, 1]}>
           <Heading size="lg" color="yellow.300">
-            $1,000 & $500
+            $1,000 &amp; $500
           </Heading>
           <Heading size="lg">
-            Theme 1st & <br /> 2nd Runner-Up
+            Theme 1st &amp; 2nd
+            <br /> Runner-Ups
           </Heading>
         </Box>
         <Box mx={[0, 0, 20]} mt="10" w="200px" order={[1, 1, 2]}>
@@ -46,33 +47,33 @@ const PrizesSection = () => {
       <Stack fontSize="xl" mt="8">
         <Stack>
           <Box>
-            <Text>Most Boomer Friendly</Text>
             <Text color="yellow.300">$250</Text>
+            <Text mb={5}>Most Boomer Friendly</Text>
           </Box>
           <Box>
-            <Text mt="5">Most Unorthodox Hack</Text>
             <Text color="yellow.300">$300</Text>
+            <Text mb={5}>Most Unorthodox Hack</Text>
           </Box>
           <Box>
-            <Text mt="5">Best Pre-U Hack</Text>
             <Text color="yellow.300">$350</Text>
+            <Text mb={5}>Best Pre-U Hack</Text>
           </Box>
         </Stack>
         <Box>
-          <Text mt="5">Best Year 1 Hack</Text>
           <Text color="yellow.300">$350</Text>
+          <Text mb={5}>Best Year 1 Hack</Text>
         </Box>
         <Box>
-          <Text mt="5">Most impressive use of data</Text>
           <Text color="yellow.300">$350</Text>
+          <Text mb={5}>Most Impressive Use of Data</Text>
         </Box>
         <Box>
-          <Text mt="5">Most popular hack</Text>
           <Text color="yellow.300">$200</Text>
+          <Text mb={5}>Most Popular Hack</Text>
         </Box>
         <Box>
-          <Text mt="5">Point Hogger</Text>
           <Text color="yellow.300">$300</Text>
+          <Text mb={5}>Point Hogger</Text>
         </Box>
       </Stack>
     </Section>

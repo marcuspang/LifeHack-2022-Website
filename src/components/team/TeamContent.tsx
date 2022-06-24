@@ -61,15 +61,15 @@ const TeamContent = () => {
           label={'Your team has ' + (data.verified ? '' : 'not') + ' been verified'}
           placement="bottom"
         >
-          <span style={{ height: '24px' }}>
+          <Text height="30px">
             <Icon
               as={data.verified ? MdCheckCircle : MdClear}
               color={data.verified ? 'green.500' : 'red.500'}
               ml={2}
-              height="24px"
-              width="24px"
+              height="30px"
+              width="30px"
             />
-          </span>
+          </Text>
         </Tooltip>
       </Flex>
       <Stack pt={6}>
@@ -115,7 +115,7 @@ const TeamContent = () => {
         </List>
         <Heading size="md" as="h3" pt={6}>
           <Tooltip label="Any requests sent by your team members will be shown here">
-            Sent team requests
+            Sent Team Requests
           </Tooltip>
         </Heading>
         {data.teamRequests.length && (

@@ -7,7 +7,7 @@ const Team = () => {
 
   return (
     <Center as="main" bg="black" py={12} flexDir="column">
-      <Heading pb={10} as="h1">
+      <Heading pb={10} as="h1" textAlign={'center'}>
         {data?.user.name ? 'Welcome back, ' + data?.user?.name + '!' : 'No team found'}
       </Heading>
       <TeamCard />
