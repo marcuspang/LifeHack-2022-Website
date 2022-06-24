@@ -1,5 +1,5 @@
 /** @type {import('next').NextConfig} */
-module.exports = {
+export default {
   i18n: {
     locales: ['en'],
     defaultLocale: 'en',
