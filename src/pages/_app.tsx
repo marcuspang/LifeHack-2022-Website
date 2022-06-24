@@ -26,6 +26,10 @@ const App = ({ Component, pageProps }: AppProps) => {
           <Head>
             <title>LifeHack 2022</title>
             <meta property="og:title" content="LifeHack 2022" key="title" />
+            <meta
+              name="description"
+              content="LifeHack 2022 is a hackathon aimed to channel the creativity, drive, and skills of the participants in the software development field."
+            />
             <meta name="msapplication-TileColor" content="#da532c" />
             <meta name="msapplication-TileImage" content="/mstile-144x144.png" />
             <meta name="theme-color" content="#000000" />
