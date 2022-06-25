@@ -23,7 +23,7 @@ export const LoginCard = () => {
   }, [status, router, toast]);
 
   return (
-    <Flex align="center" justify="center" height={'60vh'}>
+    <Flex align="center" justify="center" height={'60vh'} minH="400px">
       <Stack spacing={8} mx="auto" maxW="lg" px={6}>
         <Stack align="center">
           <Heading fontSize="4xl" textAlign={'center'}>
