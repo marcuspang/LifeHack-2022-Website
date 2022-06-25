@@ -8,7 +8,8 @@ const LoginButton = () => {
       onClick={() => {
         router.push('/login');
       }}
-      colorScheme="facebook"
+      isActive={router.route === '/login'}
+      variant="header"
     >
       Sign In
     </Button>
