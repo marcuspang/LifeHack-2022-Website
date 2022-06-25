@@ -1,3 +1,4 @@
+import { Prisma } from '@prisma/client';
 import { PrismaClientKnownRequestError } from '@prisma/client/runtime';
 import prisma from 'lib/prisma';
 import { NextApiRequest, NextApiResponse } from 'next';
@@ -67,39 +68,29 @@ export default async (req: NextApiRequest, res: NextApiResponse) => {
 
   if (req.method === 'PATCH') {
     const body = JSON.parse(req.body);
-    const { id: _, ...updateData } = body;
+    const {
+      id: _,
+      teamId,
+      ...updateData
+    } = body as Prisma.UserUpdateInput & { teamId: string | null };
     try {
-      let {
-        _sum: { points },
-      } = await prisma.user.aggregate({
-        _sum: {
-          points: true,
-        },
-        where: {
-          team: {
-            id: updateData.teamId,
-          },
-          id: {
-            not: id,
-          },
-        },
-      });
-      if (!points) {
-        points = updateData.points;
-      } else {
-        points += updateData.points;
-      }
       const updateUser = prisma.user.update({
         where: { id },
         data: updateData,
       });
-      const updateTeam = prisma.team.update({
-        data: { points: points ? points : undefined },
-        where: { id: updateData.teamId },
-      });
-      await prisma.$transaction([updateUser, updateTeam]);
+      const queries: any[] = [updateUser];
+      if (teamId) {
+        const updateTeam = prisma.team.update({
+          where: { id: teamId },
+          data: {
+            points: updateData.points,
+          },
+        });
+        queries.push(updateTeam);
+      }
+      const result = await prisma.$transaction(queries);
 
-      return res.status(200).json({ message: 'Updated successfully' });
+      return res.status(200).json({ message: 'Updated successfully', data: result });
     } catch (error) {
       if (error instanceof PrismaClientKnownRequestError) {
         if (error.code === 'P2002') {

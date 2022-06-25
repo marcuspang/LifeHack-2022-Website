@@ -6,9 +6,10 @@ import TeamMembers from './TeamMembers';
 import TeamName from './TeamName';
 import TeamPoints from './TeamPoints';
 import TeamRequests from './TeamRequests';
+import { union } from 'lodash';
 
 export interface TeamInterface extends Team {
-  users: User[];
+  users: (User & { activities: TeamInterface['activities'] })[];
   teamRequests: (TeamRequest & { requestee: User })[];
   activities: (Activities & { participants: User[] })[];
 }
@@ -27,7 +28,12 @@ const TeamContent = ({ data, isEditing }: TeamContentProps) => {
     <>
       <TeamName name={data.name} verified={data.verified} />
       <TeamPoints points={data.points} />
-      <TeamActivities activities={data.activities} />
+      <TeamActivities
+        activities={union(
+          data.activities,
+          data.users.map((user) => user.activities).reduce((prev, curr) => prev.concat(curr))
+        )}
+      />
       <TeamMembers teamMembers={data.users} />
       <TeamRequests teamRequests={data.teamRequests} />
       <TeamCardActions teamId={data.id} isEditing={isEditing} />

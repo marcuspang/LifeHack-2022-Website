@@ -28,21 +28,27 @@ import {
 } from '@chakra-ui/react';
 import { Prisma, Role, Team } from '@prisma/client';
 import Loader from 'components/common/Loader';
+import useMatchMutate from 'hooks/useMatchMutate';
 import { useSession } from 'next-auth/react';
 import { useRouter } from 'next/router';
 import { useState } from 'react';
 import { MdCheckCircle, MdClear } from 'react-icons/md';
 import useSWR from 'swr';
 
+interface EditTeamsInterface {
+  teams: (Team & { _count: { users: number; teamRequests: number } })[];
+  count: number;
+}
+
 const EditTeamsTable = () => {
   const [skip, setSkip] = useState(0);
   const [query, setQuery] = useState('');
 
   const { data: userData, status } = useSession();
-  const { data, isValidating, mutate } = useSWR<{
-    teams: (Team & { _count: { users: number; teamRequests: number } })[];
-    count: number;
-  }>('/api/teams?skip=' + skip + '&take=10&query=' + query);
+  const { data, isValidating } = useSWR<EditTeamsInterface>(
+    '/api/teams?skip=' + skip + '&take=10&query=' + query
+  );
+  const matchMutate = useMatchMutate();
   const toast = useToast();
   const router = useRouter();
 
@@ -74,7 +80,7 @@ const EditTeamsTable = () => {
       if (!result.ok) {
         throw new Error(data.error.message);
       }
-      await mutate();
+      await matchMutate(/\/api\/team/);
       toast({
         status: 'success',
         title: data.message,
@@ -151,7 +157,7 @@ const EditTeamsTable = () => {
                     defaultValue={team.name}
                     maxW="fit-content"
                     mx="auto"
-                    onSubmit={(name) => updateTeam({ id: team.id, name })}
+                    onSubmit={(name) => team.name !== name && updateTeam({ id: team.id, name })}
                   >
                     <EditablePreview />
                     <EditableInput />
@@ -164,7 +170,17 @@ const EditTeamsTable = () => {
                     defaultValue={team.points}
                     maxW="100px"
                     mx="auto"
-                    onBlur={(e) => updateTeam({ id: team.id, points: +e.target.value })}
+                    onBlur={(e) => {
+                      const difference = +e.target.value - team.points;
+                      if (difference !== 0) {
+                        updateTeam({
+                          id: team.id,
+                          points: {
+                            increment: difference,
+                          },
+                        });
+                      }
+                    }}
                   >
                     <NumberInputField />
                     <NumberInputStepper>

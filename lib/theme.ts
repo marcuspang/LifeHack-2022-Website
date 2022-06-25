@@ -66,7 +66,6 @@ const theme = extendTheme({
       },
     },
   },
-
   fonts: {
     heading: 'Hammersmith One, sans-serif',
     body: 'Nunito Sans, sans-serif',

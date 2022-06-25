@@ -12,6 +12,7 @@ import {
 } from '@chakra-ui/react';
 import { signOut, useSession } from 'next-auth/react';
 import { useState } from 'react';
+import { MdLogout } from 'react-icons/md';
 import LoginButton from '../auth/LoginButton';
 
 const DesktopAuthItems = () => {
@@ -36,13 +37,13 @@ const DesktopAuthItems = () => {
             bg="theme.300"
             shadow="3xl"
             p={4}
-            width="xs"
+            width="sm"
             border="none"
             onMouseLeave={() => setHover(false)}
           >
-            <Stack direction={'row'} px={2} py={2}>
+            <Stack direction={'row'} px={2} py={2} align="center">
               <Avatar src={data.user.image} width="55px" height="55px" />
-              <Box>
+              <Box wordBreak={'break-all'}>
                 <Text px={2} fontWeight={600}>
                   {data.user.name}
                 </Text>
@@ -56,6 +57,7 @@ const DesktopAuthItems = () => {
               _active={{ bg: 'theme.400' }}
               rounded="lg"
               py={2}
+              icon={<MdLogout />}
               onClick={() => signOut()}
             >
               Logout

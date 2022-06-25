@@ -12,30 +12,64 @@ import {
   useDisclosure,
   useToast,
 } from '@chakra-ui/react';
-import { Prisma, Team } from '@prisma/client';
+import { Activities, Prisma, User } from '@prisma/client';
 import { CUIAutoComplete, Item } from 'chakra-ui-autocomplete';
 import { useEffect, useState } from 'react';
 import useSWR, { useSWRConfig } from 'swr';
+import { EditActivitiesData } from './EditActivitiesCardContent';
 
 interface AddTeamToActivityButtonInterface {
   activityId: string;
 }
 
+interface ItemInterface extends Item {
+  name: string;
+  points: number;
+}
+
+interface UserDataInterface {
+  users: (User & { activities: Activities[] })[];
+  count: number;
+}
+
 const AddParticipantToActivityButton = ({ activityId }: AddTeamToActivityButtonInterface) => {
   const toast = useToast();
-  const { mutate } = useSWRConfig();
+  const { mutate: globalMutate } = useSWRConfig();
   const { isOpen, onOpen, onClose } = useDisclosure();
-  const { data, isValidating } = useSWR<{ teams: Team[]; count: number }>(isOpen && '/api/users');
-  const [pickerItems, setPickerItems] = useState<Item[]>([]);
-  const [selectedItems, setSelectedItems] = useState<Item[]>([]);
+  const { data, isValidating, mutate } = useSWR<UserDataInterface>(isOpen && '/api/users');
+  const [pickerItems, setPickerItems] = useState<ItemInterface[]>([]);
+  const [selectedItems, setSelectedItems] = useState<ItemInterface[]>([]);
 
   useEffect(() => {
-    if (data && data.teams.length) {
-      setPickerItems(data.teams.map((team) => ({ label: team.name, value: team.id })));
-    }
-  }, [isValidating, data]);
+    if (data && data.users.length) {
+      setPickerItems(
+        data.users.map((user) => ({
+          label: user.email || '',
+          name: user.name || '',
+          points: user.points,
+          value: user.id,
+        }))
+      );
 
-  const handleSelectedItemsChange = async (selectedItems?: Item[]) => {
+      const selectedUsers: ItemInterface[] = [];
+      data.users.forEach((user) => {
+        user.activities.forEach((activity) => {
+          if (activity.id === activityId) {
+            selectedUsers.push({
+              label: user.email || '',
+              name: user.name || '',
+              points: user.points,
+              value: user.id,
+            });
+            return;
+          }
+        });
+      });
+      setSelectedItems(selectedUsers);
+    }
+  }, [activityId, data]);
+
+  const handleSelectedItemsChange = async (selectedItems?: ItemInterface[]) => {
     if (selectedItems) {
       setSelectedItems(selectedItems);
       try {
@@ -53,7 +87,22 @@ const AddParticipantToActivityButton = ({ activityId }: AddTeamToActivityButtonI
         if (!result.ok) {
           throw new Error(data.error.message);
         }
-        await mutate('/api/activities?skip=0&take=10');
+        await mutate();
+        await globalMutate(
+          '/api/activities/' + activityId,
+          async (data: EditActivitiesData) => {
+            data.participants = selectedItems.map((item) => ({
+              id: item.value,
+              name: item.name,
+              points: item.points,
+              email: item.label,
+            }));
+            return data;
+          },
+          {
+            revalidate: false,
+          }
+        );
         toast({
           status: 'success',
           title: data.message,
@@ -88,8 +137,8 @@ const AddParticipantToActivityButton = ({ activityId }: AddTeamToActivityButtonI
           <ModalBody>
             {data ? (
               <CUIAutoComplete
-                label="Teams"
-                placeholder="Choose teams"
+                label="Participants"
+                placeholder="Choose participants"
                 items={pickerItems}
                 selectedItems={selectedItems}
                 onSelectedItemsChange={(changes) =>
@@ -127,7 +176,7 @@ const AddParticipantToActivityButton = ({ activityId }: AddTeamToActivityButtonI
         </ModalContent>
       </Modal>
       <Button variant="theme" onClick={onOpen}>
-        Add Participants (not implemented)
+        Add Participants
       </Button>
     </Box>
   );

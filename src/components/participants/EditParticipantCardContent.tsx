@@ -28,7 +28,6 @@ const EditParticipantCardContent = ({ userId }: EditParticipantCardContentProps)
       </Heading>
     );
   }
-  console.log('here', data);
   return (
     <>
       <Flex>

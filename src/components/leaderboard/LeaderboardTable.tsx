@@ -6,7 +6,9 @@ import useSWR from 'swr';
 
 const LeaderboardTable = () => {
   const [skip, setSkip] = useState(0);
-  const { data } = useSWR<{ teams: Team[]; count: number }>('/api/teams?skip=' + skip + '&take=10');
+  const { data } = useSWR<{ teams: Team[]; count: number }>(
+    '/api/teams/leaderboard?skip=' + skip + '&take=10'
+  );
 
   if (!data) {
     return <Loader />;

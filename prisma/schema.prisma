@@ -53,8 +53,7 @@ model User {
   teamId        String?
   requestee     TeamRequest[] @relation("requestee")
   requestor     TeamRequest[] @relation("requestor")
-  Activities    Activities?   @relation(fields: [activitiesId], references: [id])
-  activitiesId  String?
+  activities    Activities[]
 }
 
 enum Role {

@@ -69,7 +69,7 @@ const EditParticipantsTable = () => {
         throw new Error(data.error.message);
       }
       await mutate();
-      await matchMutate(/^\/api\/teams/);
+      await matchMutate(/^\/api\/(teams|user)/);
 
       toast({
         status: 'success',
@@ -131,7 +131,9 @@ const EditParticipantsTable = () => {
                     defaultValue={user.name || ''}
                     maxW="fit-content"
                     mx="auto"
-                    onSubmit={(name) => updateUser({ id: user.id, name, teamId: user.teamId })}
+                    onSubmit={(name) =>
+                      user.name !== name && updateUser({ id: user.id, name, teamId: user.teamId })
+                    }
                   >
                     <EditablePreview />
                     <EditableInput />
@@ -145,9 +147,16 @@ const EditParticipantsTable = () => {
                     defaultValue={user.points}
                     maxW="100px"
                     mx="auto"
-                    onBlur={(e) =>
-                      updateUser({ id: user.id, points: +e.target.value, teamId: user.teamId })
-                    }
+                    onBlur={(e) => {
+                      const difference = +e.target.value - user.points;
+                      if (difference !== 0) {
+                        updateUser({
+                          id: user.id,
+                          points: { increment: difference },
+                          teamId: user.teamId,
+                        });
+                      }
+                    }}
                   >
                     <NumberInputField />
                     <NumberInputStepper>

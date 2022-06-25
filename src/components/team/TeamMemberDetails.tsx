@@ -4,7 +4,7 @@ import NextLink from 'next/link';
 import { MdCheckCircle } from 'react-icons/md';
 
 interface TeamMemberDetailsProps {
-  user: User;
+  user: Pick<User, 'name' | 'email' | 'points'>;
 }
 
 const TeamMemberDetails = ({ user }: TeamMemberDetailsProps) => {

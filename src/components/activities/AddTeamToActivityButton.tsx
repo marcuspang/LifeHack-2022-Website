@@ -14,22 +14,24 @@ import {
 } from '@chakra-ui/react';
 import { Activities, Prisma, Team } from '@prisma/client';
 import { CUIAutoComplete, Item } from 'chakra-ui-autocomplete';
-import useMatchMutate from 'hooks/useMatchMutate';
 import { useEffect, useState } from 'react';
-import useSWR from 'swr';
+import useSWR, { useSWRConfig } from 'swr';
+import { EditActivitiesData } from './EditActivitiesCardContent';
 
 interface AddTeamToActivityButtonInterface {
   activityId: string;
 }
 
+interface AddTeamToActivityData {
+  teams: (Team & { activities: Activities[] })[];
+  count: number;
+}
+
 const AddTeamToActivityButton = ({ activityId }: AddTeamToActivityButtonInterface) => {
   const toast = useToast();
-  const matchMutate = useMatchMutate();
+  const { mutate: globalMutate } = useSWRConfig();
   const { isOpen, onOpen, onClose } = useDisclosure();
-  const { data, mutate } = useSWR<{
-    teams: (Team & { activities: Activities[] })[];
-    count: number;
-  }>(isOpen && '/api/teams');
+  const { data, mutate } = useSWR<AddTeamToActivityData>(isOpen && '/api/teams');
   const [pickerItems, setPickerItems] = useState<Item[]>([]);
   const [selectedItems, setSelectedItems] = useState<Item[]>([]);
 
@@ -68,7 +70,17 @@ const AddTeamToActivityButton = ({ activityId }: AddTeamToActivityButtonInterfac
         if (!result.ok) {
           throw new Error(data.error.message);
         }
-        await matchMutate(/^\/api\/(activities|team)/);
+        await mutate();
+        await globalMutate(
+          '/api/activities/' + activityId,
+          async (data: EditActivitiesData) => {
+            data.teams = selectedItems.map((item) => ({ id: item.value, name: item.label }));
+            return data;
+          },
+          {
+            revalidate: false,
+          }
+        );
         toast({
           status: 'success',
           title: data.message,
@@ -98,7 +110,7 @@ const AddTeamToActivityButton = ({ activityId }: AddTeamToActivityButtonInterfac
       <Modal isOpen={isOpen} onClose={onClose}>
         <ModalOverlay />
         <ModalContent bg="theme.300">
-          <ModalHeader>Add Teams to Activity</ModalHeader>
+          <ModalHeader>Add teams to activity</ModalHeader>
           <ModalCloseButton />
           <ModalBody>
             {data ? (

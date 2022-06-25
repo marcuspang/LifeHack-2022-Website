@@ -20,17 +20,17 @@ import {
   useDisclosure,
   useToast,
 } from '@chakra-ui/react';
+import useMatchMutate from 'hooks/useMatchMutate';
 import { useForm } from 'react-hook-form';
-import { useSWRConfig } from 'swr';
 
 const AddActivityButton = () => {
   const toast = useToast();
-  const { mutate } = useSWRConfig();
+  const matchMutate = useMatchMutate();
   const { isOpen, onOpen, onClose } = useDisclosure();
   const {
     handleSubmit,
     register,
-    formState: { errors, isSubmitting },
+    formState: { errors },
   } = useForm<{ name: string; points: number }>();
 
   const onSubmit = async (params: { points: number; name: string }) => {
@@ -45,12 +45,13 @@ const AddActivityButton = () => {
       if (!result.ok) {
         throw new Error(data.error.message);
       }
-      await mutate('/api/activities?skip=0&take=10');
+      await matchMutate(/\/api\/activities/);
       toast({
         status: 'success',
         title: data.message,
         isClosable: true,
       });
+      onClose();
     } catch (error) {
       if (error instanceof Error) {
         toast({

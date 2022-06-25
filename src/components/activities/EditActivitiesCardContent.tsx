@@ -11,10 +11,13 @@ interface EditActivitiesCardContentProps {
   activityId: string;
 }
 
+export interface EditActivitiesData extends Activities {
+  participants: Pick<User, 'name' | 'email' | 'points'>[];
+  teams: Pick<Team, 'id' | 'name'>[];
+}
+
 const EditActivitiesCardContent = ({ activityId }: EditActivitiesCardContentProps) => {
-  const { data, isValidating } = useSWR<Activities & { participants: User[]; teams: Team[] }>(
-    '/api/activities/' + activityId
-  );
+  const { data, isValidating } = useSWR<EditActivitiesData>('/api/activities/' + activityId);
 
   if (isValidating) {
     return <Loader />;

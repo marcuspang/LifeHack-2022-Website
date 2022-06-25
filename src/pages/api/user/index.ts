@@ -2,7 +2,7 @@ import prisma from 'lib/prisma';
 import { NextApiRequest, NextApiResponse } from 'next';
 import { getSession } from 'next-auth/react';
 
-// Get the role of a user
+// Get the user's role + team information
 export default async (req: NextApiRequest, res: NextApiResponse) => {
   const session = await getSession({ req });
 
@@ -28,6 +28,18 @@ export default async (req: NextApiRequest, res: NextApiResponse) => {
                   email: true,
                   name: true,
                   points: true,
+                  activities: {
+                    select: {
+                      id: true,
+                      name: true,
+                      points: true,
+                      participants: {
+                        select: {
+                          email: true,
+                        },
+                      },
+                    },
+                  },
                 },
               },
               teamRequests: {
@@ -40,6 +52,11 @@ export default async (req: NextApiRequest, res: NextApiResponse) => {
                     },
                   },
                   approved: true,
+                },
+                where: {
+                  approved: {
+                    not: 'ACCEPTED',
+                  },
                 },
               },
               activities: {
