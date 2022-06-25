@@ -3,7 +3,7 @@ import LeaderboardTable from 'components/leaderboard/LeaderboardTable';
 
 const Leaderboard = () => {
   return (
-    <Center as="main" bg="black" py={12} flexDirection="column">
+    <Center as="main" py={12} flexDirection="column" maxW="4xl" mx="auto">
       <Heading as="h1" size="xl" display="inline" pb={10}>
         Leaderboard
       </Heading>

@@ -17,6 +17,9 @@ export default async (req: NextApiRequest, res: NextApiResponse) => {
         orderBy: {
           points: 'desc',
         },
+        where: {
+          verified: true,
+        },
         include: {
           _count: true,
           activities: true,

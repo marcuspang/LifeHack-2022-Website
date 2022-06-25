@@ -1,10 +1,10 @@
 import { CloseIcon, HamburgerIcon } from '@chakra-ui/icons';
-import { Box, Collapse, Flex, IconButton, useDisclosure } from '@chakra-ui/react';
+import { Box, Flex, IconButton, useDisclosure } from '@chakra-ui/react';
 import DesktopHeader from './DesktopHeader';
 import MobileHeader from './MobileHeader';
 
 const Header = () => {
-  const { isOpen, onToggle } = useDisclosure();
+  const { isOpen, onToggle, onClose } = useDisclosure();
 
   return (
     <Box as="header" bg="theme.400">
@@ -20,14 +20,11 @@ const Header = () => {
           display={{ base: 'flex', md: 'none' }}
           onClick={onToggle}
           icon={isOpen ? <CloseIcon w={3} h={3} /> : <HamburgerIcon w={5} h={5} />}
-          variant="theme"
+          variant={isOpen ? 'theme' : 'header-mobile'}
           aria-label="Toggle Navigation"
         />
       </Flex>
-
-      <Collapse in={isOpen} animateOpacity>
-        <MobileHeader />
-      </Collapse>
+      <MobileHeader isOpen={isOpen} onClose={onClose} />
     </Box>
   );
 };

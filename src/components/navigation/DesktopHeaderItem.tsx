@@ -1,5 +1,5 @@
 import { Button } from '@chakra-ui/react';
-import { NavItem } from 'constants/navItems';
+import { NavItem } from 'components/navigation/navItems';
 import { useRouter } from 'next/router';
 
 interface DesktopHeaderItemProps {
@@ -13,6 +13,7 @@ const DesktopHeaderItem = ({ navItem }: DesktopHeaderItemProps) => {
       colorScheme={navItem.colorScheme}
       onClick={() => router.push(navItem.route)}
       variant={navItem.variant}
+      isActive={router.route === navItem.route}
     >
       {navItem.name}
     </Button>

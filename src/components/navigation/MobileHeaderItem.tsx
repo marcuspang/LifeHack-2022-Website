@@ -1,25 +1,30 @@
-import { Flex, Link, Text } from '@chakra-ui/react';
-import { NavItem } from 'constants/navItems';
+import { Button, Link } from '@chakra-ui/react';
+import { NavItem } from 'components/navigation/navItems';
+import { useRouter } from 'next/router';
 
 interface MobileNavItemProps {
   navItem: NavItem;
 }
 
 const MobileHeaderItem = ({ navItem }: MobileNavItemProps) => {
+  const router = useRouter();
   return (
-    <Flex
-      py={2}
+    <Button
+      rounded="md"
       as={Link}
       href={navItem.route}
-      justify="space-between"
-      align="center"
       _hover={{
         textDecoration: 'none',
       }}
+      justifyContent="left"
+      variant="header"
+      color={navItem.color}
+      isActive={navItem.route === router.route}
+      leftIcon={navItem.leftIcon}
       onClick={navItem.onClick}
     >
-      <Text fontWeight={500}>{navItem.name}</Text>
-    </Flex>
+      {navItem.name}
+    </Button>
   );
 };
 export default MobileHeaderItem;

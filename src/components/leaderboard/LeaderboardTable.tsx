@@ -19,7 +19,7 @@ const LeaderboardTable = () => {
           <Thead>
             <Tr borderBottom="1px solid" borderColor="gray.600">
               <Th textAlign="center" fontSize={['md', 'md', 'lg']}>
-                Name
+                Team
               </Th>
               <Th textAlign="center" isNumeric fontSize={['md', 'md', 'lg']}>
                 Points

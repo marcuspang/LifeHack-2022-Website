@@ -1,4 +1,5 @@
 import { signOut, useSession } from 'next-auth/react';
+import { MdLogin, MdLogout } from 'react-icons/md';
 import MobileHeaderItem from './MobileHeaderItem';
 
 const MobileAuthItems = () => {
@@ -10,6 +11,7 @@ const MobileAuthItems = () => {
         navItem={{
           name: 'Logout',
           requireAdmin: false,
+          leftIcon: <MdLogout />,
           requireUser: true,
           route: '/logout',
           onClick: () => signOut(),
@@ -21,6 +23,7 @@ const MobileAuthItems = () => {
     <MobileHeaderItem
       navItem={{
         name: 'Sign In',
+        leftIcon: <MdLogin />,
         requireAdmin: false,
         requireUser: false,
         route: '/login',

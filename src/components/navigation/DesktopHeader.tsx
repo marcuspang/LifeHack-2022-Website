@@ -1,6 +1,6 @@
 import { Heading, Stack } from '@chakra-ui/react';
 import { Role } from '@prisma/client';
-import { navItems } from 'constants/navItems';
+import { navItems } from 'components/navigation/navItems';
 import { useSession } from 'next-auth/react';
 import { useRouter } from 'next/router';
 import DesktopAuthItems from './DesktopAuthItems';
