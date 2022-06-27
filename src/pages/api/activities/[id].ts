@@ -42,6 +42,7 @@ export default async (req: NextApiRequest, res: NextApiResponse) => {
     }
     try {
       const activity = await prisma.activities.findFirst({ where: { id } });
+      console.log(updateData);
 
       // Updates associations also
       const updateActivity = prisma.activities.update({
@@ -159,11 +160,21 @@ export default async (req: NextApiRequest, res: NextApiResponse) => {
           },
         });
         // Increment points for teams who do not have the activity
+        // and if they are the only person taking part in the activity
         const addPointsToTeams = prisma.team.updateMany({
           where: {
             users: {
               some: {
-                id: { in: userIds },
+                id: {
+                  in: userIds,
+                },
+              },
+              none: {
+                activities: {
+                  some: {
+                    id,
+                  },
+                },
               },
             },
             activities: {
@@ -250,12 +261,55 @@ export default async (req: NextApiRequest, res: NextApiResponse) => {
 
   if (req.method === 'DELETE') {
     try {
-      await prisma.activities.delete({
+      const activityDeleted = await prisma.activities.findFirst({
+        select: {
+          points: true,
+        },
         where: {
           id,
         },
       });
-      return res.status(204).json({});
+      if (!activityDeleted) {
+        return res.status(400).send({ error: { message: 'No activity found' } });
+      }
+      const removePointsFromUsers = prisma.user.updateMany({
+        where: {
+          activities: {
+            some: {
+              id,
+            },
+          },
+        },
+        data: {
+          points: {
+            decrement: activityDeleted.points,
+          },
+        },
+      });
+      const removePointsFromTeams = prisma.team.updateMany({
+        where: {
+          activities: {
+            some: {
+              id,
+            },
+          },
+        },
+        data: {
+          points: {
+            decrement: activityDeleted.points,
+          },
+        },
+      });
+      const deleteActivity = prisma.activities.delete({
+        where: { id },
+      });
+
+      const result = await prisma.$transaction([
+        removePointsFromUsers,
+        removePointsFromTeams,
+        deleteActivity,
+      ]);
+      return res.status(204).send(undefined);
     } catch (error) {
       return res.status(400).send(error);
     }

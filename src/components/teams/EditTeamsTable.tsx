@@ -1,10 +1,8 @@
 import { EditIcon } from '@chakra-ui/icons';
 import {
-  Button,
   Editable,
   EditableInput,
   EditablePreview,
-  Flex,
   FormControl,
   FormLabel,
   Icon,
@@ -28,6 +26,7 @@ import {
 } from '@chakra-ui/react';
 import { Prisma, Role, Team } from '@prisma/client';
 import Loader from 'components/common/Loader';
+import TableNavigation from 'components/common/TableNavigation';
 import useMatchMutate from 'hooks/useMatchMutate';
 import { useSession } from 'next-auth/react';
 import { useRouter } from 'next/router';
@@ -218,18 +217,7 @@ const EditTeamsTable = () => {
           </Tbody>
         </Table>
       </TableContainer>
-      <Flex justifyContent="space-between" pt={6}>
-        <Button variant="theme" isDisabled={skip <= 0} onClick={() => setSkip((prev) => prev - 10)}>
-          Prev
-        </Button>
-        <Button
-          variant="theme"
-          isDisabled={data.count <= skip + 10}
-          onClick={() => setSkip((prev) => prev + 10)}
-        >
-          Next
-        </Button>
-      </Flex>
+      <TableNavigation count={data.count} skip={skip} setSkip={setSkip} />
     </>
   );
 };

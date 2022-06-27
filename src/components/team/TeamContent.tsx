@@ -6,7 +6,7 @@ import TeamMembers from './TeamMembers';
 import TeamName from './TeamName';
 import TeamPoints from './TeamPoints';
 import TeamRequests from './TeamRequests';
-import { union } from 'lodash';
+import { unionBy } from 'lodash';
 
 export interface TeamInterface extends Team {
   users: (User & { activities: TeamInterface['activities'] })[];
@@ -29,9 +29,10 @@ const TeamContent = ({ data, isEditing }: TeamContentProps) => {
       <TeamName name={data.name} verified={data.verified} />
       <TeamPoints points={data.points} />
       <TeamActivities
-        activities={union(
+        activities={unionBy(
           data.activities,
-          data.users.map((user) => user.activities).reduce((prev, curr) => prev.concat(curr))
+          data.users.map((user) => user.activities).reduce((prev, curr) => prev.concat(curr, [])),
+          'id'
         )}
       />
       <TeamMembers teamMembers={data.users} />

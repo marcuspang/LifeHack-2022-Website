@@ -24,7 +24,7 @@ const LeaveTeamButton = ({ teamId, ...props }: LeaveTeamButtonProps) => {
       toast({
         status: 'error',
         title: 'Error leaving team',
-        description: ErrorMessages.DEFUALT,
+        description: ErrorMessages.DEFAULT,
         isClosable: true,
       });
     }

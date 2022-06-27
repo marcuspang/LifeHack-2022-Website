@@ -41,7 +41,7 @@ const TeamRequestDetails = ({ request, hideApprovedRequests }: TeamRequestDetail
       toast({
         status: 'error',
         title: 'Error deleting team request',
-        description: ErrorMessages.DEFUALT,
+        description: ErrorMessages.DEFAULT,
         isClosable: true,
       });
     }

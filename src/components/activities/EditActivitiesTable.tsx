@@ -1,10 +1,8 @@
 import { EditIcon } from '@chakra-ui/icons';
 import {
-  Button,
   Editable,
   EditableInput,
   EditablePreview,
-  Flex,
   IconButton,
   NumberDecrementStepper,
   NumberIncrementStepper,
@@ -22,10 +20,12 @@ import {
 } from '@chakra-ui/react';
 import { Activities, Prisma } from '@prisma/client';
 import Loader from 'components/common/Loader';
+import TableNavigation from 'components/common/TableNavigation';
 import useMatchMutate from 'hooks/useMatchMutate';
 import { useRouter } from 'next/router';
 import { useState } from 'react';
 import useSWR from 'swr';
+import DeleteActivityButton from './DeleteActivityButton';
 
 const EditActivitiesTable = () => {
   const [skip, setSkip] = useState(0);
@@ -92,6 +92,9 @@ const EditActivitiesTable = () => {
               <Th textAlign="center" isNumeric fontSize={['md', 'md', 'lg']}>
                 Edit
               </Th>
+              <Th textAlign="center" isNumeric fontSize={['md', 'md', 'lg']}>
+                Delete
+              </Th>
             </Tr>
           </Thead>
           <Tbody>
@@ -139,23 +142,15 @@ const EditActivitiesTable = () => {
                     icon={<EditIcon />}
                   />
                 </Td>
+                <Td textAlign="center">
+                  <DeleteActivityButton id={activity.id} />
+                </Td>
               </Tr>
             ))}
           </Tbody>
         </Table>
       </TableContainer>
-      <Flex justifyContent="space-between" pt={6}>
-        <Button variant="theme" isDisabled={skip <= 0} onClick={() => setSkip((prev) => prev - 10)}>
-          Prev
-        </Button>
-        <Button
-          variant="theme"
-          isDisabled={data.count <= skip + 10}
-          onClick={() => setSkip((prev) => prev + 10)}
-        >
-          Next
-        </Button>
-      </Flex>
+      <TableNavigation count={data.count} skip={skip} setSkip={setSkip} />
     </>
   );
 };

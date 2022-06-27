@@ -66,7 +66,7 @@ const NoTeamPendingRequests = () => {
         toast({
           status: 'error',
           title: 'Error responding to team request',
-          description: ErrorMessages.DEFUALT,
+          description: ErrorMessages.DEFAULT,
           isClosable: true,
         });
       }
