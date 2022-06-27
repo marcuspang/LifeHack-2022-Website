@@ -1,34 +1,33 @@
-import { Button, Link, Stack, Text } from '@chakra-ui/react';
+import { Button, Stack, Text } from '@chakra-ui/react';
 import Section from 'components/common/Section';
-import NextLink from 'next/link';
+import { MdArrowUpward } from 'react-icons/md';
 
 const CallToActionSection = () => {
   return (
     <Section bg="theme.500" heading="See you then!👋" px={5}>
       <Text fontWeight={600} fontSize="2xl" color="gray.300" mb={2}>
-        Make sure to fill up this form below too!
+        Remember to create a team above!
       </Text>
       <Stack>
-        <NextLink href="https://nus.campuslabs.com/engage/submitter/form/start/545156" passHref>
-          <Button
-            as={Link}
-            target="_blank"
-            rel="noopener noreferrer"
-            p={6}
-            variant="cta"
-            fontSize={['lg', 'xl', 'xl']}
-            mt={3}
-            colorScheme="blue"
-            size="lg"
-            width={['auto', '300px', '300px', '300px']}
-            mx="auto"
-          >
-            Register Now
-          </Button>
-        </NextLink>
-        <Text as="span" color="gray.400" mt={2}>
-          Deadline: 27th June
-        </Text>
+        <Button
+          p={6}
+          variant="cta"
+          fontSize={['lg', 'xl', 'xl']}
+          fontWeight={600}
+          onClick={() =>
+            window.scrollTo({
+              top: 0,
+              behavior: 'smooth',
+            })
+          }
+          mt={3}
+          size="lg"
+          width={['auto', '300px', '300px', '300px']}
+          mx="auto"
+          rightIcon={<MdArrowUpward />}
+        >
+          Back to the top
+        </Button>
       </Stack>
     </Section>
   );

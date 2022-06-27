@@ -43,13 +43,17 @@ const theme = extendTheme({
         },
         cta: {
           fontSize: 'sm',
-          fontWeight: 600,
+          fontWeight: 400,
           bg: 'cyan.800',
-          _hover: { bg: 'cyan.900', opacity: '0.8' },
+          _hover: {
+            bg: 'cyan.900',
+            opacity: '0.8',
+            _disabled: { bg: 'cyan.900', textDecoration: 'none' },
+          },
           _active: {
             bg: 'cyan.900',
           },
-          color: 'gray.100',
+          color: 'gray.200',
         },
         'header-mobile': {
           fontSize: 'md',
