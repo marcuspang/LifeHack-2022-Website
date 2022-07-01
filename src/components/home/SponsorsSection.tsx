@@ -23,6 +23,7 @@ const SponsorsSection = () => {
         >
           <Image
             src="/ncs-logo.jpg"
+            padding={3}
             alt="NCS Logo"
             bg="white"
             rounded="3xl"
@@ -51,7 +52,6 @@ const SponsorsSection = () => {
         >
           <Image
             src="/tiktok-logo.png"
-            padding={8}
             bg="white"
             rounded="3xl"
             width={['120px', '150px', '200px']}
