@@ -31,7 +31,9 @@ const TeamContent = ({ data, isEditing }: TeamContentProps) => {
       <TeamActivities
         activities={unionBy(
           data.activities,
-          data.users.map((user) => user.activities).reduce((prev, curr) => prev.concat(curr, [])),
+          data.users
+            .map((user) => user.activities)
+            .reduce((prev, curr) => (prev ? prev.concat(curr, []) : curr)),
           'id'
         )}
       />
