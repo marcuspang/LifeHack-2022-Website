@@ -42,7 +42,6 @@ export default async (req: NextApiRequest, res: NextApiResponse) => {
     }
     try {
       const activity = await prisma.activities.findFirst({ where: { id } });
-      console.log(updateData);
 
       // Updates associations also
       const updateActivity = prisma.activities.update({
