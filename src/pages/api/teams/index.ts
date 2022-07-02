@@ -7,11 +7,15 @@ import isAdmin from 'utils/isAdmin';
 export default async (req: NextApiRequest, res: NextApiResponse) => {
   const session = await getSession({ req });
 
-  if (!isAdmin(session)) {
+  if (!session || !session.user || !session.user.email) {
     return res.status(403).send('Unauthorized');
   }
 
   if (req.method === 'GET') {
+    if (!isAdmin(session)) {
+      return res.status(403).send('Unauthorized');
+    }
+
     const { skip, take, query } = req.query;
 
     let teams = null;
@@ -50,10 +54,6 @@ export default async (req: NextApiRequest, res: NextApiResponse) => {
     const result = await prisma.$transaction([teams, count]);
 
     return res.json({ teams: result[0], count: result[1] });
-  }
-
-  if (!session || !session.user || !session.user.email) {
-    return res.status(403).send('Unauthorized');
   }
 
   // Create team
