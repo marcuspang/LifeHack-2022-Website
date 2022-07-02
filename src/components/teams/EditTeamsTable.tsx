@@ -1,10 +1,11 @@
 import { EditIcon } from '@chakra-ui/icons';
 import {
+  Button,
   Editable,
   EditableInput,
   EditablePreview,
   FormControl,
-  FormLabel,
+  FormErrorMessage,
   Icon,
   IconButton,
   Input,
@@ -31,6 +32,7 @@ import useMatchMutate from 'hooks/useMatchMutate';
 import { useSession } from 'next-auth/react';
 import { useRouter } from 'next/router';
 import { useState } from 'react';
+import { SubmitHandler, useForm } from 'react-hook-form';
 import { MdCheckCircle, MdClear } from 'react-icons/md';
 import useSWR from 'swr';
 
@@ -39,13 +41,21 @@ interface EditTeamsInterface {
   count: number;
 }
 
+interface FormInputs {
+  name: string;
+}
+
 const EditTeamsTable = () => {
   const [skip, setSkip] = useState(0);
-  const [query, setQuery] = useState('');
+  const {
+    register,
+    handleSubmit,
+    formState: { errors },
+  } = useForm<FormInputs>();
 
   const { data: userData, status } = useSession();
-  const { data, isValidating } = useSWR<EditTeamsInterface>(
-    '/api/teams?skip=' + skip + '&take=10&query=' + query
+  const { data, mutate, isValidating } = useSWR<EditTeamsInterface>(
+    '/api/teams?skip=' + skip + '&take=10'
   );
   const matchMutate = useMatchMutate();
   const toast = useToast();
@@ -102,25 +112,54 @@ const EditTeamsTable = () => {
       }
     }
   };
+  const onSubmit: SubmitHandler<FormInputs> = async (input) => {
+    await mutate(
+      async (teams) => {
+        try {
+          const newTeams = (await fetch('/api/teams?skip=0&take=10&query=' + input.name).then(
+            (data) => data.json()
+          )) as EditTeamsInterface;
+          return { ...data, teams: newTeams.teams };
+        } catch (error) {
+          if (error instanceof Error) {
+            toast({
+              status: 'error',
+              title: 'Error searching teams',
+              description: error.message,
+              isClosable: true,
+            });
+          } else {
+            toast({
+              status: 'error',
+              title: 'Error searching teams',
+              description: JSON.stringify(error),
+              isClosable: true,
+            });
+          }
+        }
+      },
+      { populateCache: true, rollbackOnError: false, revalidate: false }
+    );
+  };
 
   return (
     <>
-      <Stack justifyContent={'flex-start'} direction={'row'} spacing={6}>
-        {/* <FormControl mb={8} width="auto">
-          <FormLabel htmlFor="email">Email address</FormLabel>
-          <Input id="email" type="email" maxW="200px" />
-        </FormControl> */}
-        <FormControl mb={8} width="auto">
-          <FormLabel htmlFor="name">Name (NOT WORKING YET)</FormLabel>
-          <Input
-            id="name"
-            type="text"
-            maxW="200px"
-            value={query}
-            onChange={(e) => setQuery(e.target.value)}
-          />
-        </FormControl>
-      </Stack>
+      <form onSubmit={handleSubmit(onSubmit)}>
+        <Stack>
+          <Text fontSize="lg" fontWeight="bold">
+            Search fields
+          </Text>
+          <Stack justifyContent={'flex-start'} direction={'row'} spacing={6}>
+            <FormControl mb={8} width="auto">
+              <Input id="name" placeholder="Name" type="text" maxW="200px" {...register('name')} />
+              {errors.name && <FormErrorMessage>{errors.name.message}</FormErrorMessage>}
+            </FormControl>
+            <Button type="submit" variant="theme">
+              Submit
+            </Button>
+          </Stack>
+        </Stack>
+      </form>
       <TableContainer width="100%">
         <Table variant="unstyled" border="1px solid" borderColor="gray.600">
           <Thead>
@@ -143,77 +182,79 @@ const EditTeamsTable = () => {
             </Tr>
           </Thead>
           <Tbody>
-            {data.teams.map((team) => (
-              <Tr
-                key={team.id}
-                borderBottom="1px solid"
-                borderColor="gray.600"
-                transition="all 0.1s ease-in-out"
-                _hover={{ bg: 'gray.700' }}
-              >
-                <Td textAlign="center">
-                  <Editable
-                    defaultValue={team.name}
-                    maxW="fit-content"
-                    mx="auto"
-                    onSubmit={(name) => team.name !== name && updateTeam({ id: team.id, name })}
+            {data.teams.length
+              ? data.teams.map((team) => (
+                  <Tr
+                    key={team.id}
+                    borderBottom="1px solid"
+                    borderColor="gray.600"
+                    transition="all 0.1s ease-in-out"
+                    _hover={{ bg: 'gray.700' }}
                   >
-                    <EditablePreview />
-                    <EditableInput />
-                  </Editable>
-                </Td>
-                <Td textAlign="center">
-                  <NumberInput
-                    step={1}
-                    min={0}
-                    defaultValue={team.points}
-                    maxW="100px"
-                    mx="auto"
-                    onBlur={(e) => {
-                      const difference = +e.target.value - team.points;
-                      if (difference !== 0) {
-                        updateTeam({
-                          id: team.id,
-                          points: {
-                            increment: difference,
-                          },
-                        });
-                      }
-                    }}
-                  >
-                    <NumberInputField />
-                    <NumberInputStepper>
-                      <NumberIncrementStepper />
-                      <NumberDecrementStepper />
-                    </NumberInputStepper>
-                  </NumberInput>
-                </Td>
-                <Td textAlign="center">{team._count.users}</Td>
-                <Td textAlign="center">
-                  <Icon
-                    as={team.verified ? MdCheckCircle : MdClear}
-                    color={team.verified ? 'green.500' : 'red.500'}
-                    onClick={() => updateTeam({ id: team.id, verified: !team.verified })}
-                    cursor="pointer"
-                    transition="0.2s all ease-in-out"
-                    _hover={{
-                      opacity: 0.7,
-                    }}
-                    width="30px"
-                    height="30px"
-                  />
-                </Td>
-                <Td textAlign="center">
-                  <IconButton
-                    aria-label="Edit team"
-                    variant="theme"
-                    size="sm"
-                    onClick={() => router.push('/teams/' + team.id)}
-                    icon={<EditIcon />}
-                  />
-                </Td>
-              </Tr>
-            ))}
+                    <Td textAlign="center">
+                      <Editable
+                        defaultValue={team.name}
+                        maxW="fit-content"
+                        mx="auto"
+                        onSubmit={(name) => team.name !== name && updateTeam({ id: team.id, name })}
+                      >
+                        <EditablePreview />
+                        <EditableInput />
+                      </Editable>
+                    </Td>
+                    <Td textAlign="center">
+                      <NumberInput
+                        step={1}
+                        min={0}
+                        defaultValue={team.points}
+                        maxW="100px"
+                        mx="auto"
+                        onBlur={(e) => {
+                          const difference = +e.target.value - team.points;
+                          if (difference !== 0) {
+                            updateTeam({
+                              id: team.id,
+                              points: {
+                                increment: difference,
+                              },
+                            });
+                          }
+                        }}
+                      >
+                        <NumberInputField />
+                        <NumberInputStepper>
+                          <NumberIncrementStepper />
+                          <NumberDecrementStepper />
+                        </NumberInputStepper>
+                      </NumberInput>
+                    </Td>
+                    <Td textAlign="center">{team._count.users}</Td>
+                    <Td textAlign="center">
+                      <Icon
+                        as={team.verified ? MdCheckCircle : MdClear}
+                        color={team.verified ? 'green.500' : 'red.500'}
+                        onClick={() => updateTeam({ id: team.id, verified: !team.verified })}
+                        cursor="pointer"
+                        transition="0.2s all ease-in-out"
+                        _hover={{
+                          opacity: 0.7,
+                        }}
+                        width="30px"
+                        height="30px"
+                      />
+                    </Td>
+                    <Td textAlign="center">
+                      <IconButton
+                        aria-label="Edit team"
+                        variant="theme"
+                        size="sm"
+                        onClick={() => router.push('/teams/' + team.id)}
+                        icon={<EditIcon />}
+                      />
+                    </Td>
+                  </Tr>
+                ))
+              : null}
           </Tbody>
         </Table>
       </TableContainer>
