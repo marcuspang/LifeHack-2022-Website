@@ -1,9 +1,19 @@
-import { Box, Flex, Heading, StackDivider, Text, VStack } from '@chakra-ui/react';
+import { Box, Flex, Heading, Link, StackDivider, Text, VStack } from '@chakra-ui/react';
 import Section from 'components/common/Section';
+import NextLink from 'next/link';
 
 const WorkshopSection = () => {
   return (
     <Section bg="theme.500" heading="Upcoming Workshops" pt={3}>
+      <Box fontSize="xl" fontWeight={500}>
+        Link to all workshops{' '}
+        <NextLink
+          href="https://nus-sg.zoom.us/j/86755437197?pwd=eIcmzMmkyKfuj724MTg71Ic6uYCuDH.1"
+          passHref
+        >
+          <Link color="blue.300">here!</Link>
+        </NextLink>
+      </Box>
       <Box maxW="900px" m="0 auto" textAlign="left" px={6} fontSize="lg" pt={1}>
         <VStack
           divider={<StackDivider borderColor="gray.400" />}
