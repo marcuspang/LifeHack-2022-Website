@@ -17,9 +17,17 @@ export default async (req: NextApiRequest, res: NextApiResponse) => {
       where: {
         verified: true,
       },
-      orderBy: {
-        points: 'desc',
-      },
+      orderBy: [
+        {
+          points: 'desc',
+        },
+        {
+          name: 'asc',
+        },
+        {
+          updatedAt: 'desc',
+        },
+      ],
       skip: isNaN(skip as any) ? 0 : +skip,
       take: isNaN(take as any) ? 10 : +take,
     });
