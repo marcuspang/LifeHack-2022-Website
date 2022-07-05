@@ -16,40 +16,27 @@ export default async (req: NextApiRequest, res: NextApiResponse) => {
       return res.status(403).send('Unauthorized');
     }
 
-    const { skip, take, query } = req.query;
-
-    let teams = null;
-    if (query && query.toString() !== '') {
-      teams = prisma.team.findMany({
-        orderBy: {
-          points: 'desc',
+    const { skip, take, name, verified } = req.query;
+    const teams = prisma.team.findMany({
+      orderBy: {
+        points: 'desc',
+      },
+      include: {
+        _count: true,
+        activities: true,
+      },
+      where: {
+        name: {
+          contains: name && name.toString() !== '' ? name.toString() : undefined,
         },
-        include: {
-          _count: true,
-          activities: true,
+        verified: {
+          equals:
+            verified && verified.toString() !== '' ? verified.toString() === 'true' : undefined,
         },
-        where: {
-          name: {
-            contains: query.toString(),
-          },
-        },
-        skip: isNaN(skip as any) ? 0 : +skip,
-        take: isNaN(take as any) ? 10 : +take,
-      });
-    } else {
-      teams = prisma.team.findMany({
-        orderBy: {
-          points: 'desc',
-        },
-        include: {
-          _count: true,
-          activities: true,
-        },
-        skip: isNaN(skip as any) ? 0 : +skip,
-        take: isNaN(take as any) ? 10 : +take,
-      });
-    }
-
+      },
+      skip: isNaN(skip as any) ? 0 : +skip,
+      take: isNaN(take as any) ? 10 : +take,
+    });
     const count = prisma.team.count();
     const result = await prisma.$transaction([teams, count]);
 

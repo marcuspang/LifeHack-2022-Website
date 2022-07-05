@@ -1,6 +1,7 @@
 import { EditIcon } from '@chakra-ui/icons';
 import {
   Button,
+  Checkbox,
   Editable,
   EditableInput,
   EditablePreview,
@@ -43,6 +44,7 @@ interface EditTeamsInterface {
 
 interface FormInputs {
   name: string;
+  verified: boolean;
 }
 
 const EditTeamsTable = () => {
@@ -116,9 +118,10 @@ const EditTeamsTable = () => {
     await mutate(
       async (teams) => {
         try {
-          const newTeams = (await fetch('/api/teams?skip=0&take=10&query=' + input.name).then(
-            (data) => data.json()
-          )) as EditTeamsInterface;
+          const newTeams = (await fetch(
+            '/api/teams?skip=0&take=10&' +
+              new URLSearchParams(input as Record<string, any>).toString()
+          ).then((data) => data.json())) as EditTeamsInterface;
           return { ...data, teams: newTeams.teams };
         } catch (error) {
           if (error instanceof Error) {
@@ -149,10 +152,19 @@ const EditTeamsTable = () => {
           <Text fontSize="lg" fontWeight="bold">
             Search fields
           </Text>
-          <Stack justifyContent={'flex-start'} direction={'row'} spacing={6}>
-            <FormControl mb={8} width="auto">
+          <Stack
+            justifyContent={'flex-start'}
+            direction={'row'}
+            spacing={6}
+            pb={8}
+            alignItems="center"
+          >
+            <FormControl width="auto">
               <Input id="name" placeholder="Name" type="text" maxW="200px" {...register('name')} />
               {errors.name && <FormErrorMessage>{errors.name.message}</FormErrorMessage>}
+            </FormControl>
+            <FormControl width="auto">
+              <Checkbox {...register('verified')}>Verified?</Checkbox>
             </FormControl>
             <Button type="submit" variant="theme">
               Submit
