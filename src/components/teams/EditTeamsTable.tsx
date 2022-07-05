@@ -57,7 +57,7 @@ const EditTeamsTable = () => {
 
   const { data: userData, status } = useSession();
   const { data, mutate, isValidating } = useSWR<EditTeamsInterface>(
-    '/api/teams?skip=' + skip + '&take=10'
+    '/api/teams?skip=' + skip + '&take=10&verified=false'
   );
   const matchMutate = useMatchMutate();
   const toast = useToast();
