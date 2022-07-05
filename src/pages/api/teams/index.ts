@@ -19,7 +19,7 @@ export default async (req: NextApiRequest, res: NextApiResponse) => {
     const { skip, take, name, verified } = req.query;
     const teams = prisma.team.findMany({
       orderBy: {
-        points: 'desc',
+        name: 'desc',
       },
       include: {
         _count: true,

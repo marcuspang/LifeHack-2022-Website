@@ -23,6 +23,7 @@ export default async (req: NextApiRequest, res: NextApiResponse) => {
               id: true,
               name: true,
               points: true,
+              verified: true,
               users: {
                 select: {
                   email: true,
