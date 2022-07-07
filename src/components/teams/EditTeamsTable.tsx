@@ -52,12 +52,16 @@ const EditTeamsTable = () => {
   const {
     register,
     handleSubmit,
+    getValues,
     formState: { errors },
   } = useForm<FormInputs>();
 
   const { data: userData, status } = useSession();
   const { data, mutate, isValidating } = useSWR<EditTeamsInterface>(
-    '/api/teams?skip=' + skip + '&take=10&verified=false'
+    '/api/teams?skip=' +
+      skip +
+      '&take=10&' +
+      new URLSearchParams(getValues() as Record<string, any>).toString()
   );
   const matchMutate = useMatchMutate();
   const toast = useToast();
@@ -114,6 +118,7 @@ const EditTeamsTable = () => {
       }
     }
   };
+
   const onSubmit: SubmitHandler<FormInputs> = async (input) => {
     await mutate(
       async (teams) => {
