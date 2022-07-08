@@ -12,8 +12,8 @@ import {
   useDisclosure,
   useToast,
 } from '@chakra-ui/react';
+import useMatchMutate from 'hooks/useMatchMutate';
 import { FormEventHandler, useRef } from 'react';
-import { useSWRConfig } from 'swr';
 
 interface AddTeamMemberButtonProps extends ButtonProps {
   teamId: string;
@@ -21,7 +21,7 @@ interface AddTeamMemberButtonProps extends ButtonProps {
 
 const AddTeamMemberButton = ({ teamId, ...props }: AddTeamMemberButtonProps) => {
   const { isOpen, onOpen, onClose } = useDisclosure();
-  const { mutate } = useSWRConfig();
+  const matchMutate = useMatchMutate();
   const emailRef = useRef<HTMLInputElement>(null);
   const toast = useToast();
 
@@ -46,7 +46,7 @@ const AddTeamMemberButton = ({ teamId, ...props }: AddTeamMemberButtonProps) => 
       if (!result.ok) {
         throw new Error(data.error.message);
       }
-      await mutate('/api/teams/' + teamId);
+      await matchMutate(/^\/api\/(team|activities)/);
       toast({
         status: 'success',
         title: 'Successfully added',

@@ -28,6 +28,18 @@ export default async (req: NextApiRequest, res: NextApiResponse) => {
               email: true,
               name: true,
               points: true,
+              activities: {
+                select: {
+                  id: true,
+                  name: true,
+                  points: true,
+                  participants: {
+                    select: {
+                      email: true,
+                    },
+                  },
+                },
+              },
             },
           },
           teamRequests: {

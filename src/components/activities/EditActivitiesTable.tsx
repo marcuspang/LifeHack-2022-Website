@@ -53,7 +53,7 @@ const EditActivitiesTable = () => {
         throw new Error(data.error.message);
       }
       await mutate();
-      await matchMutate(/^\/api\/teams/);
+      await matchMutate(/\/api\/(team|users|participants|activities)/);
       toast({
         status: 'success',
         title: data.message,
@@ -124,7 +124,17 @@ const EditActivitiesTable = () => {
                     defaultValue={activity.points}
                     maxW="100px"
                     mx="auto"
-                    onBlur={(e) => updateActivity({ id: activity.id, points: +e.target.value })}
+                    onBlur={(e) => {
+                      const difference = +e.target.value - activity.points;
+                      if (difference !== 0) {
+                        updateActivity({
+                          id: activity.id,
+                          points: {
+                            increment: difference,
+                          },
+                        });
+                      }
+                    }}
                   >
                     <NumberInputField />
                     <NumberInputStepper>

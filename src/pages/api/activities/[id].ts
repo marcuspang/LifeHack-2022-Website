@@ -36,7 +36,9 @@ export default async (req: NextApiRequest, res: NextApiResponse) => {
 
   if (req.method === 'PATCH') {
     const body = JSON.parse(req.body);
-    const { id: _id, ...updateData } = body as Prisma.ActivitiesUpdateInput;
+    const { id: _id, ...updateData } = body as Prisma.ActivitiesUpdateInput & {
+      points?: { increment: number };
+    };
     if (!updateData) {
       return res.status(400).send('Invalid parameters');
     }
@@ -51,24 +53,34 @@ export default async (req: NextApiRequest, res: NextApiResponse) => {
         },
       });
       const queries: any[] = [updateActivity];
-      // Update points for existing teams
+      // Update points for existing teams and participants
       if (updateData.points && activity) {
-        const difference = +updateData.points - activity.points;
+        const points = updateData.points;
         const updateTeams = prisma.team.updateMany({
           data: {
-            points: {
-              increment: difference,
-            },
+            points,
           },
           where: {
             activities: {
-              every: {
+              some: {
                 id,
               },
             },
           },
         });
-        queries.push(updateTeams);
+        const updateParticipants = prisma.user.updateMany({
+          data: {
+            points,
+          },
+          where: {
+            activities: {
+              some: {
+                id,
+              },
+            },
+          },
+        });
+        queries.push(updateTeams, updateParticipants);
       }
       // Update points for teams added/removed
       if (updateData.teams && updateData.teams.set && activity) {

@@ -69,7 +69,7 @@ const EditParticipantsTable = () => {
         throw new Error(data.error.message);
       }
       await mutate();
-      await matchMutate(/^\/api\/(teams|user)/);
+      await matchMutate(/^\/api\/(team|user)/);
 
       toast({
         status: 'success',
