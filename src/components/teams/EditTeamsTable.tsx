@@ -169,7 +169,9 @@ const EditTeamsTable = () => {
               {errors.name && <FormErrorMessage>{errors.name.message}</FormErrorMessage>}
             </FormControl>
             <FormControl width="auto">
-              <Checkbox {...register('verified')}>Verified?</Checkbox>
+              <Checkbox defaultChecked {...register('verified')}>
+                Verified?
+              </Checkbox>
             </FormControl>
             <Button type="submit" variant="theme">
               Submit
