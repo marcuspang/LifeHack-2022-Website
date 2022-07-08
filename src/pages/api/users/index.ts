@@ -23,8 +23,8 @@ export default async (req: NextApiRequest, res: NextApiResponse) => {
         team: true,
         activities: true,
       },
-      skip: isNaN(skip as any) ? 0 : +skip,
-      take: isNaN(take as any) ? 10 : +take,
+      skip: isNaN(skip as any) ? undefined : +skip,
+      take: isNaN(take as any) ? undefined : +take,
     });
 
     const count = prisma.user.count();

@@ -14,7 +14,7 @@ import {
 } from '@chakra-ui/react';
 import { Activities, Prisma, User } from '@prisma/client';
 import { CUIAutoComplete, Item } from 'chakra-ui-autocomplete';
-import { useEffect, useState } from 'react';
+import { FormEventHandler, useEffect, useState } from 'react';
 import useSWR, { useSWRConfig } from 'swr';
 import { EditActivitiesData } from './EditActivitiesCardContent';
 
@@ -36,7 +36,7 @@ const AddParticipantToActivityButton = ({ activityId }: AddTeamToActivityButtonI
   const toast = useToast();
   const { mutate: globalMutate } = useSWRConfig();
   const { isOpen, onOpen, onClose } = useDisclosure();
-  const { data, isValidating, mutate } = useSWR<UserDataInterface>(isOpen && '/api/users');
+  const { data, mutate } = useSWR<UserDataInterface>(isOpen && '/api/users');
   const [pickerItems, setPickerItems] = useState<ItemInterface[]>([]);
   const [selectedItems, setSelectedItems] = useState<ItemInterface[]>([]);
 
@@ -72,57 +72,61 @@ const AddParticipantToActivityButton = ({ activityId }: AddTeamToActivityButtonI
   const handleSelectedItemsChange = async (selectedItems?: ItemInterface[]) => {
     if (selectedItems) {
       setSelectedItems(selectedItems);
-      try {
-        const result = await fetch('/api/activities/' + activityId, {
-          method: 'PATCH',
-          body: JSON.stringify({
-            participants: {
-              set: selectedItems.map((item) => ({
-                id: item.value,
-              })),
-            },
-          } as Prisma.ActivitiesUpdateInput),
-        });
-        const data = await result.json();
-        if (!result.ok) {
-          throw new Error(data.error.message);
-        }
-        await mutate();
-        await globalMutate(
-          '/api/activities/' + activityId,
-          async (data: EditActivitiesData) => {
-            data.participants = selectedItems.map((item) => ({
+    }
+  };
+
+  const handleSubmit: FormEventHandler<HTMLFormElement> = async (event) => {
+    event.preventDefault();
+    try {
+      const result = await fetch('/api/activities/' + activityId, {
+        method: 'PATCH',
+        body: JSON.stringify({
+          participants: {
+            set: selectedItems.map((item) => ({
               id: item.value,
-              name: item.name,
-              points: item.points,
-              email: item.label,
-            }));
-            return data;
+            })),
           },
-          {
-            revalidate: false,
-          }
-        );
+        } as Prisma.ActivitiesUpdateInput),
+      });
+      const data = await result.json();
+      if (!result.ok) {
+        throw new Error(data.error.message);
+      }
+      await mutate();
+      await globalMutate(
+        '/api/activities/' + activityId,
+        async (data: EditActivitiesData) => {
+          data.participants = selectedItems.map((item) => ({
+            id: item.value,
+            name: item.name,
+            points: item.points,
+            email: item.label,
+          }));
+          return data;
+        },
+        {
+          revalidate: false,
+        }
+      );
+      toast({
+        status: 'success',
+        title: data.message,
+        isClosable: true,
+      });
+    } catch (error) {
+      if (error instanceof Error) {
         toast({
-          status: 'success',
-          title: data.message,
+          status: 'error',
+          title: 'Error updating activity',
+          description: error.message,
           isClosable: true,
         });
-      } catch (error) {
-        if (error instanceof Error) {
-          toast({
-            status: 'error',
-            title: 'Error updating activity',
-            description: error.message,
-            isClosable: true,
-          });
-        } else {
-          toast({
-            status: 'error',
-            title: 'Error updating activity',
-            isClosable: true,
-          });
-        }
+      } else {
+        toast({
+          status: 'error',
+          title: 'Error updating activity',
+          isClosable: true,
+        });
       }
     }
   };
@@ -131,49 +135,56 @@ const AddParticipantToActivityButton = ({ activityId }: AddTeamToActivityButtonI
     <Box>
       <Modal isOpen={isOpen} onClose={onClose}>
         <ModalOverlay />
-        <ModalContent bg="theme.300">
-          <ModalHeader>Add Participants to Activity</ModalHeader>
-          <ModalCloseButton />
-          <ModalBody>
-            {data ? (
-              <CUIAutoComplete
-                label="Participants"
-                placeholder="Choose participants"
-                items={pickerItems}
-                selectedItems={selectedItems}
-                onSelectedItemsChange={(changes) =>
-                  handleSelectedItemsChange(changes.selectedItems)
-                }
-                listStyleProps={{ bg: 'gray.800', color: 'white' }}
-                tagStyleProps={{ bg: 'gray.800', color: 'white' }}
-                listItemStyleProps={{ bg: 'gray.700' }}
-                toggleButtonStyleProps={{
-                  variant: 'theme',
-                  marginInlineStart: '0 !important ',
-                  borderBottomLeftRadius: 0,
-                  borderTopLeftRadius: 0,
-                }}
-                inputStyleProps={{
-                  borderTopRightRadius: 0,
-                  borderBottomRightRadius: 0,
-                }}
-                highlightItemBg="gray.700"
-                disableCreateItem={true}
-              />
-            ) : (
-              <Text>No participants</Text>
-            )}
-          </ModalBody>
+        <form onSubmit={handleSubmit}>
+          <ModalContent bg="theme.300">
+            <ModalHeader>Add Participants to Activity</ModalHeader>
+            <ModalCloseButton />
+            <ModalBody>
+              {data ? (
+                <CUIAutoComplete
+                  label="Participants"
+                  placeholder="Choose participants"
+                  items={pickerItems}
+                  selectedItems={selectedItems}
+                  onSelectedItemsChange={(changes) =>
+                    handleSelectedItemsChange(changes.selectedItems)
+                  }
+                  listStyleProps={{
+                    bg: 'gray.800',
+                    color: 'white',
+                    maxHeight: '300px',
+                    overflowY: 'auto',
+                  }}
+                  tagStyleProps={{ bg: 'gray.800', color: 'white' }}
+                  listItemStyleProps={{ bg: 'gray.700' }}
+                  toggleButtonStyleProps={{
+                    variant: 'theme',
+                    marginInlineStart: '0 !important ',
+                    borderBottomLeftRadius: 0,
+                    borderTopLeftRadius: 0,
+                  }}
+                  inputStyleProps={{
+                    borderTopRightRadius: 0,
+                    borderBottomRightRadius: 0,
+                  }}
+                  highlightItemBg="gray.700"
+                  disableCreateItem={true}
+                />
+              ) : (
+                <Text>No participants</Text>
+              )}
+            </ModalBody>
 
-          <ModalFooter>
-            <Button colorScheme="facebook" mr={3} onClick={onClose}>
-              Close
-            </Button>
-            <Button variant="theme" type="submit">
-              Submit
-            </Button>
-          </ModalFooter>
-        </ModalContent>
+            <ModalFooter>
+              <Button colorScheme="facebook" mr={3} onClick={onClose}>
+                Close
+              </Button>
+              <Button variant="theme" type="submit">
+                Submit
+              </Button>
+            </ModalFooter>
+          </ModalContent>
+        </form>
       </Modal>
       <Button variant="theme" onClick={onOpen}>
         Add Participants

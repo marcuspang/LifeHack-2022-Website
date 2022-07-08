@@ -39,8 +39,8 @@ export default async (req: NextApiRequest, res: NextApiResponse) => {
             verified && verified.toString() !== '' ? verified.toString() === 'true' : undefined,
         },
       },
-      skip: isNaN(skip as any) ? 0 : +skip,
-      take: isNaN(take as any) ? 10 : +take,
+      skip: isNaN(skip as any) ? undefined : +skip,
+      take: isNaN(take as any) ? undefined : +take,
     });
     const count = prisma.team.count();
     const result = await prisma.$transaction([teams, count]);
