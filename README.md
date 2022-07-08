@@ -14,11 +14,11 @@ Activities that earn points include:
 
 ## Setup Guide
 
-1. Install yarn, find out more [here](https://classic.yarnpkg.com/en/docs/install)
+1. Install yarn [here](https://classic.yarnpkg.com/en/docs/install)
 2. Run `yarn` in the root directory
 3. Clone `.env.template` and rename the new file as `.env`
-4. Add the relevant config details for Next Auth, Google OAuth credentials, and GitHub OAuth credentials
-5. Add your local MySQL connection string
+4. Add the relevant config details for next-auth, Google OAuth credentials, and GitHub OAuth credentials
+5. Add your local MySQL connection string (syntax: `mysql://USER:PASSWORD@HOST:PORT/DATABASE`)
 6. Run `yarn dev` to get the server running
 
 ### Misc
