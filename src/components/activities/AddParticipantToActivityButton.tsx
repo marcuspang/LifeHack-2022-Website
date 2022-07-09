@@ -13,7 +13,7 @@ import {
   useToast,
 } from '@chakra-ui/react';
 import { Activities, Prisma, User } from '@prisma/client';
-import { CUIAutoComplete, Item } from 'chakra-ui-autocomplete';
+import CUIAutoComplete, { Item } from 'components/common/CUIAutocomplete';
 import useMatchMutate from 'hooks/useMatchMutate';
 import { FormEventHandler, useEffect, useState } from 'react';
 import useSWR from 'swr';
@@ -141,7 +141,17 @@ const AddParticipantToActivityButton = ({ activityId }: AddTeamToActivityButtonI
                     maxHeight: '300px',
                     overflowY: 'auto',
                   }}
-                  tagStyleProps={{ bg: 'gray.800', color: 'white' }}
+                  tagsStyleProps={{
+                    maxHeight: '200px',
+                    overflowY: 'auto',
+                    spacing: 0,
+                  }}
+                  tagStyleProps={{
+                    bg: 'gray.800',
+                    color: 'white',
+                    marginRight: '4px !important ',
+                    marginBottom: '4px !important ',
+                  }}
                   listItemStyleProps={{ bg: 'gray.700' }}
                   toggleButtonStyleProps={{
                     variant: 'theme',
