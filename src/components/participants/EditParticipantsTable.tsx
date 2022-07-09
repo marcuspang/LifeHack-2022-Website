@@ -4,12 +4,16 @@ import {
   Editable,
   EditableInput,
   EditablePreview,
+  FormControl,
+  FormErrorMessage,
   IconButton,
+  Input,
   NumberDecrementStepper,
   NumberIncrementStepper,
   NumberInput,
   NumberInputField,
   NumberInputStepper,
+  Stack,
   Table,
   TableContainer,
   Tbody,
@@ -27,15 +31,31 @@ import useMatchMutate from 'hooks/useMatchMutate';
 import { useSession } from 'next-auth/react';
 import { useRouter } from 'next/router';
 import { useState } from 'react';
+import { SubmitHandler, useForm } from 'react-hook-form';
 import useSWR from 'swr';
 
+interface FormInputs {
+  name: string;
+  email: string;
+}
+
+interface EditParticipantsInterface {
+  users: (User & { team: Team | null })[];
+  count: number;
+}
+
 const EditParticipantsTable = () => {
+  const {
+    register,
+    handleSubmit,
+    getValues,
+    formState: { errors },
+  } = useForm<FormInputs>();
   const [skip, setSkip] = useState(0);
   const { data: userData, status } = useSession();
-  const { data, isValidating, mutate } = useSWR<{
-    users: (User & { team: Team | null })[];
-    count: number;
-  }>('/api/users?skip=' + skip + '&take=10');
+  const { data, isValidating, mutate } = useSWR<EditParticipantsInterface>(
+    '/api/users?skip=' + skip + '&take=10&' + new URLSearchParams(getValues()).toString()
+  );
   const matchMutate = useMatchMutate();
   const toast = useToast();
   const router = useRouter();
@@ -94,8 +114,70 @@ const EditParticipantsTable = () => {
     }
   };
 
+  const onSubmit: SubmitHandler<FormInputs> = async (input) => {
+    await mutate(
+      async (user) => {
+        try {
+          const newUsers = (await fetch(
+            '/api/users?skip=0&take=10&' + new URLSearchParams(input).toString()
+          ).then((data) => data.json())) as EditParticipantsInterface;
+          return { ...data, users: newUsers.users };
+        } catch (error) {
+          if (error instanceof Error) {
+            toast({
+              status: 'error',
+              title: 'Error searching teams',
+              description: error.message,
+              isClosable: true,
+            });
+          } else {
+            toast({
+              status: 'error',
+              title: 'Error searching teams',
+              description: JSON.stringify(error),
+              isClosable: true,
+            });
+          }
+        }
+      },
+      { populateCache: true, rollbackOnError: false, revalidate: false }
+    );
+  };
+
   return (
     <>
+      <form onSubmit={handleSubmit(onSubmit)}>
+        <Stack>
+          <Text fontSize="lg" fontWeight="bold">
+            Search fields
+          </Text>
+          <Stack
+            justifyContent={'flex-start'}
+            direction={'row'}
+            spacing={6}
+            pb={8}
+            alignItems="center"
+          >
+            <FormControl width="auto">
+              <Input id="name" placeholder="Name" type="text" maxW="200px" {...register('name')} />
+              {errors.name && <FormErrorMessage>{errors.name.message}</FormErrorMessage>}
+            </FormControl>
+            <FormControl width="auto">
+              <Input
+                id="email"
+                placeholder="Email"
+                type="text"
+                maxW="200px"
+                {...register('email')}
+              />
+              {errors.name && <FormErrorMessage>{errors.name.message}</FormErrorMessage>}
+            </FormControl>
+            <Button type="submit" variant="theme">
+              Submit
+            </Button>
+          </Stack>
+        </Stack>
+      </form>
       <TableContainer width="100%">
         <Table variant="unstyled" border="1px solid" borderColor="gray.600">
           <Thead>

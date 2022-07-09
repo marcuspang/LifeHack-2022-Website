@@ -12,7 +12,7 @@ export default async (req: NextApiRequest, res: NextApiResponse) => {
 
   // Get all users for participants
   if (req.method === 'GET') {
-    const { skip, take } = req.query;
+    const { skip, take, name, email } = req.query;
 
     const users = prisma.user.findMany({
       orderBy: {
@@ -22,6 +22,14 @@ export default async (req: NextApiRequest, res: NextApiResponse) => {
         _count: true,
         team: true,
         activities: true,
+      },
+      where: {
+        name: {
+          contains: name && name.toString() !== '' ? name.toString() : undefined,
+        },
+        email: {
+          contains: email && email.toString() !== '' ? email.toString() : undefined,
+        },
       },
       skip: isNaN(skip as any) ? undefined : +skip,
       take: isNaN(take as any) ? undefined : +take,
