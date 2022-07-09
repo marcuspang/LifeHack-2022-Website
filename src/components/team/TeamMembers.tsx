@@ -4,9 +4,10 @@ import TeamMemberDetails from './TeamMemberDetails';
 
 interface TeamMembersProps {
   teamMembers: TeamInterface['users'];
+  withLink?: boolean;
 }
 
-const TeamMembers = ({ teamMembers }: TeamMembersProps) => {
+const TeamMembers = ({ teamMembers, withLink }: TeamMembersProps) => {
   return (
     <Stack pt={6}>
       <Heading size="md" as="h3">
@@ -14,7 +15,7 @@ const TeamMembers = ({ teamMembers }: TeamMembersProps) => {
       </Heading>
       <List spacing={3}>
         {teamMembers.map((user, index) => (
-          <TeamMemberDetails key={index + '.' + user.email} user={user} />
+          <TeamMemberDetails key={index + '.' + user.email} user={user} withLink={withLink} />
         ))}
       </List>
     </Stack>

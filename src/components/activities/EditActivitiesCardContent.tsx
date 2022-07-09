@@ -1,4 +1,4 @@
-import { Box, Flex, Heading, List, ListIcon, ListItem, Stack, Text } from '@chakra-ui/react';
+import { Box, Flex, Heading, List, ListIcon, ListItem, Stack, Text, Link } from '@chakra-ui/react';
 import { Activities, Team, User } from '@prisma/client';
 import Loader from 'components/common/Loader';
 import { MdCheckCircle } from 'react-icons/md';
@@ -6,13 +6,14 @@ import useSWR from 'swr';
 import TeamMemberDetails from '../team/TeamMemberDetails';
 import AddParticipantToActivityButton from './AddParticipantToActivityButton';
 import AddTeamToActivityButton from './AddTeamToActivityButton';
+import NextLink from 'next/link';
 
 interface EditActivitiesCardContentProps {
   activityId: string;
 }
 
 export interface EditActivitiesData extends Activities {
-  participants: Pick<User, 'name' | 'email' | 'points'>[];
+  participants: Pick<User, 'name' | 'email' | 'points' | 'id'>[];
   teams: Pick<Team, 'id' | 'name'>[];
 }
 
@@ -54,7 +55,11 @@ const EditActivitiesCardContent = ({ activityId }: EditActivitiesCardContentProp
         {data.participants && data.participants.length && (
           <List spacing={3}>
             {data.participants.map((participants, index) => (
-              <TeamMemberDetails key={index + '.' + participants.email} user={participants} />
+              <TeamMemberDetails
+                key={index + '.' + participants.email}
+                user={participants}
+                withLink
+              />
             ))}
           </List>
         )}
@@ -63,11 +68,13 @@ const EditActivitiesCardContent = ({ activityId }: EditActivitiesCardContentProp
           Teams
         </Heading>
         {data.teams && data.teams.length && (
-          <List spacing={3}>
+          <List spacing={3} maxHeight="200px" overflowY={'auto'}>
             {data.teams.map((team) => (
               <ListItem key={team.id}>
                 <ListIcon as={MdCheckCircle} color="green.500" height="22px" />
-                {team.name}
+                <NextLink href={'/teams/' + team.id} passHref>
+                  <Link color="blue.200">{team.name}</Link>
+                </NextLink>
               </ListItem>
             ))}
           </List>

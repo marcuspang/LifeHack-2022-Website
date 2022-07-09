@@ -8,18 +8,23 @@ import TeamPoints from './TeamPoints';
 import TeamRequests from './TeamRequests';
 import { unionBy } from 'lodash';
 
+export type ActivitiesWithParticipants = Activities & { participants: User[] };
+export type TeamRequestsWithRequestee = TeamRequest & { requestee: User };
+export type UserWithActivitiesParticipants = User & { activities: ActivitiesWithParticipants[] };
+
 export interface TeamInterface extends Team {
-  users: (User & { activities: TeamInterface['activities'] })[];
-  teamRequests: (TeamRequest & { requestee: User })[];
-  activities: (Activities & { participants: User[] })[];
+  users: UserWithActivitiesParticipants[];
+  teamRequests: TeamRequestsWithRequestee[];
+  activities: ActivitiesWithParticipants[];
 }
 
 interface TeamContentProps {
   data?: TeamInterface;
   isEditing?: boolean;
+  withLink?: boolean;
 }
 
-const TeamContent = ({ data, isEditing }: TeamContentProps) => {
+const TeamContent = ({ data, isEditing, withLink }: TeamContentProps) => {
   if (!data) {
     return <NoTeamContent isEditing={isEditing} />;
   }
@@ -36,8 +41,9 @@ const TeamContent = ({ data, isEditing }: TeamContentProps) => {
             .reduce((prev, curr) => (prev ? prev.concat(curr, []) : curr)),
           'id'
         )}
+        withLink={withLink}
       />
-      <TeamMembers teamMembers={data.users} />
+      <TeamMembers teamMembers={data.users} withLink={withLink} />
       <TeamRequests teamRequests={data.teamRequests} />
       <TeamCardActions teamId={data.id} isEditing={isEditing} />
     </>

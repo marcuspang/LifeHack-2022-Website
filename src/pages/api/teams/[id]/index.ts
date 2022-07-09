@@ -25,6 +25,7 @@ export default async (req: NextApiRequest, res: NextApiResponse) => {
         include: {
           users: {
             select: {
+              id: true,
               email: true,
               name: true,
               points: true,

@@ -1,12 +1,13 @@
-import { Stack, Heading, List, Tooltip, ListItem, ListIcon } from '@chakra-ui/react';
-import { MdCheckCircle } from 'react-icons/md';
-import { TeamInterface } from './TeamContent';
+import { Heading, List, Stack } from '@chakra-ui/react';
+import ActivitiesDetails from 'components/activities/ActivitiesDetails';
+import { ActivitiesWithParticipants } from './TeamContent';
 
 interface TeamActivitiesProps {
-  activities: TeamInterface['activities'];
+  activities: ActivitiesWithParticipants[];
+  withLink?: boolean;
 }
 
-const TeamActivities = ({ activities }: TeamActivitiesProps) => {
+const TeamActivities = ({ activities, withLink }: TeamActivitiesProps) => {
   return (
     <Stack pt={6}>
       <Heading as="h3" size="md" display="inline">
@@ -15,22 +16,12 @@ const TeamActivities = ({ activities }: TeamActivitiesProps) => {
       <List spacing={3}>
         {activities.length &&
           activities.map((activity) => (
-            <Tooltip
+            <ActivitiesDetails
               key={activity.id}
-              label={
-                activity.points +
-                ' points by ' +
-                (activity.participants.length > 0
-                  ? activity.participants.map((participant) => participant.email).join(', ')
-                  : 'the team')
-              }
-              placement="auto-start"
-            >
-              <ListItem>
-                <ListIcon as={MdCheckCircle} color="green.500" height="22px" />
-                {activity.name}
-              </ListItem>
-            </Tooltip>
+              {...activity}
+              withLink={withLink}
+              withDetailedDescription
+            />
           ))}
       </List>
     </Stack>

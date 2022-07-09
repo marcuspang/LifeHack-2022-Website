@@ -35,7 +35,7 @@ const EditTeamCard = ({ teamId }: EditTeamCardProps) => {
     );
   }
 
-  return <TeamContent data={data} isEditing />;
+  return <TeamContent data={data} isEditing withLink />;
 };
 
 export default EditTeamCard;

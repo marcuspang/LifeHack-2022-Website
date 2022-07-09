@@ -1,8 +1,10 @@
 import { Box, Flex, Heading, Link, List, Stack, Text } from '@chakra-ui/react';
-import { Team, TeamRequest, User } from '@prisma/client';
+import { Activities, Team, TeamRequest, User } from '@prisma/client';
 import Loader from 'components/common/Loader';
 import TeamRequestDetails from 'components/team/TeamRequestDetails';
 import useSWR from 'swr';
+import NextLink from 'next/link';
+import ActivitiesDetails from 'components/activities/ActivitiesDetails';
 
 interface EditParticipantCardContentProps {
   userId: string;
@@ -11,6 +13,7 @@ interface EditParticipantCardContentProps {
 interface UserRequestsInterface extends User {
   requestee: (Pick<TeamRequest, 'id' | 'approved'> & { requestor: Pick<User, 'name' | 'email'> })[];
   requestor: (Pick<TeamRequest, 'id' | 'approved'> & { requestee: Pick<User, 'name' | 'email'> })[];
+  activities: Activities[];
   team?: Pick<Team, 'id' | 'name' | 'points'>;
 }
 
@@ -30,20 +33,38 @@ const EditParticipantCardContent = ({ userId }: EditParticipantCardContentProps)
   }
   return (
     <>
-      <Flex>
+      <Flex direction={'column'}>
+        <Heading as="h2" size="lg" display="inline">
+          Username
+        </Heading>
+        <Text fontSize="xl">{data.name}</Text>
+      </Flex>
+      <Flex pt={6} direction="column">
+        <Heading as="h2" size="lg" display="inline">
+          Email
+        </Heading>
         <Box>
-          <Heading as="h2" size="lg" display="inline">
-            Username
-          </Heading>
-          <Text fontSize="xl">{data.name}</Text>
+          <NextLink href={'mailto:' + data.email} passHref>
+            <Link fontSize="xl" color="blue.200">
+              {data.email}
+            </Link>
+          </NextLink>
         </Box>
       </Flex>
-      <Flex pt={6}>
+      <Flex pt={6} direction="column">
+        <Heading as="h2" size="lg" display="inline">
+          Team Name
+        </Heading>
         <Box>
-          <Heading as="h2" size="lg" display="inline">
-            Email
-          </Heading>
-          <Text fontSize="xl">{data.email}</Text>
+          {data.team ? (
+            <NextLink href={'/teams/' + data.team.id} passHref>
+              <Link fontSize={'xl'} color="blue.200">
+                {data.team.name}
+              </Link>
+            </NextLink>
+          ) : (
+            'No team found!'
+          )}
         </Box>
       </Flex>
       <Stack pt={6}>
@@ -52,17 +73,18 @@ const EditParticipantCardContent = ({ userId }: EditParticipantCardContentProps)
         </Heading>
         <Text fontSize="xl">{data.points}</Text>
       </Stack>
-      <Stack py={6}>
-        <Heading size="md" as="h3">
-          Team Name
+      <Stack pt={6}>
+        <Heading as="h3" size="md" display="inline">
+          Activities
         </Heading>
-        <Text>
-          {data.team ? (
-            <Link href={'/teams/' + data.team.id}>{data.team.name}</Link>
-          ) : (
-            'No team found!'
-          )}
-        </Text>
+        <List spacing={3}>
+          {data.activities.length &&
+            data.activities.map((activity) => (
+              <ActivitiesDetails key={activity.id} {...activity} />
+            ))}
+        </List>
+      </Stack>
+      <Stack py={6}>
         <Heading size="md" as="h3" pt={6}>
           Team requests received
         </Heading>

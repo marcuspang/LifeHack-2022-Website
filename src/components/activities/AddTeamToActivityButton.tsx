@@ -16,7 +16,7 @@ import { Activities, Prisma, Team } from '@prisma/client';
 import { CUIAutoComplete, Item } from 'chakra-ui-autocomplete';
 import useMatchMutate from 'hooks/useMatchMutate';
 import { FormEventHandler, useEffect, useState } from 'react';
-import useSWR, { useSWRConfig } from 'swr';
+import useSWR from 'swr';
 
 interface AddTeamToActivityButtonInterface {
   activityId: string;
@@ -27,13 +27,8 @@ interface AddTeamToActivityData {
   count: number;
 }
 
-interface FormInputs {
-  items: Item[];
-}
-
 const AddTeamToActivityButton = ({ activityId }: AddTeamToActivityButtonInterface) => {
   const toast = useToast();
-  const { mutate: globalMutate } = useSWRConfig();
   const matchMutate = useMatchMutate();
   const { isOpen, onOpen, onClose } = useDisclosure();
   const { data, mutate } = useSWR<AddTeamToActivityData>(isOpen && '/api/teams');
@@ -162,7 +157,7 @@ const AddTeamToActivityButton = ({ activityId }: AddTeamToActivityButtonInterfac
           </ModalContent>
         </form>
       </Modal>
-      <Button variant="theme" onClick={onOpen}>
+      <Button variant="theme" onClick={onOpen} mt={4}>
         Add Team
       </Button>
     </Box>
