@@ -9,7 +9,6 @@ const Leaderboard = () => {
       </Heading>
       <Box
         p={8}
-        pt={12}
         bg="gray.800"
         rounded="md"
         flexDirection="column"

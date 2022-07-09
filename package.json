@@ -11,7 +11,7 @@
     "@fontsource/hammersmith-one": "^4.5.7",
     "@fontsource/nunito-sans": "^4.5.8",
     "@next-auth/prisma-adapter": "^1.0.3",
-    "@prisma/client": "^3.15.0",
+    "@prisma/client": "^4.0.0",
     "@testing-library/jest-dom": "^5.14.1",
     "@testing-library/react": "^13.0.0",
     "@testing-library/user-event": "^13.2.1",
@@ -74,6 +74,6 @@
     "eslint-plugin-unused-imports": "^2.0.0",
     "husky": "^8.0.0",
     "prettier": "^2.6.2",
-    "prisma": "^3.15.0"
+    "prisma": "^4.0.0"
   }
 }

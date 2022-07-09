@@ -6,7 +6,7 @@ export default async (req: NextApiRequest, res: NextApiResponse) => {
   const session = await getSession({ req });
 
   if (req.method === 'GET') {
-    const { skip, take } = req.query;
+    const { skip, take, name } = req.query;
 
     const teams = prisma.team.findMany({
       select: {
@@ -28,8 +28,6 @@ export default async (req: NextApiRequest, res: NextApiResponse) => {
           updatedAt: 'desc',
         },
       ],
-      skip: isNaN(skip as any) ? 0 : +skip,
-      take: isNaN(take as any) ? 10 : +take,
     });
     const count = prisma.team.count({
       where: {
@@ -38,7 +36,23 @@ export default async (req: NextApiRequest, res: NextApiResponse) => {
     });
     const result = await prisma.$transaction([teams, count]);
 
-    return res.json({ teams: result[0], count: result[1] });
+    // Query params are not passed directly to the query so that we can assign rank to each team
+    const [newSkip, newTake] = [isNaN(skip as any) ? 0 : +skip, isNaN(take as any) ? 10 : +take];
+    return res.json({
+      teams: result[0]
+        .map((team, index) => ({ rank: index + 1, ...team }))
+        .filter((team) => {
+          // For some reason, the input has double quotes around queries
+          const nameString =
+            name && name.toString() !== ''
+              ? name.toString().toLowerCase().replace(/["]/g, '')
+              : undefined;
+          return nameString === undefined || team.name.toLowerCase().includes(nameString);
+        })
+        .slice(newSkip)
+        .slice(0, newTake),
+      count: result[1],
+    });
   }
 
   if (!session || !session.user || !session.user.email) {

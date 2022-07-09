@@ -54,7 +54,11 @@ const EditTeamsTable = () => {
     handleSubmit,
     getValues,
     formState: { errors },
-  } = useForm<FormInputs>();
+  } = useForm<FormInputs>({
+    defaultValues: {
+      verified: true,
+    },
+  });
 
   const { data: userData, status } = useSession();
   const { data, mutate, isValidating } = useSWR<EditTeamsInterface>(
@@ -169,9 +173,7 @@ const EditTeamsTable = () => {
               {errors.name && <FormErrorMessage>{errors.name.message}</FormErrorMessage>}
             </FormControl>
             <FormControl width="auto">
-              <Checkbox defaultChecked {...register('verified')}>
-                Verified?
-              </Checkbox>
+              <Checkbox {...register('verified')}>Verified?</Checkbox>
             </FormControl>
             <Button type="submit" variant="theme">
               Submit
