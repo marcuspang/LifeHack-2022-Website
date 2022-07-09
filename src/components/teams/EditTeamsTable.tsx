@@ -163,10 +163,10 @@ const EditTeamsTable = () => {
           </Text>
           <Stack
             justifyContent={'flex-start'}
-            direction={'row'}
             spacing={6}
             pb={8}
-            alignItems="center"
+            direction={['column', 'row', 'row']}
+            alignItems={['flex-start', 'center', 'center']}
           >
             <FormControl width="auto">
               <Input id="name" placeholder="Name" type="text" maxW="200px" {...register('name')} />
