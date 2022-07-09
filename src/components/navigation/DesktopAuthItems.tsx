@@ -42,7 +42,7 @@ const DesktopAuthItems = () => {
             onMouseLeave={() => setHover(false)}
           >
             <Stack direction={'row'} px={2} py={2} align="center">
-              <Avatar src={data.user.image} width="55px" height="55px" />
+              <Avatar src={data.user.image} width="55px" height="55px" name={'User menu'} />
               <Box wordBreak={'break-all'}>
                 <Text px={2} fontWeight={600}>
                   {data.user.name}
