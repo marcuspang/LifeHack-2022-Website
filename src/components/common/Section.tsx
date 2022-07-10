@@ -1,6 +1,6 @@
 import { Box, BoxProps, Heading, Text } from '@chakra-ui/react';
 
-interface SectionProps extends BoxProps {
+export interface SectionProps extends BoxProps {
   heading: string;
   text?: string;
 }

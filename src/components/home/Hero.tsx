@@ -26,7 +26,7 @@ const Hero = () => {
             fontSize={['lg', 'xl', '2xl']}
             textAlign={['center', 'center', 'inherit', 'inherit']}
           >
-            9th - 10th July & 16th July 2022
+            9th - 10th July &amp; 16th July 2022
           </Text>
           <Text
             fontSize={['md', 'lg', 'xl']}

@@ -3,7 +3,7 @@ import Section from 'components/common/Section';
 
 const PrizesSection = () => {
   return (
-    <Section heading="Prizes" color="gray.200">
+    <Section heading="Prizes" color="gray.200" pb={0}>
       <Text fontSize="3xl" mt="10">
         Main Prizes
       </Text>

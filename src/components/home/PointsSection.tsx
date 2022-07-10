@@ -4,7 +4,7 @@ import { MdCheckCircle } from 'react-icons/md';
 
 const PointsSection = () => {
   return (
-    <Section bg="theme.500" heading="Point System" pt={1}>
+    <Section bg="theme.500" heading="Point System" pt={8}>
       <Box
         textAlign={['center', 'center', 'left', 'left']}
         maxW="700px"

@@ -8,6 +8,7 @@ import PointsSection from 'components/home/PointsSection';
 import PrizesSection from 'components/home/PrizesSection';
 import SponsorsSection from 'components/home/SponsorsSection';
 import TimelineSection from 'components/home/TimelineSection';
+import WinnerSection from 'components/home/WinnerSection';
 import WorkshopSection from 'components/home/WorkshopSection';
 
 const Home = () => {
@@ -17,6 +18,7 @@ const Home = () => {
       <AboutSection />
       <TimelineSection />
       <PrizesSection />
+      <WinnerSection />
       <PointsSection />
       <WorkshopSection />
       <LuckyDrawAndGoodieBagsSection />
