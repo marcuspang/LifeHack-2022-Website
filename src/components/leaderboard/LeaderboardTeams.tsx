@@ -23,7 +23,7 @@ const themeWinnersData: ThemeWinnerData[] = [
   {
     theme: 'Safety',
     color: 'yellow.300',
-    topTeams: [{ name: 'Quest Busters' }, { name: '3 Tekong Boys' }, { name: 'Team Cow' }],
+    topTeams: [{ name: 'Quest Busters' }, { name: 'Team Cow' }],
     honourableMentions: [{ name: 'PR BROS' }, { name: 'void painAndSuffering()' }],
   },
 ];
