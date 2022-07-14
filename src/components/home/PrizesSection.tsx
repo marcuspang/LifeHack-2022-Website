@@ -36,7 +36,7 @@ const PrizesSection = () => {
         </Box>
         <Box pt={[0, 0, 10]} mt={10} w="300px" order={3}>
           <Heading size="lg" color="yellow.300">
-            $100
+            $200
           </Heading>
           <Heading size="lg">Honorable Mentions</Heading>
         </Box>
@@ -68,8 +68,8 @@ const PrizesSection = () => {
           <Text mb={5}>Most Impressive Use of Data</Text>
         </Box>
         <Box>
-          <Text color="yellow.300">$200</Text>
-          <Text mb={5}>Most Popular Hack</Text>
+          <Text color="yellow.300">$100</Text>
+          <Text mb={5}>O&lsquo;Comm&lsquo;s Pick</Text>
         </Box>
         <Box>
           <Text color="yellow.300">$300</Text>
